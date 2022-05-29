@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="costos_almacenamiento_view" model="ir.actions.act_window">
+        <field name="name">Costos Almacenamiento</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cotizador.costos_almacenamiento</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+    </record>
+
+
+     <record id="cotizador_costos_almacenamiento_tree" model="ir.ui.view">
+        <field name="name">cotizador.costos_almacenamiento.tree</field>
+        <field name="model">cotizador.costos_almacenamiento</field>
+        <field name="arch" type="xml">
+                    <tree multi_edit = "1">
+                                <field name="kg_desde"/>
+                                <field name="kg_hasta"/>
+                                <field name="importe"/>
+                    </tree>
+        </field>
+    </record>
+
+
+     <record id="curso_alumnos_form" model="ir.ui.view">
+        <field name="name">cotizador.costos_almacenamiento.form</field>
+        <field name="model">cotizador.costos_almacenamiento</field>
+        <field name="arch" type="xml">
+                    <form>
+                            <sheet>
+                                <group>
+                                        <field name="kg_desde"/>
+                                        <field name="kg_hasta"/>
+                                        <field name="importe"/>
+                                </group>
+                            </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <menuitem id="menu_cotizador"
+              name="Cotizador"
+              />
+
+    <menuitem id="menu_cotizador_gastos_almacenamiento"
+              name="Gastos Almacenamiento"
+              parent="menu_cotizador"
+              action="costos_almacenamiento_view"
+              />
+
+    <menuitem id="menu_cotizador_analitico"
+          name="Analitico"
+          parent="menu_cotizador"
+          action="costos_almacenamiento_view"
+          />
+
+</odoo>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="cotizador_analitico_view" model="ir.actions.act_window">
+        <field name="name">Analitico</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cotizador.analitico</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{}</field>
+    </record>
+
+
+     <record id="curso_alumnos_tree" model="ir.ui.view">
+        <field name="name">cotizador.analitico.tree</field>
+        <field name="model">cotizador.analitico</field>
+        <field name="arch" type="xml">
+                    <tree multi_edit = "1">
+                                <field name="nro_orden"/>
+                                <field name="precio_dolar"/>
+                                <field name="precio_euro"/>
+
+                                <field name="subtotal1"/>
+                                <field name="total_peso"/>
+                                <field name="coef_peso_ajuste"/>
+
+
+                                <field name="total_peso_ajustado"/>
+                                <field name="coef_flete"/>
+                                <field name="subtotal2_flete"/>
+                                <field name="coef_dexport"/>
+                                <field name="subtotal3_dexport"/>
+                                <field name="coef_utilidad"/>
+                                <field name="subtotal4_utilidad"/>
+                                <field name="gastos_envio_local"/>
+                                <field name="gastos_envios_despacho"/>
+                                <field name="subtotal5_gastos"/>
+                                <field name="coef_cotizador"/>
+
+                    </tree>
+        </field>
+    </record>
+
+
+    <menuitem id="menu_cotizador_analitico"
+          name="Analitico"
+          parent="menu_cotizador"
+          action="cotizador_analitico_view"
+          />
+
+</odoo>

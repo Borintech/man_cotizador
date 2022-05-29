@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="costos_configuracion_view" model="ir.actions.act_window">
+        <field name="name">Configuración</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cotizador.configuracion</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+    </record>
+
+
+     <record id="cotizador_configuracion_tree" model="ir.ui.view">
+        <field name="name">cotizador.configuracion.tree</field>
+        <field name="model">cotizador.configuracion</field>
+        <field name="arch" type="xml">
+                    <tree multi_edit = "1">
+                                <field name="precio_dolar"/>
+                                <field name="precio_euro"/>
+                                <field name="coef_peso_ajuste"/>
+                                <field name="coef_flete"/>
+                                <field name="coef_dexport"/>
+                                <field name="coef_utilidad"/>
+
+                    </tree>
+        </field>
+    </record>
+
+
+     <record id="cotizador_configuracion_form" model="ir.ui.view">
+        <field name="name">cotizador.configuracion.form</field>
+        <field name="model">cotizador.configuracion</field>
+        <field name="arch" type="xml">
+                    <form>
+                            <sheet>
+                                <group>
+                                        <field name="precio_dolar"/>
+                                        <field name="precio_euro"/>
+                                        <field name="coef_peso_ajuste"/>
+
+                                        <field name="coef_flete"/>
+                                        <field name="coef_dexport"/>
+                                        <field name="coef_utilidad"/>
+
+                                </group>
+                            </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+    <menuitem id="menu_cotizador_configuracion"
+              name="Configuraciones"
+              parent="menu_cotizador"
+              action="costos_configuracion_view"
+              />
+
+
+</odoo>

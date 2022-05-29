@@ -1,0 +1,22 @@
+<odoo>
+    <record id="view_herada_mati" model="ir.ui.view">
+        <field name="name">sale.order.cotizador</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+
+                <xpath expr="//field[(@name='payment_term_id')]" position="after">
+
+                    <field name="gasto_envio_local" string="G. Envíos"/>
+                    <field name="gasto_envio_despacho" string="G. Despacho"/>
+                    <field name="dias_almacenamiento" string="Días alm."/>
+                    <field name="cotizar" string="Cotizar"/>
+                    <field name="dias_almacenamiento2" string="D.Almacen"/>
+
+                </xpath>
+
+        </field>
+
+    </record>
+</odoo>
