@@ -9,6 +9,7 @@ bandera = 1
 actualizados = []
 total_euros = 0
 total_peso = 0
+actualizados2 = {}
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
@@ -83,13 +84,21 @@ class SaleOrder(models.Model):
 
                 total_peso = 0
                 total_euros = 0
+
+                ## acá se debería calcular el coeficiente
+                #coef = self._tomar_coeficiente()
+                coef = 100
+
                 for line in order.order_line:
 
-                    if not line.id in actualizados:
-                        #line.price_unit = line.price_unit * self._tomar_coeficiente()
-                        line.price_unit = line.price_unit * 100
-                        print("line.price_unit   --->  " , line.price_unit)
-                        actualizados.append(line.id)
+                    if not line.id in actualizados2:
+                        actualizados2[line.id] = line.price_unit
+
+                    precio = actualizados2[line.id]
+
+                    line.price_unit = precio * coef
+                    print("line.price_unit   --->  " , line.price_unit, "   precio original: ", precio)
+                    #actualizados.append(line.id)
 
                     total_euros += line.price_unit
                     # se obtiene el peso del producto
@@ -104,3 +113,20 @@ class SaleOrder(models.Model):
         if self.cotizar:
             self.aplica_coef_ejemplo()
             raise ValidationError("Invocando a la función de cotización")
+
+
+    @api.model
+    def create(self, vals_list):
+
+        # averigua el último id de sale.order
+        q = " select id from  public.sale_order order by id desc  limit 1"
+        request.cr.execute(q)
+        r = request.cr.fetchall()[0][0]
+        #ultimo_id = self.env['sale.order'].search([])[-1].id
+        men = f'Último id de sale.order  =  {r}'
+        print(men)
+        # -----
+
+        result = super(SaleOrder, self).create(vals_list)
+
+        return result
