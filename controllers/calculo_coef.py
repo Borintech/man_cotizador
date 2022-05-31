@@ -1,4 +1,5 @@
 from odoo.http import request
+#pruebacommitcotizador
 
 class cotiza():
 
