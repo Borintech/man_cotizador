@@ -63,14 +63,14 @@ class SaleOrder(models.Model):
             for line in order.order_line:
                 line.price_unit = line.price_unit * coef
 
-    @api.depends('gasto_envio_local','gasto_envio_despacho','dias_almacenamiento2' )
-    def _tomar_coeficiente(self):
+
+    def _tomar_coeficiente(self, total_euro, total_peso,,gasto_envio_local,gasto_envio_despacho,dias_almacenamiento2):
         coti = cotiza()
-        r = coti.calcular_coeficiente(total_euros,total_peso,self.gasto_envio_local,self.gasto_envio_despacho,self.dias_almacenamiento2)
+        r = coti.calcular_coeficiente(total_euro,total_peso,gasto_envio_local,gasto_envio_despacho,dias_almacenamiento2)
         return r
 
 
-    @api.depends('order_line','cotizar')
+    @api.depends('order_line','cotizar','gasto_envio_local','gasto_envio_despacho','dias_almacenamiento2')
     def aplica_coef_ejemplo(self):
 
         global bandera
@@ -80,13 +80,20 @@ class SaleOrder(models.Model):
             print("Entrando aplica_coef_ejemplo")
 
             for order in self:
-                print("order")
-
                 total_peso = 0
                 total_euros = 0
 
+                for line in order.order_line:
+                    total_euros += line.price_unit
+                    try:
+                        peso_unitario = self._peso(line.product_id)
+                        total_peso += peso_unitario + line.product_uom_qty
+                    except:
+                        pass
+
+            for order in self:
                 ## acá se debería calcular el coeficiente
-                #coef = self._tomar_coeficiente()
+                coef = self._tomar_coeficiente(total_euros,total_peso,self.gasto_envio_local,self.gasto_envio_despacho,self.dias_almacenamiento2)
                 coef = 100
 
                 for line in order.order_line:
@@ -100,14 +107,7 @@ class SaleOrder(models.Model):
                     print("line.price_unit   --->  " , line.price_unit, "   precio original: ", precio)
                     #actualizados.append(line.id)
 
-                    total_euros += line.price_unit
                     # se obtiene el peso del producto
-                    peso_unitario = self._peso(line.product_id)
-                    # total del peso es la cantiadad por el peso unitario
-                    try:
-                        total_peso += peso_unitario + line.product_uom_qty
-                    except:
-                        pass
 
     def cotizar_ejemplo(self):
         if self.cotizar:
