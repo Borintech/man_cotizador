@@ -11,83 +11,124 @@ total_euros = 0
 total_peso = 0
 actualizados2 = {}
 
+
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     gasto_envio_local = fields.Float("Gasto Envios")
+    print("x19", gasto_envio_local)
     gasto_envio_despacho = fields.Float("Gasto Despacho")
-    dias_almacenamiento = fields.Float(string="Días almacenamiento",  compute = "aplica_coef_ejemplo", store=True)
+    print("x21", gasto_envio_despacho)
+    dias_almacenamiento = fields.Float(string="Días almacenamiento", compute="aplica_coef_ejemplo", store=True)
+    print("x23", dias_almacenamiento)
+    # vamos a aplica_coef_ejemplo
 
-    #dias_almacenamiento = fields.Float("Días almacenamiento")
+    # dias_almacenamiento = fields.Float("Días almacenamiento")
     cotizar = fields.Boolean("Cotizar")
     dias_almacenamiento2 = fields.Float(string="D.Almacen")
 
-
     def funcion_ale(self, precio_a_cambiar):
-        #pide coheficiente de algún lado
+        # pide coheficiente de algún lado
         coheficiente = 1.6
         return precio_a_cambiar * coheficiente
 
-    def _peso(self,product_id):
+    def _peso(self, product_id):
         q = f"select weight from product_product where id = {product_id.ids[0]}"
         request.cr.execute(q)
         peso = request.cr.fetchall()[0][0]
         return peso
 
-    def _cal_coef(self,total_orden, total_peso):
+    def _cal_coef(self, total_orden, total_peso):
         pass
-
-
 
     @api.depends('order_line')
     def aplica_coef(self):
         # calculo el total
         total_orden = 0
         peso_unitario = 0
-        total_peso = 0
-
+        global total_peso
+        total_peso = 1  # lo pongo en uno
+        banderita = 0
         for order in self:
             for line in order.order_line:
+                banderita += 1
+                print("x57 line", line)
                 total_orden += line.price_unit
                 # se obtiene el peso del producto
-                peso_unitario  += self._peso(line.product_id)
+                peso_unitario += self._peso(line.product_id)
                 # total del peso es la cantiadad por el peso unitario
-                total_peso += peso_unitario + line.product_uom_qty
+                total_peso += peso_unitario * line.product_uom_qty
 
         # calculo el coeficiente
-        coef  = self._cal_coef(total_orden,total_peso)
-
+        print("total_orden", total_orden)
+        print("total_peso", total_peso)
+        # coef  = self._cal_coef(total_orden,total_peso)
+        coef = 1
+        if banderita > 0:
+            coef = self._tomar_coeficiente()
 
         # actualización del precio unitario detodas las lineas de los items de la órden
         for order in self:
             for line in order.order_line:
                 line.price_unit = line.price_unit * coef
 
-    @api.depends('gasto_envio_local','gasto_envio_despacho','dias_almacenamiento2' )
-    def _tomar_coeficiente(self):
+    @api.depends('gasto_envio_local', 'gasto_envio_despacho', 'dias_almacenamiento2')
+    def _tomar_coeficiente(self, total_euro, total_peso2, gasto_envio_local, gasto_envio_despacho,
+                           dias_almacenamiento2):
         coti = cotiza()
-        r = coti.calcular_coeficiente(total_euros,total_peso,self.gasto_envio_local,self.gasto_envio_despacho,self.dias_almacenamiento2)
+        print("DENTRO DE _TOMAR_COFICIENTE")
+        print("total_euros", total_euros)
+        print("total_peso", total_peso)
+        print("gasto_envio_local", gasto_envio_local)
+        print("gasto_envio_despacho", gasto_envio_despacho)
+        print("dias_almacenamiento2", dias_almacenamiento2)
+        r = coti.calcular_coeficiente(total_euro, total_peso2, gasto_envio_local, gasto_envio_despacho,
+                                      dias_almacenamiento2)
         return r
 
+    # def _tomar_coeficiente(self):
+    #     print("xx82 PESO", total_peso)
+    #     coti = cotiza()
+    #     r = coti.calcular_coeficiente(total_euros,total_peso,self.gasto_envio_local,self.gasto_envio_despacho,self.dias_almacenamiento2)
+    #     return r
 
-    @api.depends('order_line','cotizar')
+    @api.depends('order_line', 'cotizar', 'gasto_envio_local', 'gasto_envio_despacho', 'dias_almacenamiento2')
     def aplica_coef_ejemplo(self):
 
-        global bandera
+        global bandera, total_peso, total_euros
         bandera += 1
+        print("x94 bandera", bandera)
 
-        if bandera > 2 and self.cotizar:
+        #if bandera > 2 and self.cotizar:
+        print("cotizar", self.cotizar)
+        if self.cotizar:
             print("Entrando aplica_coef_ejemplo")
 
             for order in self:
-                print("order")
-
                 total_peso = 0
                 total_euros = 0
 
+                for line in order.order_line:
+                    print(dir(line))
+                    total_euros += line.price_unit
+                    try:
+                        peso_unitario = self._peso(line.product_id)
+                        total_peso += peso_unitario * line.product_uom_qty
+                    except:
+                        pass
+
+            for order in self:
                 ## acá se debería calcular el coeficiente
-                #coef = self._tomar_coeficiente()
-                coef = 100
+                print("ANTES DE ENVIAR A _TOMAR_COFICIENTE")
+                print("total_euros", total_euros)
+                print("total_peso", total_peso)
+                print("gasto_envio_local", self.gasto_envio_local)
+                print("gasto_envio_despacho", self.gasto_envio_despacho)
+                print("dias_almacenamiento2", self.dias_almacenamiento2)
+                coef = self._tomar_coeficiente(total_euros, total_peso, self.gasto_envio_local,
+                                               self.gasto_envio_despacho, self.dias_almacenamiento2)
+                print("114", coef)
+                #coef = 100
 
                 for line in order.order_line:
 
@@ -97,23 +138,15 @@ class SaleOrder(models.Model):
                     precio = actualizados2[line.id]
 
                     line.price_unit = precio * coef
-                    print("line.price_unit   --->  " , line.price_unit, "   precio original: ", precio)
-                    #actualizados.append(line.id)
+                    print("line.price_unit   --->  ", line.price_unit, "   precio original: ", precio)
+                    # actualizados.append(line.id)
 
-                    total_euros += line.price_unit
                     # se obtiene el peso del producto
-                    peso_unitario = self._peso(line.product_id)
-                    # total del peso es la cantiadad por el peso unitario
-                    try:
-                        total_peso += peso_unitario + line.product_uom_qty
-                    except:
-                        pass
 
     def cotizar_ejemplo(self):
         if self.cotizar:
             self.aplica_coef_ejemplo()
             raise ValidationError("Invocando a la función de cotización")
-
 
     @api.model
     def create(self, vals_list):
@@ -122,7 +155,7 @@ class SaleOrder(models.Model):
         q = " select id from  public.sale_order order by id desc  limit 1"
         request.cr.execute(q)
         r = request.cr.fetchall()[0][0]
-        #ultimo_id = self.env['sale.order'].search([])[-1].id
+        # ultimo_id = self.env['sale.order'].search([])[-1].id
         men = f'Último id de sale.order  =  {r}'
         print(men)
         # -----
