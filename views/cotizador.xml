@@ -11,6 +11,7 @@
                     <field name="gasto_envio_despacho" string="G. Despacho"/>
                     <field name="dias_almacenamiento" string="cp"/>
                     <field name="cotizar" string="Cotizar"/>
+                    <field name="medio_envio" string="M. Envío"/>
                     <field name="dias_almacenamiento2" string="D.Almacen"/>
 
                 </xpath>
