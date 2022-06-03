@@ -157,6 +157,9 @@ class SaleOrder(models.Model):
                         pass
 
 
+            if total_peso == 0:
+                total_peso =1
+
 
             for order in self:
                 ## acá se debería calcular el coeficiente
