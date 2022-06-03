@@ -31,7 +31,7 @@
                                 <field name="subtotal4_utilidad" string="-Sub4_Util" decoration-bf="1" readonly="1"/>
 
                                 <field name="valor_dolar" string="[V.Dolar]"/>
-                                <field name="valor_euro" string="[V.Dolar]"/>
+                                <field name="valor_euro" string="[V.Euro]"/>
 
                                 <field name="activar_coef" string="Coef_Manual?"/>
 
