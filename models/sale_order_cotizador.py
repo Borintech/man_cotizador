@@ -5,6 +5,9 @@ from odoo.exceptions import ValidationError
 
 from ..controllers.calculo_coef import cotiza
 
+from ..controllers.api_dolar_euro import valor_dolar_euro
+
+
 bandera = 1
 actualizados = []
 total_euros = 0
@@ -44,6 +47,8 @@ class SaleOrder(models.Model):
     activar_coef = fields.Boolean("Act.Coef")
     # -------------------
 
+    valor_dolar = fields.Float("Valor Dólar")
+    valor_euro = fields.Float("Valor Euro")
 
 
     def funcion_ale(self, precio_a_cambiar):
@@ -116,6 +121,11 @@ class SaleOrder(models.Model):
     @api.depends('order_line', 'cotizar', 'gasto_envio_local', 'gasto_envio_despacho', 'dias_almacenamiento2','medio_envio')
     def aplica_coef_ejemplo(self):
 
+        valor_dolar, valor_euro = valor_dolar_euro()
+
+        self.valor_dolar =valor_dolar
+        self.valor_euro = valor_euro
+
         global bandera, total_peso, total_euros
         bandera += 1
         print("x94 bandera", bandera)
@@ -173,14 +183,14 @@ class SaleOrder(models.Model):
 
                 print("114", coef)
                 #coef = 100
-                self.coef_euro2dolar = c0
-                self.subtotal2_flete =s2
-                self.subtotal3_dexport =s3
-                self.subtotal4_utilidad = s4
+                order.coef_euro2dolar = c0
+                order.subtotal2_flete =s2
+                order.subtotal3_dexport =s3
+                order.subtotal4_utilidad = s4
 
-                self.coef_subtotal2 = c2
-                self.coef_dexport = c3
-                self.coef_utilidad = c4
+                order.coef_subtotal2 = c2
+                order.coef_dexport = c3
+                order.coef_utilidad = c4
 
 
                 for line in order.order_line:

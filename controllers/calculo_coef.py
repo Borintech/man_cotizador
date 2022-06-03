@@ -2,14 +2,12 @@ from odoo.http import request
 import os
 import datetime
 
-
 def _log(dato):
     nombre = os.path.dirname(__file__) + '/coe_log.log'
     log = open(nombre, 'a')
     dato = "- Log: " + str(datetime.datetime.now()) + " ---> " + dato
     log.write(dato + '\n')
     log.close()
-
 
 class cotiza:
     print("CARGANDO LA CLASE COTIZA")
