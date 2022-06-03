@@ -9,7 +9,7 @@
 
                     <field name="gasto_envio_local" string="G. Envíos"/>
                     <field name="gasto_envio_despacho" string="G. Despacho"/>
-                    <field name="dias_almacenamiento" string="cp"/>
+                    <field name="dias_almacenamiento" string="cp"  invisible="1"/>
                     <field name="cotizar" string="Cotizar"/>
                     <field name="medio_envio" string="M. Envío"/>
                     <field name="dias_almacenamiento2" string="D.Almacen"/>
@@ -19,18 +19,19 @@
                 <xpath expr="//field[@name='partner_shipping_id']" position="after">
 
 
-                    <field name="coef_euro2dolar" string="Coef.Eu2Do"/>
+                                <field name="coef_euro2dolar" string="Coef.Eu2Do"/>
 
                                 <field name="coef_subtotal2" style="width:20"/>
-                                <field name="subtotal2_flete" />
+                                <field name="subtotal2_flete" string="-Sub2_Flete" decoration-bf="1" readonly="1"/>
 
                                 <field name="coef_dexport" />
-                                <field name="subtotal3_dexport" />
+                                <field name="subtotal3_dexport" string="-Sub3_Exp" decoration-bf="1" readonly="1"/>
 
                                 <field name="coef_utilidad"/>
-                                <field name="subtotal4_utilidad"/>
+                                <field name="subtotal4_utilidad" string="-Sub4_Util" decoration-bf="1" readonly="1"/>
 
-                                <field name="activar_coef"/>
+                                <field name="activar_coef" string="Coef_Manual?"/>
+
                     <a>------</a>
 
 

@@ -93,7 +93,8 @@ class SaleOrder(models.Model):
 
     @api.depends('gasto_envio_local', 'gasto_envio_despacho', 'dias_almacenamiento2')
     def _tomar_coeficiente(self, total_euro, total_peso2, gasto_envio_local, gasto_envio_despacho,
-                           dias_almacenamiento2):
+                           dias_almacenamiento2,
+                           coef_euro2dolar,coef_subtotal2,coef_dexport,coef_utilidad):
         coti = cotiza()
         print("DENTRO DE _TOMAR_COFICIENTE")
         print("total_euros", total_euros)
@@ -102,7 +103,8 @@ class SaleOrder(models.Model):
         print("gasto_envio_despacho", gasto_envio_despacho)
         print("dias_almacenamiento2", dias_almacenamiento2)
         r = coti.calcular_coeficiente(total_euro, total_peso2, gasto_envio_local, gasto_envio_despacho,
-                                      dias_almacenamiento2)
+                                      dias_almacenamiento2,
+                                      coef_euro2dolar,coef_subtotal2,coef_dexport,coef_utilidad)
         return r
 
     # def _tomar_coeficiente(self):
@@ -158,18 +160,28 @@ class SaleOrder(models.Model):
                 if self.medio_envio == 'currier':
                     self.dias_almacenamiento2 = -1
 
-                coef = self._tomar_coeficiente(total_euros, total_peso, self.gasto_envio_local,
-                                               self.gasto_envio_despacho, self.dias_almacenamiento2)
+                #coef = self._tomar_coeficiente(total_euros, total_peso, self.gasto_envio_local,
+                #                               self.gasto_envio_despacho, self.dias_almacenamiento2)
 
                 if self.activar_coef:
-                    coef = self._tomar_coeficiente(total_euros, total_peso, self.gasto_envio_local,
-                                               self.gasto_envio_despacho, self.dias_almacenamiento2)
+                    coef,s2,s3,s4,c2,c3,c4,c0 = self._tomar_coeficiente(total_euros, total_peso, self.gasto_envio_local,
+                                               self.gasto_envio_despacho, self.dias_almacenamiento2,
+                                                   self.coef_euro2dolar,self.coef_subtotal2,self.coef_dexport,self.coef_utilidad)
                 else:
-                    coef = self._tomar_coeficiente(total_euros, total_peso, self.gasto_envio_local,
-                                                   self.gasto_envio_despacho, self.dias_almacenamiento2)
+                    coef,s2,s3,s4,c2,c3,c4,c0 = self._tomar_coeficiente(total_euros, total_peso, self.gasto_envio_local,
+                                                   self.gasto_envio_despacho, self.dias_almacenamiento2,0,0,0,0)
 
                 print("114", coef)
                 #coef = 100
+                self.coef_euro2dolar = c0
+                self.subtotal2_flete =s2
+                self.subtotal3_dexport =s3
+                self.subtotal4_utilidad = s4
+
+                self.coef_subtotal2 = c2
+                self.coef_dexport = c3
+                self.coef_utilidad = c4
+
 
                 for line in order.order_line:
 

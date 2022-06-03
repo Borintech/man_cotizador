@@ -71,7 +71,7 @@ class cotiza:
 
     def calcular_coeficiente(self, total_euros, total_peso,
                              gasto_envio_local=0, gasto_envio_despacho=0,
-                             dias_almacenamiento=15):
+                             dias_almacenamiento=15,coef_euro2dolar=0,coef_subtotal2=0,coef_dexport=0,coef_utilidad=0):
         """
         Esta función se encarga calcular el coerficiente de conversión.
 
@@ -97,11 +97,10 @@ class cotiza:
 
         try:
             # 1. de euro a dolar ---------------------
-            print("xx66", self.euro, self.dolar)
-            coef_euro2dolar = self.euro / self.dolar
+            if coef_euro2dolar ==0:
+                coef_euro2dolar = self.euro / self.dolar
 
             _log(f' - coef euro a dolar : {coef_euro2dolar}')
-
 
             # 2. subtotal1 --------------------------
             total_dolar = total_euros * coef_euro2dolar
@@ -111,20 +110,26 @@ class cotiza:
             _log(f' - subtotal1 : {subtotal1}')
 
             # 3. total peso ajustado -----------------
-            coef_subtotal2 = self._valor_coef_ajuste()
+            if coef_subtotal2 ==0:
+                coef_subtotal2 = self._valor_coef_ajuste()
+
             subtotal2_flete = total_peso * coef_subtotal2
 
             _log(f' - subtotal2_flete : {subtotal2_flete}')
 
             # 4. coef_dexport
-            coef_dexport = self._valor_coef_dexport()
+            if coef_dexport ==0:
+                coef_dexport = self._valor_coef_dexport()
+
             subtotal3_dexport = (coef_dexport * subtotal2_flete)
 
             _log(f' - subtotal3_dexport : {subtotal3_dexport}')
 
-
             # 5. coef_utilidad
-            coef_utilidad = self._valor_coef_utilidad()
+
+            if coef_utilidad == 0:
+                coef_utilidad = self._valor_coef_utilidad()
+
             subtotal4_utilidad = (subtotal3_dexport * coef_utilidad)
 
             _log(f' - subtotal4_utilidad : {subtotal4_utilidad}')
@@ -144,9 +149,13 @@ class cotiza:
 
             _log(f' - coef_cotizador : {coef_cotizador}')
 
+            # 9. ahora lo paso a pesos
+
+            coef_cotizador = coef_cotizador * self.dolar
+
             _log("------------------------------------------------")
 
-            return coef_cotizador
+            return coef_cotizador,subtotal2_flete,subtotal3_dexport,subtotal4_utilidad,coef_subtotal2,coef_dexport,coef_utilidad,coef_euro2dolar
 
         except:
-            return 0
+            return 0,0,0,0,0,0,0,0
