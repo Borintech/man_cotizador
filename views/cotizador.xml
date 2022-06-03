@@ -13,8 +13,29 @@
                     <field name="cotizar" string="Cotizar"/>
                     <field name="medio_envio" string="M. Envío"/>
                     <field name="dias_almacenamiento2" string="D.Almacen"/>
-
                 </xpath>
+
+
+                <xpath expr="//field[@name='partner_shipping_id']" position="after">
+
+
+                    <field name="coef_euro2dolar" string="Coef.Eu2Do"/>
+
+                                <field name="coef_subtotal2" style="width:20"/>
+                                <field name="subtotal2_flete" />
+
+                                <field name="coef_dexport" />
+                                <field name="subtotal3_dexport" />
+
+                                <field name="coef_utilidad"/>
+                                <field name="subtotal4_utilidad"/>
+
+                                <field name="activar_coef"/>
+                    <a>------</a>
+
+
+
+               </xpath>
 
         </field>
 

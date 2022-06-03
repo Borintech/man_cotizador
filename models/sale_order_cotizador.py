@@ -16,11 +16,8 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     gasto_envio_local = fields.Float("Gasto Envios")
-    print("x19", gasto_envio_local)
     gasto_envio_despacho = fields.Float("Gasto Despacho")
-    print("x21", gasto_envio_despacho)
     dias_almacenamiento = fields.Float(string="Días almacenamiento", compute="aplica_coef_ejemplo", store=True)
-    print("x23", dias_almacenamiento)
     # vamos a aplica_coef_ejemplo
 
     # dias_almacenamiento = fields.Float("Días almacenamiento")
@@ -29,6 +26,25 @@ class SaleOrder(models.Model):
 
     enume = [('maritimo',"Marítimo"), ('aereo',"Aéreo"),('currier',"Currier")]
     medio_envio = fields.Selection(enume, default='currier', string="Envío", requiere = True)
+
+    #-------------------
+    coef_euro2dolar = fields.Float("Coef.Euro2Dolar")
+    # - ajuste peso
+    coef_subtotal2 = fields.Float("Coef.Peso")
+    subtotal2_flete = fields.Float("Coef.Flete")
+
+    # - exporta
+    coef_dexport = fields.Float("Coef.Exp")
+    subtotal3_dexport = fields.Float("Sub.Exp")
+
+    # - utilidad
+    coef_utilidad = fields.Float("Coef.Utilidad")
+    subtotal4_utilidad = fields.Float("Subt.Utilidad")
+
+    activar_coef = fields.Boolean("Act.Coef")
+    # -------------------
+
+
 
     def funcion_ale(self, precio_a_cambiar):
         # pide coheficiente de algún lado
@@ -144,6 +160,14 @@ class SaleOrder(models.Model):
 
                 coef = self._tomar_coeficiente(total_euros, total_peso, self.gasto_envio_local,
                                                self.gasto_envio_despacho, self.dias_almacenamiento2)
+
+                if self.activar_coef:
+                    coef = self._tomar_coeficiente(total_euros, total_peso, self.gasto_envio_local,
+                                               self.gasto_envio_despacho, self.dias_almacenamiento2)
+                else:
+                    coef = self._tomar_coeficiente(total_euros, total_peso, self.gasto_envio_local,
+                                                   self.gasto_envio_despacho, self.dias_almacenamiento2)
+
                 print("114", coef)
                 #coef = 100
 
