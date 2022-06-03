@@ -10,18 +10,38 @@ def _log(dato):
     log.close()
 
 class cotiza:
-    print("CARGANDO LA CLASE COTIZA")
-    q = """SELECT * FROM cotizador_configuracion
-    ORDER BY id ASC """
-    request.cr.execute(q)
-    valores = request.cr.dictfetchall()
-    print('xx8 valores', valores)
-    v_dolar = valores[0]['precio_dolar']
-    v_euro = valores[0]['precio_euro']
-    v_coef_peso_ajuste = valores[0]['coef_peso_ajuste']
-    v_coef_flete = valores[0]['coef_flete']
-    v_coef_dexport = valores[0]['coef_dexport']
-    v_coef_utilidad = valores[0]['coef_utilidad']
+
+    try:
+        print("CARGANDO LA CLASE COTIZA")
+        q = """SELECT * FROM cotizador_configuracion
+        ORDER BY id ASC """
+        request.cr.execute(q)
+        valores = request.cr.dictfetchall()
+
+        print('xx8 valores', valores)
+        v_dolar = valores[0]['precio_dolar']
+        v_euro = valores[0]['precio_euro']
+        v_coef_peso_ajuste = valores[0]['coef_peso_ajuste']
+        v_coef_flete = valores[0]['coef_flete']
+        v_coef_dexport = valores[0]['coef_dexport']
+        v_coef_utilidad = valores[0]['coef_utilidad']
+
+        v_coef_flete_maritimo = valores[0]['coef_flete_maritimo']
+        v_coef_flete_aereo = valores[0]['coef_flete_aereo']
+        v_coef_flete_currier = valores[0]['coef_flete_currier']
+    except Exception as e:
+        v_dolar = 1
+        v_euro = 1
+        v_coef_peso_ajuste = 1
+        v_coef_flete = 1
+        v_coef_dexport = 1
+        v_coef_utilidad = 1
+        v_coef_flete_maritimo = 0
+        v_coef_flete_aereo = 0
+        v_coef_flete_currier = 0
+
+
+
 
     def __init__(self):
         self.dolar = self._valor_dolar()
@@ -67,7 +87,7 @@ class cotiza:
         almacenaje = r * dias
         return almacenaje
 
-    def calcular_coeficiente(self, total_euros, total_peso,
+    def calcular_coeficiente(self, medio_envio, total_euros, total_peso,
                              gasto_envio_local=0, gasto_envio_despacho=0,
                              dias_almacenamiento=15,coef_euro2dolar=0,coef_subtotal2=0,coef_dexport=0,coef_utilidad=0):
         """
@@ -111,7 +131,22 @@ class cotiza:
             if coef_subtotal2 ==0:
                 coef_subtotal2 = self._valor_coef_ajuste()
 
-            subtotal2_flete = total_peso * coef_subtotal2
+
+            coe_medio_envio = 22
+
+            if medio_envio == 'maritimo':
+                coe_medio_envio = self.v_coef_flete_maritimo
+
+            if medio_envio == 'aereo':
+                coe_medio_envio = self.v_coef_flete_aereo
+
+            if medio_envio == 'currier':
+                coe_medio_envio = self.v_coef_flete_currier
+
+
+            subtotal2_flete = total_peso * coef_subtotal2 * coe_medio_envio
+
+            subtotal2_flete = subtotal2_flete + subtotal1
 
             _log(f' - subtotal2_flete : {subtotal2_flete}')
 
@@ -119,7 +154,7 @@ class cotiza:
             if coef_dexport ==0:
                 coef_dexport = self._valor_coef_dexport()
 
-            subtotal3_dexport = (coef_dexport * subtotal2_flete)
+            subtotal3_dexport = (coef_dexport * subtotal2_flete) + subtotal2_flete
 
             _log(f' - subtotal3_dexport : {subtotal3_dexport}')
 
@@ -128,7 +163,7 @@ class cotiza:
             if coef_utilidad == 0:
                 coef_utilidad = self._valor_coef_utilidad()
 
-            subtotal4_utilidad = (subtotal3_dexport * coef_utilidad)
+            subtotal4_utilidad = (subtotal3_dexport * coef_utilidad) + subtotal3_dexport
 
             _log(f' - subtotal4_utilidad : {subtotal4_utilidad}')
 
@@ -148,12 +183,12 @@ class cotiza:
             _log(f' - coef_cotizador : {coef_cotizador}')
 
             # 9. ahora lo paso a pesos
-
+            coef_real = coef_cotizador
             coef_cotizador = coef_cotizador * self.dolar
 
             _log("------------------------------------------------")
 
-            return coef_cotizador,subtotal2_flete,subtotal3_dexport,subtotal4_utilidad,coef_subtotal2,coef_dexport,coef_utilidad,coef_euro2dolar
+            return coef_cotizador,subtotal2_flete,subtotal3_dexport,subtotal4_utilidad,coef_subtotal2,coef_dexport,coef_utilidad,coef_euro2dolar,coef_real
 
         except:
             return 0,0,0,0,0,0,0,0

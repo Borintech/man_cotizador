@@ -50,6 +50,8 @@ class SaleOrder(models.Model):
     valor_dolar = fields.Float("Valor Dólar")
     valor_euro = fields.Float("Valor Euro")
 
+    coef_cotizacion = fields.Float("Coef.Contización")
+
 
     def funcion_ale(self, precio_a_cambiar):
         # pide coheficiente de algún lado
@@ -97,17 +99,18 @@ class SaleOrder(models.Model):
                 line.price_unit = line.price_unit * coef
 
     @api.depends('gasto_envio_local', 'gasto_envio_despacho', 'dias_almacenamiento2')
-    def _tomar_coeficiente(self, total_euro, total_peso2, gasto_envio_local, gasto_envio_despacho,
+    def _tomar_coeficiente(self, medio_envio,total_euro, total_peso2, gasto_envio_local, gasto_envio_despacho,
                            dias_almacenamiento2,
                            coef_euro2dolar,coef_subtotal2,coef_dexport,coef_utilidad):
         coti = cotiza()
+
         print("DENTRO DE _TOMAR_COFICIENTE")
         print("total_euros", total_euros)
         print("total_peso", total_peso)
         print("gasto_envio_local", gasto_envio_local)
         print("gasto_envio_despacho", gasto_envio_despacho)
         print("dias_almacenamiento2", dias_almacenamiento2)
-        r = coti.calcular_coeficiente(total_euro, total_peso2, gasto_envio_local, gasto_envio_despacho,
+        r = coti.calcular_coeficiente(medio_envio, total_euro, total_peso2, gasto_envio_local, gasto_envio_despacho,
                                       dias_almacenamiento2,
                                       coef_euro2dolar,coef_subtotal2,coef_dexport,coef_utilidad)
         return r
@@ -148,7 +151,8 @@ class SaleOrder(models.Model):
 
 
                     print(dir(line))
-                    total_euros += precio_unitario
+                    total_euros += precio_unitario * line.product_uom_qty
+
 
                     try:
                         peso_unitario = self._peso(line.product_id)
@@ -160,6 +164,21 @@ class SaleOrder(models.Model):
             if total_peso == 0:
                 total_peso =1
 
+
+            if self.activar_coef:
+                coef, s2, s3, s4, c2, c3, c4, c0, coef_real = self._tomar_coeficiente(self.medio_envio,
+                                                                           total_euros, total_peso,
+                                                                           self.gasto_envio_local,
+                                                                           self.gasto_envio_despacho,
+                                                                           self.dias_almacenamiento2,
+                                                                           self.coef_euro2dolar, self.coef_subtotal2,
+                                                                           self.coef_dexport, self.coef_utilidad)
+            else:
+                coef, s2, s3, s4, c2, c3, c4, c0, coef_real = self._tomar_coeficiente(self.medio_envio,
+                                                                           total_euros, total_peso,
+                                                                           self.gasto_envio_local,
+                                                                           self.gasto_envio_despacho,
+                                                                           self.dias_almacenamiento2, 0, 0, 0, 0)
 
             for order in self:
                 ## acá se debería calcular el coeficiente
@@ -173,16 +192,7 @@ class SaleOrder(models.Model):
                 if self.medio_envio == 'currier':
                     self.dias_almacenamiento2 = -1
 
-                #coef = self._tomar_coeficiente(total_euros, total_peso, self.gasto_envio_local,
-                #                               self.gasto_envio_despacho, self.dias_almacenamiento2)
 
-                if self.activar_coef:
-                    coef,s2,s3,s4,c2,c3,c4,c0 = self._tomar_coeficiente(total_euros, total_peso, self.gasto_envio_local,
-                                               self.gasto_envio_despacho, self.dias_almacenamiento2,
-                                                   self.coef_euro2dolar,self.coef_subtotal2,self.coef_dexport,self.coef_utilidad)
-                else:
-                    coef,s2,s3,s4,c2,c3,c4,c0 = self._tomar_coeficiente(total_euros, total_peso, self.gasto_envio_local,
-                                                   self.gasto_envio_despacho, self.dias_almacenamiento2,0,0,0,0)
 
                 print("114", coef)
                 #coef = 100
@@ -194,6 +204,8 @@ class SaleOrder(models.Model):
                 order.coef_subtotal2 = c2
                 order.coef_dexport = c3
                 order.coef_utilidad = c4
+
+                order.coef_cotizacion = coef_real
 
 
                 for line in order.order_line:

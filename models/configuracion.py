@@ -23,3 +23,8 @@ class Transformada(models.Model):
     #coef_utilidad = 1.60
     coef_utilidad = fields.Float("Coef Utilidad ")
 
+    # coeficientes para el flete
+
+    coef_flete_maritimo = fields.Float("Coef T. Marítimo", default=5)
+    coef_flete_aereo = fields.Float("Coef T. Aéreo", default=15)
+    coef_flete_currier = fields.Float("Coef T. Currier", default=25)

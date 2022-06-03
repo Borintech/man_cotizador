@@ -35,6 +35,8 @@
 
                                 <field name="activar_coef" string="Coef_Manual?"/>
 
+                                <field name="coef_cotizacion" decoration-bf="1" readonly="1"/>
+
                     <a>------</a>
 
 
