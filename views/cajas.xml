@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="cajas_view" model="ir.actions.act_window">
+        <field name="name">Cajas</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cotizador.cajas</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+    </record>
+
+
+     <record id="cotizador_cajas_tree" model="ir.ui.view">
+        <field name="name">cotizador.cajas.tree</field>
+        <field name="model">cotizador.cajas</field>
+        <field name="arch" type="xml">
+                    <tree multi_edit = "1">
+                                <field name="m_cajas"/>
+                                <field name="peso_vol"/>
+                                <field name="vol_interior"/>
+                    </tree>
+        </field>
+    </record>
+
+
+     <record id="cotizador_cajas_form" model="ir.ui.view">
+        <field name="name">cotizador.cajas.form</field>
+        <field name="model">cotizador.cajas</field>
+        <field name="arch" type="xml">
+                    <form>
+                            <sheet>
+                                <group>
+                                    <field name="m_cajas"/>
+                                    <field name="peso_vol"/>
+                                    <field name="vol_interior"/>
+                                </group>
+                            </sheet>
+                    </form>
+        </field>
+     </record>
+
+
+
+    <menuitem id="menu_cotizador_cajas"
+              name="Cajas"
+              parent="menu_cotizador"
+              action="cajas_view"
+              />
+
+
+
+</odoo>

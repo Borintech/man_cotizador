@@ -18,9 +18,15 @@
                                 <field name="precio_dolar"/>
                                 <field name="precio_euro"/>
                                 <field name="coef_peso_ajuste"/>
+
                                 <field name="coef_flete"/>
                                 <field name="coef_dexport"/>
                                 <field name="coef_utilidad"/>
+
+
+                                <field name="coef_flete_maritimo"/>
+                                <field name="coef_flete_aereo"/>
+                                <field name="coef_flete_currier"/>
 
                     </tree>
         </field>

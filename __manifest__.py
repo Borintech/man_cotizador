@@ -15,9 +15,10 @@
         'views/costos_almacenamiento.xml',
         'views/analitico.xml',
         'views/cotizador.xml',
-        'views/configuracion.xml'
-
-
+        'views/configuracion.xml',
+        'views/bobinas.xml',
+        'views/cajas.xml',
+        'views/cotizador_page_cajas.xml',
             ],
     'demo': [],
     'qweb': [],
