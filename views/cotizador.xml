@@ -6,7 +6,6 @@
         <field name="arch" type="xml">
 
                 <xpath expr="//field[(@name='payment_term_id')]" position="after">
-
                     <field name="gasto_envio_local" string="G. Envíos"/>
                     <field name="gasto_envio_despacho" string="G. Despacho"/>
                     <field name="dias_almacenamiento" string="cp"  invisible="1"/>
@@ -14,7 +13,6 @@
                     <field name="medio_envio" string="M. Envío"/>
                     <field name="dias_almacenamiento2" string="D.Almacen"/>
                 </xpath>
-
 
                 <xpath expr="//field[@name='partner_shipping_id']" position="after">
 
@@ -38,8 +36,6 @@
                                 <field name="coef_cotizacion" decoration-bf="1" readonly="1"/>
 
                     <a>------</a>
-
-
 
                </xpath>
 
