@@ -185,6 +185,7 @@ class cotiza:
             # 9. ahora lo paso a pesos
             coef_real = coef_cotizador
             coef_cotizador = coef_cotizador * self.dolar
+            #coef_cotizador = coef_cotizador
 
             _log("------------------------------------------------")
 

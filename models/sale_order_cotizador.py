@@ -18,6 +18,43 @@ total_peso = 0
 actualizados2 = {}
 
 
+def _make_bobina_tabla2():
+    #rr = request.env['cotizador.bobinas'].search([])
+
+    q = "select * from cotizador_bobinas"
+    request.cr.execute(q)
+    rr =  request.cr.fetchall()
+
+    m = f'<table style="width:50%">'
+    m += f'<tr> <th> Medidas de Bobinas </th> <th style="text-align:right"> Peso Bruto </th> <th style="text-align:right"> Peso Volumétrico </th></tr>'
+    for r in rr:
+        m += f'<tr><td> {r[0]} </td> <td style="text-align:right"> {r[1]} </td> <td style="text-align:right"> {r[2]} </td></tr>'
+
+    m += "</table>"
+
+    return m
+
+def _make_caja_tabla2():
+    #rr = request.env['cotizador.bobinas'].search([])
+
+    q = "select * from cotizador_cajas"
+    request.cr.execute(q)
+    rr =  request.cr.fetchall()
+
+    m = f'<table style="width:50%">'
+    m += f'<tr> <th> Medidas Cajas </th> <th style="text-align:right"> Peso Volumétrico  </th> <th style="text-align:right"> Volumen Interior </th></tr>'
+    for r in rr:
+        m += f'<tr><td> {r[0]} </td> <td style="text-align:right" > {r[1]} </td> <td style="text-align:right"> {r[2]} </td></tr>'
+
+    m += "</table>"
+
+    return m
+
+
+
+
+
+
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
@@ -33,29 +70,47 @@ class SaleOrder(models.Model):
     enume = [('maritimo', "Marítimo"), ('aereo', "Aéreo"), ('currier', "Currier")]
     medio_envio = fields.Selection(enume, default='currier', string="Envío", requiere=True)
 
+    t1 = _make_bobina_tabla2()
+    t2 = _make_caja_tabla2()
+
+    #make_bobina_tabla = _make_bobina_tabla()
+    bobina_tabla = fields.Html(string = 'Tabla Bobina', default = t1)
+    caja_tabla = fields.Html("Tabla Caja", default = t2)
+
+
+
+    bonina_datos = fields.Many2many('cotizador.bobinas')
+
     @api.model
     def _obtener_imagen_cajas(self):
         """ Get a default image when the user is created without image
 
             Inspired to _get_default_image method in
             https://github.com/odoo/odoo/blob/11.0/odoo/addons/base/res/res_partner.py
-        """
+
         nombre_foto = 'tamanio_cajas.png'
         image_path = get_module_resource('man_cotizador', 'static/img', nombre_foto)
         image = base64.b64encode(open(image_path, 'rb').read())
         # return image_process(image, colorize=True)
-        return image_process(image)
+        """
+        #return image_process(image)
+        return
 
-    cajas_image = fields.Image(string="Tamaño de cajas", readonly=True, default=_obtener_imagen_cajas)
+    cajas_image = fields.Image(string="Tamaño de cajas", readonly=True)
+
+
 
     @api.model
     def _obtener_imagen_bobinas(self):
+        """
         nombre_foto = 'tamanio_bobinas.png'
         image_path = get_module_resource('man_cotizador', 'static/img', nombre_foto)
         image = base64.b64encode(open(image_path, 'rb').read())
         return image_process(image)
+        """
+        return 1
 
-    bobinas_image = fields.Image(string="Tamaño de bobinas", readonly=True, default=_obtener_imagen_bobinas)
+
 
     # -------------------
     coef_euro2dolar = fields.Float("Coef.Euro2Dolar")

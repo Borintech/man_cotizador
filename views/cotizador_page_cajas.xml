@@ -6,24 +6,14 @@
         <field name="arch" type="xml">
             <notebook position="inside">
                 <page name="cajas" string="Cajas">
-                        <!--<page groups="base.group_no_one"
-                        string="Customer Signature"
-                        name="customer_signature"
-                        attrs="{'invisible': [('require_signature', '=', False),
-                        ('signed_by', '=', False),
-                        ('signature', '=', False),
-                        ('signed_on', '=', False)]}">-->
                     <group>
-                        <!--<field name="signed_by"/>
-                        <field name="signed_on"/>
-                        <field name="signature" widget="image"/>-->
-                            <field name="cajas_image" widget="image"/>
+                            <field name="caja_tabla" />
                     </group>
                 </page>
 
                 <page name="bobinas" string="Bobinas">
                     <group>
-                        <field name="bobinas_image" widget="image"/>
+                            <field name="bobina_tabla"/>
                     </group>
                 </page>
             </notebook>
