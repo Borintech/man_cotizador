@@ -52,9 +52,6 @@ def _make_caja_tabla2():
 
 
 
-
-
-
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
@@ -70,16 +67,24 @@ class SaleOrder(models.Model):
     enume = [('maritimo', "Marítimo"), ('aereo', "Aéreo"), ('currier', "Currier")]
     medio_envio = fields.Selection(enume, default='currier', string="Envío", requiere=True)
 
-    t1 = _make_bobina_tabla2()
-    t2 = _make_caja_tabla2()
-
     #make_bobina_tabla = _make_bobina_tabla()
-    bobina_tabla = fields.Html(string = 'Tabla Bobina', default = t1)
-    caja_tabla = fields.Html("Tabla Caja", default = t2)
-
-
+    bobina_tabla = fields.Html(string = 'Tabla Bobina', readonly = True )
+    caja_tabla = fields.Html(string = "Tabla Caja",  readonly = True )
 
     bonina_datos = fields.Many2many('cotizador.bobinas')
+
+    @api.onchange('gasto_envio_local')
+    def _make_bobina_tabla22(self):
+        # rr = request.env['cotizador.bobinas'].search([])
+        if self.medio_envio:
+            m = _make_bobina_tabla2()
+            self.bobina_tabla = m
+
+            m = _make_caja_tabla2()
+            self.caja_tabla = m
+
+
+
 
     @api.model
     def _obtener_imagen_cajas(self):
