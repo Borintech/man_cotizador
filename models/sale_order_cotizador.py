@@ -28,7 +28,7 @@ def _make_bobina_tabla2():
     m = f'<table style="width:50%">'
     m += f'<tr> <th> Medidas de Bobinas </th> <th style="text-align:right"> Peso Bruto </th> <th style="text-align:right"> Peso Volumétrico </th></tr>'
     for r in rr:
-        m += f'<tr><td> {r[0]} </td> <td style="text-align:right"> {r[1]} </td> <td style="text-align:right"> {r[2]} </td></tr>'
+        m += f'<tr><td> {r[1]} </td> <td style="text-align:right"> {r[2]} </td> <td style="text-align:right"> {r[3]} </td></tr>'
 
     m += "</table>"
 
@@ -42,9 +42,9 @@ def _make_caja_tabla2():
     rr =  request.cr.fetchall()
 
     m = f'<table style="width:50%">'
-    m += f'<tr> <th> Medidas Cajas </th> <th style="text-align:right"> Peso Volumétrico  </th> <th style="text-align:right"> Volumen Interior </th></tr>'
+    m += f'<tr> <th> Medidas Cajas </th> <th style="text-align:right"> Peso Volumétrico  </th> <th style="text-align:right"> Volumen Interior cm<sup>3</sup></th></tr>'
     for r in rr:
-        m += f'<tr><td> {r[0]} </td> <td style="text-align:right" > {r[1]} </td> <td style="text-align:right"> {r[2]} </td></tr>'
+        m += f'<tr><td> {r[1]} </td> <td style="text-align:right" > {r[2]} </td> <td style="text-align:right"> {r[3]} </td></tr>'
 
     m += "</table>"
 
