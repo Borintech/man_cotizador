@@ -366,6 +366,16 @@ class SaleOrder(models.Model):
             print("coef_utilidad", self.coef_utilidad)
 
             if self.activar_coef:
+                if self.coef_dexport > 0:
+                    try:
+                        self.coef_dexport /= 100
+                    except:
+                        pass
+                if self.coef_utilidad > 0:
+                    try:
+                        self.coef_utilidad /= 100
+                    except:
+                        pass
                 coef, s2, s3, s4, c2, c3, c4, c0, coef_real, subtotal5 = self._tomar_coeficiente(self.medio_envio,
                                                                                       total_euros, total_peso,
                                                                                       self.gasto_envio_local,
