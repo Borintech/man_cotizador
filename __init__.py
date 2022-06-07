@@ -1,5 +1,5 @@
 from . import models
-#from . import controllers
+from .controllers import *
 
 
 
