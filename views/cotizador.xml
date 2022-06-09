@@ -18,7 +18,7 @@
 
 
                     <field name="coef_euro2dolar" string="Coef.Eu2Do" invisible="1"/>
-
+                    <!-- agrgué campos sub total 1 pesoreal variacionpeso-->
                     <field name="subtotal1_precio" decoration-bf="1" readonly="1"/>
                     <field name="peso_real" readonly="1"/>
 

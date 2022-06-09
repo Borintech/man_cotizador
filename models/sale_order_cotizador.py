@@ -435,7 +435,6 @@ class SaleOrder(models.Model):
                     print("line.price_unit   --->  ", line.price_unit, "   precio original: ", precio)
                     # actualizados.append(line.id)
 
-                # se obtiene el peso del producto
 
                 # if order.amount_total > 0:
                 #     order.amount_total = subtotal5
