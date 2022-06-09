@@ -123,7 +123,7 @@ class SaleOrder(models.Model):
     coef_subtotal2 = fields.Float("Coef.Peso")
     subtotal2_flete = fields.Float("Coef.Flete")
 
-    # - exporta
+    # - Derechos de importacion
     coef_dexport = fields.Float("Coef.Exp")
     subtotal3_dexport = fields.Float("Sub.Exp")
 
@@ -137,7 +137,7 @@ class SaleOrder(models.Model):
     valor_dolar = fields.Float("Valor Dólar")
     valor_euro = fields.Float("Valor Euro")
 
-    coef_cotizacion = fields.Float("Coef.Contización")
+    coef_cotizacion = fields.Float("Coef.Cotización")
 
     def funcion_ale(self, precio_a_cambiar):
         # pide coheficiente de algún lado
@@ -179,7 +179,7 @@ class SaleOrder(models.Model):
         if banderita > 0:
             coef = self._tomar_coeficiente()
 
-        # actualización del precio unitario detodas las lineas de los items de la órden
+        # actualización del precio unitario de todas las lineas de los items de la órden
         for order in self:
             for line in order.order_line:
                 line.price_unit = line.price_unit * coef
@@ -422,16 +422,16 @@ class SaleOrder(models.Model):
 
 
 
-                # for line in order.order_line:
-                #
-                #     if not line.id in actualizados2:
-                #         actualizados2[line.id] = line.price_unit
-                #
-                #     precio = actualizados2[line.id]
-                #
-                #     line.price_unit = precio * coef
-                #     print("line.price_unit   --->  ", line.price_unit, "   precio original: ", precio)
-                    # actualizados.append(line.id)
+            #     for line in order.order_line:
+            #
+            #         if not line.id in actualizados2:
+            #             actualizados2[line.id] = line.price_unit
+            #
+            #        precio = actualizados2[line.id]
+            #
+            #         line.price_unit = precio * coef
+            #         print("line.price_unit   --->  ", line.price_unit, "   precio original: ", precio)
+            #         actualizados.append(line.id)
 
                     # se obtiene el peso del producto
 
