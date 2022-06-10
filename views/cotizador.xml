@@ -6,34 +6,40 @@
         <field name="arch" type="xml">
 
                 <xpath expr="//field[(@name='payment_term_id')]" position="after">
-                    <field name="gasto_envio_local" string="G. Envíos"/>
-                    <field name="gasto_envio_despacho" string="G. Despacho"/>
+                    <field name="gasto_envio_local" string="Gtos. Envío Local"/>
+                    <field name="gasto_envio_despacho" string="Gtos. Despacho"/>
                     <field name="dias_almacenamiento" string="cp"  invisible="1"/>
+                    <field name="medio_envio" string="Metodo de Envío"/>
+                    <field name="dias_almacenamiento2" string="Dias de Almacenamiento"/>
                     <field name="cotizar" string="Cotizar"/>
-                    <field name="medio_envio" string="M. Envío"/>
-                    <field name="dias_almacenamiento2" string="D.Almacen"/>
                 </xpath>
 
                 <xpath expr="//field[@name='partner_shipping_id']" position="after">
 
 
-                                <field name="coef_euro2dolar" string="Coef.Eu2Do" invisible="1"/>
+                    <field name="coef_euro2dolar" string="Coef.Eu2Do" invisible="1"/>
+                    <!-- agrgué campos sub total 1 pesoreal variacionpeso-->
+                    <field name="subtotal1_precio" decoration-bf="1" readonly="1"/>
+                    <field name="peso_real" readonly="1"/>
 
-                                <field name="coef_subtotal2" style="width:20"/>
-                                <field name="subtotal2_flete" string="-Sub2_Flete" decoration-bf="1" readonly="1"/>
+                    <field name="coef_subtotal2" style="width:20" string="Variación Peso"/>
 
-                                <field name="coef_dexport" />
-                                <field name="subtotal3_dexport" string="-Sub3_Exp" decoration-bf="1" readonly="1"/>
+                    <field name="peso_por_variacion" readonly="1"/>
 
-                                <field name="coef_utilidad"/>
-                                <field name="subtotal4_utilidad" string="-Sub4_Util" decoration-bf="1" readonly="1"/>
+                    <field name="subtotal2_flete" string="Sub Total 2" decoration-bf="1" readonly="1"/>
 
-                                <field name="valor_dolar" string="[V.Dolar]"/>
-                                <field name="valor_euro" string="[V.Euro]"/>
+                    <field name="coef_dexport" string="Porcentaje Derechos de Importación" />
+                    <field name="subtotal3_dexport" string="Sub Total 3" decoration-bf="1" readonly="1"/>
 
-                                <field name="activar_coef" string="Coef_Manual?"/>
+                    <field name="coef_utilidad" string="Porcentaje Utilidad"/>
+                    <field name="subtotal4_utilidad" string="Sub Total 4" decoration-bf="1" readonly="1"/>
 
-                                <field name="coef_cotizacion" decoration-bf="1" readonly="1"/>
+                    <field name="valor_dolar" string="Valor Dolar"/>
+                    <field name="valor_euro" string="Valor Euro"/>
+
+                    <field name="activar_coef" string="Modificar porcentajes manualmente"/>
+
+                    <field name="coef_cotizacion" decoration-bf="1" readonly="1" string="Coeficiente"/>
 
                     <a>------</a>
 

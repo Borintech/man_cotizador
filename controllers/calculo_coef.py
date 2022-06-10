@@ -253,6 +253,7 @@ class cotiza:
             else:
                 coe_medio_envio = v_coef_flete_currier
 
+            nuevo_peso = total_peso * coef_subtotal2
             print("x250:", total_peso, coef_subtotal2, coe_medio_envio)
             subtotal2_flete = total_peso * coef_subtotal2 * coe_medio_envio
 
@@ -286,21 +287,23 @@ class cotiza:
             subtotal5 = gasto_envio_local + gasto_envio_despacho + total_almacenaje_dolares + subtotal4_utilidad
 
             _log(f' - subtotal5 : {subtotal5}')
+            print("x289 subtotal5", subtotal5)
 
             # 8. cálculo del coeficiente de conversión
             coef_cotizador = subtotal5 / subtotal1
+            print("x293 coef_cotizador", coef_cotizador)
 
             _log(f' - coef_cotizador : {coef_cotizador}')
 
             # 9. ahora lo paso a pesos
             coef_real = coef_cotizador
+            print("x297 coef_real", coef_real)
             coef_cotizador = coef_cotizador * self.dolar
             # coef_cotizador = coef_cotizador
 
             _log("------------------------------------------------")
 
-            return coef_cotizador, subtotal2_flete, subtotal3_dexport, subtotal4_utilidad, coef_subtotal2, coef_dexport, coef_utilidad, coef_euro2dolar, coef_real, subtotal5
+            return coef_cotizador, subtotal2_flete, subtotal3_dexport, subtotal4_utilidad, coef_subtotal2, coef_dexport, coef_utilidad, coef_euro2dolar, coef_real, subtotal5, subtotal1, nuevo_peso
 
         except:
-            # retornaba 8 valores, se esperan 9
-            return 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+            return 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
