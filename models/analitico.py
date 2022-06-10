@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#cambios para poder hacer commit
 
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError

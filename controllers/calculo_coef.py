@@ -2,7 +2,7 @@ from odoo.http import request
 import os
 import datetime
 
-
+#cambios para poder hacer commit
 def _log(dato):
     nombre = os.path.dirname(__file__) + '/coe_log.log'
     log = open(nombre, 'a')

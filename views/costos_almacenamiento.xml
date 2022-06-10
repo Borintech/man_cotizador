@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!--cambios para subir a la rama nelson-->
 
     <record id="costos_almacenamiento_view" model="ir.actions.act_window">
         <field name="name">Costos Almacenamiento</field>

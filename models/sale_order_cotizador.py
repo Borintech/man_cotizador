@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#cambios para poder hacer commit
 import base64
 
 from odoo import api, fields, models, _

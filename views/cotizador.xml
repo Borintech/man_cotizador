@@ -1,4 +1,5 @@
 <odoo>
+    <!--cambios para subir a la rama nelson-->
     <record id="view_herada_mati" model="ir.ui.view">
         <field name="name">sale.order.cotizador</field>
         <field name="model">sale.order</field>
