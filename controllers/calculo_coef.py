@@ -29,7 +29,7 @@ class cotiza:
             v_dolar = valores[0]['precio_dolar']
             v_euro = valores[0]['precio_euro']
             v_coef_peso_ajuste = valores[0]['coef_peso_ajuste']
-            v_coef_flete = valores[0]['coef_flete']
+            #v_coef_flete = valores[0]['coef_flete']
             v_coef_dexport = valores[0]['coef_dexport']
             v_coef_utilidad = valores[0]['coef_utilidad']
 
