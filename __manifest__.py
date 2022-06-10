@@ -19,6 +19,8 @@
         'views/bobinas.xml',
         'views/cajas.xml',
         'views/cotizador_page_cajas.xml',
+        'security/cotizador_security.xml',
+        'security/ir.model.access.csv',
             ],
     'demo': [],
     'qweb': [],

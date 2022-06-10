@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_Cotizador_Usuario,Cotizador analitico usuario,model_cotizador_analitico,cotizador_user,1,0,0,0
+access_Cotizador_Administrador,Cotizador analitico administrador,model_cotizador_analitico,cotizador_admin,1,1,1,1
+access_Cotizador_Usuario,Cotizador analitico usuario,model_cotizador_configuracion,cotizador_user,1,0,0,0
+access_Cotizador_Administrador,Cotizador analitico administrador,model_cotizador_configuracion,cotizador_admin,1,1,1,1
+access_Cotizador_Usuario,Cotizador analitico usuario,model_cotizador_costos_almacenamiento,cotizador_user,1,0,0,0
+access_Cotizador_Administrador,Cotizador analitico administrador,model_cotizador_costos_almacenamiento,cotizador_admin,1,1,1,1
+access_Cotizador_Usuario,Cotizador analitico usuario,model_cotizador_bobinas,cotizador_user,1,0,0,0
+access_Cotizador_Administrador,Cotizador analitico administrador,model_cotizador_bobinas,cotizador_admin,1,1,1,1
+access_Cotizador_Usuario,Cotizador analitico usuario,model_cotizador_cajas,cotizador_user,1,0,0,0
+access_Cotizador_Administrador,Cotizador analitico administrador,model_cotizador_cajas,cotizador_admin,1,1,1,1

@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<odoo>
+
+<!--Defino una Categoría de seguridad para el módulo-->
+    <record model="ir.module.category" id="module_cotizador">
+        <field name="name">Cotizador</field>
+        <field name="description">Nivel de acceso para el modulo cotizador</field>
+    </record>
+
+<!--Defino Grupo Usuario-->
+
+    <record id="cotizador_user" model="res.groups">
+        <field name="name">usuario</field>
+        <field name="category_id" ref="module_cotizador"/>
+    </record>
+
+<!--Defino Grupo Usuario Admin -->
+
+    <record id="cotizador_admin" model="res.groups">
+        <field name="name">Administrador</field>
+        <field name="category_id" ref="module_cotizador"/>
+        <field name="implied_ids" eval="[(4, ref('cotizador_user'))]"/>
+    </record>
+
+    <!--<menuitem name="Cotizador" id="cotizador_menu_1" parent="cotizador.menu_root" action="action_window" groups="cotizador_admin"/>-->
+
+</odoo>
