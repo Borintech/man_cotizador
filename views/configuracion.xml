@@ -16,19 +16,20 @@
         <field name="model">cotizador.configuracion</field>
         <field name="arch" type="xml">
                     <tree multi_edit = "1">
-                                <field name="precio_dolar"/>
-                                <field name="precio_euro"/>
-                                <field name="coef_peso_ajuste"/>
+                        <field name="precio_dolar"/>
+                        <field name="precio_euro"/>
+                        <field name="coef_peso_ajuste"/>
 
-                                <!--<field name="coef_flete"/>-->
-                                <field name="coef_dexport"/>
-                                <field name="coef_utilidad"/>
+                        <!--<field name="coef_flete"/>-->
+                        <field name="coef_dexport"/>
+                        <field name="coef_utilidad"/>
 
+                        <field name="coef_flete_maritimo"/>
+                        <field name="coef_flete_aereo"/>
+                        <field name="coef_flete_currier"/>
 
-                                <field name="coef_flete_maritimo"/>
-                                <field name="coef_flete_aereo"/>
-                                <field name="coef_flete_currier"/>
-
+                        <field name="porcentaje_gasto_maritimo"/>
+                        <field name="porcentaje_gasto_aereo"/>
                     </tree>
         </field>
     </record>
@@ -38,34 +39,33 @@
         <field name="name">cotizador.configuracion.form</field>
         <field name="model">cotizador.configuracion</field>
         <field name="arch" type="xml">
-                    <form>
-                            <sheet>
-                                <group>
-                                        <field name="precio_dolar"/>
-                                        <field name="precio_euro"/>
-                                        <field name="coef_peso_ajuste"/>
+            <form>
+                <sheet>
 
-                                        <!--<field name="coef_flete"/>-->
-                                        <field name="coef_dexport"/>
-                                        <field name="coef_utilidad"/>
+                    <group>
+                        <field name="precio_dolar"/>
+                        <field name="precio_euro"/>
+                        <field name="coef_peso_ajuste"/>
 
-                                        <field name="coef_flete_maritimo"/>
-                                        <field name="coef_flete_aereo"/>
-                                        <field name="coef_flete_currier"/>
+                        <!--<field name="coef_flete"/>-->
+                        <field name="coef_dexport"/>
+                        <field name="coef_utilidad"/>
 
-                                </group>
-                            </sheet>
+                        <field name="coef_flete_maritimo"/>
+                        <field name="coef_flete_aereo"/>
+                        <field name="coef_flete_currier"/>
+
+                        <field name="porcentaje_gasto_maritimo"/>
+                        <field name="porcentaje_gasto_aereo"/>
+                    </group>
+                </sheet>
             </form>
         </field>
-    </record>
-
-
+     </record>
 
     <menuitem id="menu_cotizador_configuracion"
               name="Configuraciones"
               parent="menu_cotizador"
               action="costos_configuracion_view"
               />
-
-
 </odoo>
