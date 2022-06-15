@@ -1,4 +1,5 @@
 from odoo import fields, models
+#cambios para poder hacer commit
 
 
 class Bobinas(models.Model):

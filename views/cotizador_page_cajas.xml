@@ -1,4 +1,5 @@
 <odoo>
+    <!--cambios para subir a la rama nelson-->
     <record id="cotizador_page_cajas" model="ir.ui.view">
         <field name="name">cotizador.page.cajas</field>
         <field name="model">sale.order</field>

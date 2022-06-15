@@ -1,5 +1,6 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
+#cambios para poder hacer commit
 
 class Transformada(models.Model):
     _name = "cotizador.costos_almacenamiento"
