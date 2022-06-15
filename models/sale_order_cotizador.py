@@ -454,18 +454,18 @@ class SaleOrder(models.Model):
             self.aplica_coef_ejemplo()
             raise ValidationError("Invocando a la función de cotización")
 
-    @api.model
-    def create(self, vals_list):
-
-        # averigua el último id de sale.order
-        q = " select id from  public.sale_order order by id desc  limit 1"
-        request.cr.execute(q)
-        r = request.cr.fetchall()[0][0]
-        # ultimo_id = self.env['sale.order'].search([])[-1].id
-        men = f'Último id de sale.order  =  {r}'
-        print(men)
-        # -----
-
-        result = super(SaleOrder, self).create(vals_list)
-
-        return result
+    # @api.model
+    # def create(self, vals_list):
+    #
+    #     # averigua el último id de sale.order
+    #     q = " select id from  public.sale_order order by id desc  limit 1"
+    #     request.cr.execute(q)
+    #     r = request.cr.fetchall()[0][0]
+    #     # ultimo_id = self.env['sale.order'].search([])[-1].id
+    #     men = f'Último id de sale.order  =  {r}'
+    #     print(men)
+    #     # -----
+    #
+    #     result = super(SaleOrder, self).create(vals_list)
+    #
+    #     return result
