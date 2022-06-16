@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-#cambios para poder hacer commit
+
 import base64
-# ########
+
 from datetime import datetime, timedelta
 from functools import partial
 from itertools import groupby
@@ -11,24 +11,21 @@ from odoo.exceptions import AccessError, UserError, ValidationError
 from odoo.tools.misc import formatLang, get_lang
 from odoo.osv import expression
 from odoo.tools import float_is_zero, float_compare
-# ########
-
-
-from odoo import api, fields, models, _
-from odoo.http import request
-from odoo.exceptions import ValidationError
 from odoo.modules import get_module_resource
 from odoo.tools import image_process
 
 from ..controllers.calculo_coef import cotiza
-
 from ..controllers.api_dolar_euro import valor_dolar_euro
+from odoo import api, fields, models, _
+from odoo.http import request
+from odoo.exceptions import ValidationError
 
 bandera = 1
 actualizados = []
 total_euros = 0
 total_peso = 0
 actualizados2 = {}
+leer = True
 
 
 def _make_bobina_tabla2():
@@ -68,42 +65,44 @@ def _make_caja_tabla2():
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
+    activar_coef = fields.Boolean("Act.Coef")
+
     gasto_envio_local = fields.Float("Gasto Envios")
     gasto_envio_despacho = fields.Float("Gasto Despacho")
-    dias_almacenamiento = fields.Float(string="Días almacenamiento", compute="aplica_coef_ejemplo", store=True)
-    # vamos a aplica_coef_ejemplo
 
-    # dias_almacenamiento = fields.Float("Días almacenamiento")
+    dias_almacenamiento = fields.Float(string="Días almacenamiento", compute="aplica_coef_ejemplo", store=True)
+
     cotizar = fields.Boolean("Cotizar", default=False)
     dias_almacenamiento2 = fields.Integer()
 
     enume = [('maritimo', "Marítimo"), ('aereo', "Aéreo"), ('currier', "Currier")]
-    medio_envio = fields.Selection(enume, default='currier', string="Envío", requiere=True)
+    medio_envio = fields.Selection(string="Envío", selection=enume, store=True, default='currier')
 
-    @api.onchange('medio_envio')
+    @api.onchange('medio_envio', 'activar_coef', 'porcentaje_gasto_envio_despacho')
     def get_porcentaje_gasto_envio_despacho(self):
-        r = 0
-        if self.medio_envio == 'maritimo':
-            q = """select * from cotizador_configuracion order by id desc"""
-            request.cr.execute(q)
-            r = request.cr.dictfetchall()[0]['porcentaje_gasto_maritimo']
-        if self.medio_envio == 'aereo':
-            q = """select * from cotizador_configuracion order by id desc"""
-            request.cr.execute(q)
-            r = request.cr.dictfetchall()[0]['porcentaje_gasto_aereo']
 
-        self.porcentaje_gasto_envio_despacho = float(r)
+        if not self.activar_coef:
+            if self.medio_envio == 'maritimo':
+                q = """select * from cotizador_configuracion order by id desc"""
+                request.cr.execute(q)
+                r = request.cr.dictfetchall()[0]['porcentaje_gasto_maritimo']
+            if self.medio_envio == 'aereo':
+                q = """select * from cotizador_configuracion order by id desc"""
+                request.cr.execute(q)
+                r = request.cr.dictfetchall()[0]['porcentaje_gasto_aereo']
+            if self.medio_envio == 'currier':
+                r = 0
+            self.porcentaje_gasto_envio_despacho = float(r)
 
-    porcentaje_gasto_envio_despacho = fields.Float(compute="get_porcentaje_gasto_envio_despacho", store=True)
+    porcentaje_gasto_envio_despacho = fields.Float(compute="get_porcentaje_gasto_envio_despacho",
+                                                   store=True,
+                                                   readonly=False)
     gasto_envio_calculado = fields.Float(readonly=True)
 
-
-    # make_bobina_tabla = _make_bobina_tabla()
     bobina_tabla = fields.Html(string='Tabla Bobina', readonly=True)
     caja_tabla = fields.Html(string="Tabla Caja", readonly=True)
 
     bonina_datos = fields.Many2many('cotizador.bobinas')
-
 
     @api.onchange('gasto_envio_local')
     def _make_bobina_tabla22(self):
@@ -159,7 +158,7 @@ class SaleOrder(models.Model):
     coef_utilidad = fields.Float("Coef.Utilidad")
     subtotal4_utilidad = fields.Float("Subt.Utilidad")
 
-    activar_coef = fields.Boolean("Act.Coef")
+    # activar_coef = fields.Boolean("Act.Coef")
     # -------------------
 
     valor_dolar = fields.Float("Valor Dólar BNA")
@@ -199,10 +198,6 @@ class SaleOrder(models.Model):
                 # total del peso es la cantiadad por el peso unitario
                 total_peso += peso_unitario * line.product_uom_qty
 
-        # calculo el coeficiente
-        print("total_orden", total_orden)
-        print("total_peso", total_peso)
-        # coef  = self._cal_coef(total_orden,total_peso)
         coef = 1
         if banderita > 0:
             coef = self._tomar_coeficiente()
@@ -215,134 +210,12 @@ class SaleOrder(models.Model):
     @api.depends('gasto_envio_local', 'gasto_envio_despacho', 'dias_almacenamiento2')
     def _tomar_coeficiente(self, medio_envio, total_euro, total_peso2, gasto_envio_local, gasto_envio_despacho,
                            dias_almacenamiento2,
-                           coef_euro2dolar, coef_subtotal2, coef_dexport, coef_utilidad):
+                           coef_euro2dolar, coef_subtotal2, coef_dexport, coef_utilidad, porc_gastos_desp):
         coti = cotiza()
-
-        print("DENTRO DE _TOMAR_COFICIENTE")
-        print("total_euros", total_euros)
-        print("total_peso", total_peso)
-        print("gasto_envio_local", gasto_envio_local)
-        print("gasto_envio_despacho", gasto_envio_despacho)
-        print("dias_almacenamiento2", dias_almacenamiento2)
         r = coti.calcular_coeficiente(medio_envio, total_euro, total_peso2, gasto_envio_local, gasto_envio_despacho,
                                       dias_almacenamiento2,
-                                      coef_euro2dolar, coef_subtotal2, coef_dexport, coef_utilidad)
+                                      coef_euro2dolar, coef_subtotal2, coef_dexport, coef_utilidad, porc_gastos_desp)
         return r
-
-    # def _tomar_coeficiente(self):
-    #     print("xx82 PESO", total_peso)
-    #     coti = cotiza()
-    #     r = coti.calcular_coeficiente(total_euros,total_peso,self.gasto_envio_local,self.gasto_envio_despacho,self.dias_almacenamiento2)
-    #     return r
-    #
-    # @api.depends('order_line', 'cotizar', 'gasto_envio_local', 'gasto_envio_despacho', 'dias_almacenamiento2',
-    #              'medio_envio')
-    # def aplica_coef_ejemplo(self):
-    #     # muestra en sale_order valor dolar y euro según api
-    #     valor_dolar, valor_euro = valor_dolar_euro()
-    #     self.valor_dolar = valor_dolar
-    #     self.valor_euro = valor_euro
-    #
-    #     global bandera, total_peso, total_euros
-    #     bandera += 1
-    #     print("x94 bandera", bandera)
-    #
-    #     if bandera > 2 and self.cotizar:
-    #         # todo Ale... recordar que en la instalación si sacamos bandera > 2 no entiendo
-    #         #  por qué línea 223 if self.cotizar viene en true o pasa y rompe la instalación
-    #         #  ya que order error
-    #         print("Entrando aplica_coef_ejemplo")
-    #
-    #         for order in self:
-    #             total_peso = 0
-    #             total_euros = 0
-    #
-    #             for line in order.order_line:
-    #
-    #                 if not line.id in actualizados2:
-    #                     actualizados2[line.id] = line.price_unit
-    #
-    #                 precio_unitario = actualizados2[line.id]
-    #
-    #                 print(dir(line))
-    #                 total_euros += precio_unitario * line.product_uom_qty
-    #
-    #                 try:
-    #                     peso_unitario = self._peso(line.product_id)
-    #                     total_peso += peso_unitario * line.product_uom_qty
-    #                 except:
-    #                     pass
-    #
-    #         if total_peso == 0:
-    #             total_peso = 1
-    #
-    #
-    #         print("medio_envio", self.medio_envio)
-    #         print("total_euros", total_euros)
-    #         print("total_peso", total_peso)
-    #         print("gasto_envio_local", self.gasto_envio_local)
-    #         print("gasto_envio_despacho", self.gasto_envio_despacho)
-    #         print("dias_almacenamiento2", self.dias_almacenamiento2)
-    #         print("coef_euro2dolar", self.coef_euro2dolar)
-    #         print("coef_subtotal2", self.coef_subtotal2)
-    #         print("coef_dexport", self.coef_dexport)
-    #         print("coef_utilidad", self.coef_utilidad)
-    #
-    #         if self.activar_coef:
-    #             coef, s2, s3, s4, c2, c3, c4, c0, coef_real = self._tomar_coeficiente(self.medio_envio,
-    #                                                                                   total_euros, total_peso,
-    #                                                                                   self.gasto_envio_local,
-    #                                                                                   self.gasto_envio_despacho,
-    #                                                                                   self.dias_almacenamiento2,
-    #                                                                                   self.coef_euro2dolar,
-    #                                                                                   self.coef_subtotal2,
-    #                                                                                   self.coef_dexport,
-    #                                                                                   self.coef_utilidad)
-    #         else:
-    #             coef, s2, s3, s4, c2, c3, c4, c0, coef_real = self._tomar_coeficiente(self.medio_envio,
-    #                                                                                   total_euros, total_peso,
-    #                                                                                   self.gasto_envio_local,
-    #                                                                                   self.gasto_envio_despacho,
-    #                                                                                   self.dias_almacenamiento2, 0, 0,
-    #                                                                                   0, 0)
-    #
-    #         for order in self:
-    #             ## acá se debería calcular el coeficiente
-    #             print("ANTES DE ENVIAR A _TOMAR_COFICIENTE")
-    #             print("total_euros", total_euros)
-    #             print("total_peso", total_peso)
-    #             print("gasto_envio_local", self.gasto_envio_local)
-    #             print("gasto_envio_despacho", self.gasto_envio_despacho)
-    #             print("dias_almacenamiento2", self.dias_almacenamiento2)
-    #
-    #             if self.medio_envio == 'currier':
-    #                 self.dias_almacenamiento2 = -1
-    #
-    #             print("114", coef)
-    #             # coef = 100
-    #             order.coef_euro2dolar = c0
-    #             order.subtotal2_flete = s2
-    #             order.subtotal3_dexport = s3
-    #             order.subtotal4_utilidad = s4
-    #
-    #             order.coef_subtotal2 = c2
-    #             order.coef_dexport = c3
-    #             order.coef_utilidad = c4
-    #
-    #             order.coef_cotizacion = coef_real
-    #
-    #             for line in order.order_line:
-    #
-    #                 if not line.id in actualizados2:
-    #                     actualizados2[line.id] = line.price_unit
-    #
-    #                 precio = actualizados2[line.id]
-    #
-    #                 line.price_unit = precio * coef
-    #                 print("line.price_unit   --->  ", line.price_unit, "   precio original: ", precio)
-    #                 # actualizados.append(line.id)
-    #
-    #                 # se obtiene el peso del producto
 
     @api.depends('order_line', 'cotizar', 'gasto_envio_local', 'gasto_envio_despacho', 'dias_almacenamiento2',
                  'medio_envio', 'activar_coef')
@@ -352,58 +225,34 @@ class SaleOrder(models.Model):
         self.valor_dolar = valor_dolar
         self.valor_euro = valor_euro
         try:
-            print("entra al try")
             self.coef_real_euro_dolar = float(valor_euro) / float(valor_dolar)
         except:
-            print("entra a la excepción")
             self.coef_real_euro_dolar = 0
 
         global bandera, total_peso, total_euros
         bandera += 1
-        print("x94 bandera", bandera, "cotizar:", self.cotizar)
 
         if bandera > 2 and self.cotizar:
             # todo Ale... recordar que en la instalación si sacamos bandera > 2 no entiendo
             #  por qué línea 223 if self.cotizar viene en true o pasa y rompe la instalación
             #  ya que order error
-            print("Entrando aplica_coef_ejemplo")
 
             for order in self:
                 total_peso = 0
                 total_euros = 0
-                # if 0 query else self.coef
-                print("x337", self.coef_euro2dolar)
 
-                # for line in order.order_line:
-                #
-                #     if line.id not in actualizados2:
-                #         actualizados2[line.id] = line.price_unit
-                #
-                #     precio_unitario = actualizados2[line.id]
-                #     print("x347 actualizados2", actualizados2)
-                #
-                #     print(dir(line))
-                #     total_euros += precio_unitario * line.product_uom_qty
-                #
-                #     try:
-                #         peso_unitario = self._peso(line.product_id)
-                #         total_peso += peso_unitario * line.product_uom_qty
-                #         print("x355 peso total", total_peso)
-                #     except:
-                #         pass
                 for line in order.order_line:
                     precio_unitario = "ahora intentamos consultar el standard_price"
                     try:
                         producto_precio_standard = line.product_id.standard_price
 
                         if line.id not in actualizados2:
-                            #actualizados2[line.id] = line.price_unit
+                            # actualizados2[line.id] = line.price_unit
                             actualizados2[line.id] = producto_precio_standard
 
                         precio_unitario = actualizados2[line.id]
-                        print("x347 actualizados2", actualizados2)
                     except:
-                        print("No se halló standard_price")
+                        print("No se halló standard_price. línea 259 sale_order_cotizador.py")
                         pass
 
                     total_euros += precio_unitario * line.product_uom_qty
@@ -411,20 +260,8 @@ class SaleOrder(models.Model):
                     try:
                         peso_unitario = self._peso(line.product_id)
                         total_peso += peso_unitario * line.product_uom_qty
-                        print("x355 peso total", total_peso)
                     except:
                         pass
-
-            print("medio_envio", self.medio_envio)
-            print("total_euros", total_euros)
-            print("total_peso", total_peso)
-            print("gasto_envio_local", self.gasto_envio_local)
-            print("gasto_envio_despacho", self.gasto_envio_despacho)
-            print("dias_almacenamiento2", self.dias_almacenamiento2)
-            print("coef_euro2dolar", self.coef_euro2dolar)
-            print("coef_subtotal2", self.coef_subtotal2)
-            print("coef_dexport", self.coef_dexport)
-            print("coef_utilidad", self.coef_utilidad)
 
             if self.activar_coef:
                 if self.coef_dexport > 0:
@@ -439,35 +276,34 @@ class SaleOrder(models.Model):
                     except:
                         # aca podemos poner una ventana de advertencia
                         pass
-                coef, s2, s3, s4, c2, c3, c4, c0, coef_real, subtotal5, s1, peso_despues, g_e_calc = self._tomar_coeficiente(self.medio_envio,
-                                                                                                 total_euros,
-                                                                                                 total_peso,
-                                                                                                 self.gasto_envio_local,
-                                                                                                 self.gasto_envio_despacho,
-                                                                                                 self.dias_almacenamiento2,
-                                                                                                 self.coef_euro2dolar,
-                                                                                                 self.coef_subtotal2,
-                                                                                                 self.coef_dexport,
-                                                                                                 self.coef_utilidad)
+                coef, s2, s3, s4, c2, c3, c4, c0, coef_real, subtotal5, s1, peso_despues, g_e_calc = \
+                    self._tomar_coeficiente(
+                        self.medio_envio,
+                        total_euros,
+                        total_peso,
+                        self.gasto_envio_local,
+                        self.gasto_envio_despacho,
+                        self.dias_almacenamiento2,
+                        self.coef_euro2dolar,
+                        self.coef_subtotal2,
+                        self.coef_dexport,
+                        self.coef_utilidad,
+                        self.porcentaje_gasto_envio_despacho)
             else:
-                print("totalpesoelse", total_peso)
-                coef, s2, s3, s4, c2, c3, c4, c0, coef_real, subtotal5, s1, peso_despues, g_e_calc = self._tomar_coeficiente(self.medio_envio,
-                                                                                                 total_euros,
-                                                                                                 total_peso,
-                                                                                                 self.gasto_envio_local,
-                                                                                                 self.gasto_envio_despacho,
-                                                                                                 self.dias_almacenamiento2,
-                                                                                                 0, 0,
-                                                                                                 0, 0)
+                coef, s2, s3, s4, c2, c3, c4, c0, coef_real, subtotal5, s1, peso_despues, g_e_calc = self._tomar_coeficiente(
+                    self.medio_envio,
+                    total_euros,
+                    total_peso,
+                    self.gasto_envio_local,
+                    self.gasto_envio_despacho,
+                    self.dias_almacenamiento2,
+                    0,
+                    0,
+                    0,
+                    0,
+                    self.porcentaje_gasto_envio_despacho)
 
             for order in self:
-                ## acá se debería calcular el coeficiente
-                print("ANTES DE ENVIAR A _TOMAR_COFICIENTE")
-                print("total_euros", total_euros)
-                print("total_peso", total_peso)
-                print("gasto_envio_local", self.gasto_envio_local)
-                print("gasto_envio_despacho", self.gasto_envio_despacho)
-                print("dias_almacenamiento2", self.dias_almacenamiento2)
 
                 if self.medio_envio == 'currier':
                     self.dias_almacenamiento2 = -1
@@ -495,9 +331,8 @@ class SaleOrder(models.Model):
                         precio = actualizados2[line.id]
 
                     line.price_unit = precio * coef_real * c0
-                    print("line.price_unit   --->  ", line.price_unit, "   precio original: ", precio)
+                    #print("line.price_unit   --->  ", line.price_unit, "   precio original: ", precio)
                     # actualizados.append(line.id)
-
 
                 # if order.amount_total > 0:
                 #     order.amount_total = subtotal5
@@ -509,9 +344,8 @@ class SaleOrder(models.Model):
                         precio = actualizados2[line.id]
                         line.price_unit = precio
                     except:
-                        print("no hay precio en lista -except línea 450 sale_order_cotizador.py")
+                        print("no hay precio en lista -except línea 351 sale_order_cotizador.py")
                         pass
-
 
     def cotizar_ejemplo(self):
         if self.cotizar:

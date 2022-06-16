@@ -8,7 +8,7 @@
 
                 <xpath expr="//field[(@name='payment_term_id')]" position="after">
                     <field name="gasto_envio_local" string="Gtos. Envío Local"/>
-                    <field name="gasto_envio_despacho" string="Gtos. Despacho"/>
+                    <!--<field name="gasto_envio_despacho" string="Gtos. Despacho"/>-->
                     <field name="dias_almacenamiento" string="cp"  invisible="1"/>
                     <field name="medio_envio" string="Metodo de Envío"/>
                     <field name="porcentaje_gasto_envio_despacho" string="Gtos. Despacho %"/>
