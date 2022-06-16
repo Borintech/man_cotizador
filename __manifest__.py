@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#cambios para poder hacer commit
 {
     'name': 'Cotizador2',
     'version': '1',

@@ -2,7 +2,7 @@ from odoo.http import request
 import os
 import datetime
 
-
+#cambios para poder hacer commit
 def _log(dato):
     nombre = os.path.dirname(__file__) + '/coe_log.log'
     log = open(nombre, 'a')
@@ -37,6 +37,7 @@ class cotiza:
             v_coef_flete_aereo = valores[0]['coef_flete_aereo']
             v_coef_flete_currier = valores[0]['coef_flete_currier']
         except Exception as e:
+            print("entra a la excepcion de calculo")
             v_dolar = 1
             v_euro = 1
             v_coef_peso_ajuste = 1
@@ -130,7 +131,7 @@ class cotiza:
             _log(f' - coef euro a dolar : {coef_euro2dolar}')
 
             # 2. subtotal1 --------------------------
-            total_dolar = total_euros  # * coef_euro2dolar
+            total_dolar = total_euros * coef_euro2dolar
             subtotal1 = total_dolar
 
             _log(f' - subtotal1 : {subtotal1}')
@@ -179,6 +180,22 @@ class cotiza:
             _log(f' - total_almacenaje_dolares : {total_almacenaje_dolares}')
 
             # 7. subtotal5
+
+            if medio_envio == 'maritimo':
+                porcentaje_gasto_envio = 20 / 100
+
+            if medio_envio == 'aereo':
+                porcentaje_gasto_envio = 50 / 100
+
+            if medio_envio == 'currier':
+                porcentaje_gasto_envio = 0 / 100
+
+            gasto_envio = porcentaje_gasto_envio * subtotal1
+            print("x191 gasto_envio_despacho", gasto_envio_despacho)
+            print("porcentaje_gasto_envio", porcentaje_gasto_envio)
+            gasto_envio_despacho += gasto_envio
+            print("gasto_envio_despacho", gasto_envio_despacho)
+
             subtotal5 = gasto_envio_local + gasto_envio_despacho + total_almacenaje_dolares + subtotal4_utilidad
 
             _log(f' - subtotal5 : {subtotal5}')
@@ -228,6 +245,8 @@ class cotiza:
         _log("dias_almacenamiento2 " + str(dias_almacenamiento))
 
         try:
+            print("232 euro", self.euro)
+            print("232 dolar", self.dolar)
             # 1. de euro a dolar ---------------------
             if coef_euro2dolar == 0:
                 coef_euro2dolar = self.euro / self.dolar
@@ -235,7 +254,7 @@ class cotiza:
             _log(f' - coef euro a dolar : {coef_euro2dolar}')
 
             # 2. subtotal1 --------------------------
-            total_dolar = total_euros  # * coef_euro2dolar
+            total_dolar = total_euros * coef_euro2dolar
             subtotal1 = total_dolar
 
             _log(f' - subtotal1 : {subtotal1}')
@@ -283,8 +302,29 @@ class cotiza:
 
             _log(f' - total_almacenaje_dolares : {total_almacenaje_dolares}')
 
+            # 6 bis. calcula gasto_envio_despacho
+            if medio_envio == 'maritimo':
+                #porcentaje_envio = v_coef_flete_maritimo
+                porcentaje_envio = 20 / 100
+
+            elif medio_envio == 'aereo':
+                porcentaje_envio = 20 / 100
+
+            else:
+                porcentaje_envio = 0 / 100
+
+            print("x316porcentaje_envio", porcentaje_envio)
+            gasto_envio = subtotal4_utilidad * porcentaje_envio
+            print("x318gasto_envio", gasto_envio)
+            gasto_envio_despacho += gasto_envio
+            print("x320gasto_envio_despacho", gasto_envio_despacho)
+            gasto_envio_calculado = gasto_envio_despacho
+
+
+
             # 7. subtotal5
-            subtotal5 = gasto_envio_local + gasto_envio_despacho + total_almacenaje_dolares + subtotal4_utilidad
+            #subtotal5 = gasto_envio_local + gasto_envio_despacho + total_almacenaje_dolares + subtotal4_utilidad
+            subtotal5 = gasto_envio_local + gasto_envio_calculado + total_almacenaje_dolares + subtotal4_utilidad
 
             _log(f' - subtotal5 : {subtotal5}')
             print("x289 subtotal5", subtotal5)
@@ -303,7 +343,7 @@ class cotiza:
 
             _log("------------------------------------------------")
 
-            return coef_cotizador, subtotal2_flete, subtotal3_dexport, subtotal4_utilidad, coef_subtotal2, coef_dexport, coef_utilidad, coef_euro2dolar, coef_real, subtotal5, subtotal1, nuevo_peso
+            return coef_cotizador, subtotal2_flete, subtotal3_dexport, subtotal4_utilidad, coef_subtotal2, coef_dexport, coef_utilidad, coef_euro2dolar, coef_real, subtotal5, subtotal1, nuevo_peso, gasto_envio_calculado
 
         except:
-            return 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+            return 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
