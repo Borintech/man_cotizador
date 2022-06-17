@@ -211,11 +211,11 @@ class SaleOrder(models.Model):
     @api.depends('gasto_envio_local', 'gasto_envio_despacho', 'dias_almacenamiento2')
     def _tomar_coeficiente(self, medio_envio, total_euro, total_peso2, gasto_envio_local, gasto_envio_despacho,
                            dias_almacenamiento2,
-                           coef_euro2dolar, coef_subtotal2, coef_dexport, coef_utilidad, porc_gastos_desp):
+                           coef_euro2dolar, coef_subtotal2, coef_dexport, coef_utilidad, porc_gastos_desp, env_agr):
         coti = cotiza()
         r = coti.calcular_coeficiente(medio_envio, total_euro, total_peso2, gasto_envio_local, gasto_envio_despacho,
                                       dias_almacenamiento2,
-                                      coef_euro2dolar, coef_subtotal2, coef_dexport, coef_utilidad, porc_gastos_desp)
+                                      coef_euro2dolar, coef_subtotal2, coef_dexport, coef_utilidad, porc_gastos_desp, env_agr)
         return r
 
     @api.depends('order_line', 'cotizar', 'gasto_envio_local', 'gasto_envio_despacho', 'dias_almacenamiento2',
