@@ -98,6 +98,7 @@ class SaleOrder(models.Model):
                                                    store=True,
                                                    readonly=False)
     gasto_envio_calculado = fields.Float(readonly=True)
+    gasto_envio_agregado = fields.Float(readonly=False, help="sume o reste para ajustar \nvalores del campo \nTotal Gastos de Despacho")
 
     bobina_tabla = fields.Html(string='Tabla Bobina', readonly=True)
     caja_tabla = fields.Html(string="Tabla Caja", readonly=True)
@@ -144,7 +145,7 @@ class SaleOrder(models.Model):
     # -------------------
     peso_real = fields.Float("Peso Real Total en Kg")
     peso_por_variacion = fields.Float("Peso Total en Kg")
-    subtotal1_precio = fields.Monetary("Sub Total 1")
+    subtotal1_precio = fields.Float("Sub Total 1")
     coef_euro2dolar = fields.Float("Coef.Euro2Dolar")
     # - ajuste peso
     coef_subtotal2 = fields.Float("Coef.Peso")
@@ -288,7 +289,8 @@ class SaleOrder(models.Model):
                         self.coef_subtotal2,
                         self.coef_dexport,
                         self.coef_utilidad,
-                        self.porcentaje_gasto_envio_despacho)
+                        self.porcentaje_gasto_envio_despacho,
+                        self.gasto_envio_agregado)
             else:
                 coef, s2, s3, s4, c2, c3, c4, c0, coef_real, subtotal5, s1, peso_despues, g_e_calc = self._tomar_coeficiente(
                     self.medio_envio,
@@ -301,7 +303,8 @@ class SaleOrder(models.Model):
                     0,
                     0,
                     0,
-                    self.porcentaje_gasto_envio_despacho)
+                    self.porcentaje_gasto_envio_despacho,
+                    self.gasto_envio_agregado)
 
             for order in self:
 
@@ -322,6 +325,7 @@ class SaleOrder(models.Model):
                 order.coef_utilidad = c4 * 100
                 order.coef_cotizacion = coef_real
                 order.gasto_envio_calculado = g_e_calc
+
 
                 for line in order.order_line:
                     if line.id not in actualizados2:

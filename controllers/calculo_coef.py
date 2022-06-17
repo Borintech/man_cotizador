@@ -85,7 +85,7 @@ class cotiza:
     def calcular_coeficiente(self, medio_envio, total_euros, total_peso,
                              gasto_envio_local=0, gasto_envio_despacho=0,
                              dias_almacenamiento=15, coef_euro2dolar=0, coef_subtotal2=0, coef_dexport=0,
-                             coef_utilidad=0, porcentaje_gasto_envio=0):
+                             coef_utilidad=0, porcentaje_gasto_envio=0, gasto_envio_agregado=0):
         """
         Esta función se encarga calcular el coerficiente de conversión.
 
@@ -175,9 +175,10 @@ class cotiza:
             gasto_envio_calculado = gasto_envio_despacho
             gasto_envio = subtotal4_utilidad * porcentaje_envio
             gasto_envio_calculado = gasto_envio
+            if gasto_envio_agregado!=0:
+                gasto_envio_calculado+=gasto_envio_agregado
 
             # 7. subtotal5
-
             subtotal5 = gasto_envio_local + gasto_envio_calculado + total_almacenaje_dolares + subtotal4_utilidad
 
             _log(f' - subtotal5 : {subtotal5}')
@@ -192,6 +193,8 @@ class cotiza:
             coef_cotizador = coef_cotizador * self.dolar
 
             _log("------------------------------------------------")
+
+
 
             return coef_cotizador, subtotal2_flete, subtotal3_dexport, subtotal4_utilidad, coef_subtotal2, coef_dexport, coef_utilidad, coef_euro2dolar, coef_real, subtotal5, subtotal1, nuevo_peso, gasto_envio_calculado
 
