@@ -80,25 +80,6 @@ class SaleOrder(models.Model):
 
     @api.onchange('medio_envio', 'activar_coef', 'porcentaje_gasto_envio_despacho')
     def get_porcentaje_gasto_envio_despacho(self):
-<<<<<<< HEAD
-        r = 0
-        if self.medio_envio == 'maritimo':
-            q = """select * from cotizador_configuracion order by id desc"""
-            request.cr.execute(q)
-            r = request.cr.dictfetchall()[0]['porcentaje_gasto_maritimo']
-        if self.medio_envio == 'aereo':
-            q = """select * from cotizador_configuracion order by id desc"""
-            request.cr.execute(q)
-            r = request.cr.dictfetchall()[0]['porcentaje_gasto_aereo']
-        if r:
-            self.porcentaje_gasto_envio_despacho = float(r)
-        else:
-            self.porcentaje_gasto_envio_despacho = 0
-
-    porcentaje_gasto_envio_despacho = fields.Float(string="gastos despacho", compute="get_porcentaje_gasto_envio_despacho", store=True, readonly=False )
-    gasto_envio_calculado = fields.Float(readonly=True)
-=======
->>>>>>> origin/man_cotizador_PreparandoEntrega2
 
         if not self.activar_coef:
             if self.medio_envio == 'maritimo':

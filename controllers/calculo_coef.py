@@ -167,19 +167,14 @@ class cotiza:
             else:
                 porcentaje_envio = porcentaje_gasto_envio / 100
 
-<<<<<<< HEAD
             print("x316porcentaje_envio", porcentaje_envio)
             gasto_envio = subtotal4_utilidad * porcentaje_envio
             print("x318gasto_envio", gasto_envio)
             gasto_envio_despacho += gasto_envio
             print("x320gasto_envio_despacho", gasto_envio_despacho)
             gasto_envio_calculado = gasto_envio_despacho
-=======
             gasto_envio = subtotal4_utilidad * porcentaje_envio
             gasto_envio_calculado = gasto_envio
->>>>>>> origin/man_cotizador_PreparandoEntrega2
-
-
 
             # 7. subtotal5
 
