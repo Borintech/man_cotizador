@@ -244,9 +244,11 @@ class SaleOrder(models.Model):
 
                 for line in order.order_line:
                     precio_unitario = "ahora intentamos consultar el standard_price"
+                    #print (line.product_id.price)
                     try:
-                        producto_precio_standard = line.product_id.standard_price
-
+                        #producto_precio_standard = line.product_id.standard_price
+                        producto_precio_standard = line.product_id.variant_seller_ids.price
+                        print(producto_precio_standard)
                         if line.id not in actualizados2:
                             # actualizados2[line.id] = line.price_unit
                             actualizados2[line.id] = producto_precio_standard
