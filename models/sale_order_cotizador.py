@@ -1,19 +1,4 @@
 # -*- coding: utf-8 -*-
-
-import base64
-
-from datetime import datetime, timedelta
-from functools import partial
-from itertools import groupby
-
-from odoo import api, fields, models, SUPERUSER_ID, _
-from odoo.exceptions import AccessError, UserError, ValidationError
-from odoo.tools.misc import formatLang, get_lang
-from odoo.osv import expression
-from odoo.tools import float_is_zero, float_compare
-from odoo.modules import get_module_resource
-from odoo.tools import image_process
-
 from ..controllers.calculo_coef import cotiza
 from ..controllers.api_dolar_euro import valor_dolar_euro
 from odoo import api, fields, models, _
@@ -80,19 +65,22 @@ class SaleOrder(models.Model):
 
     @api.onchange('medio_envio', 'activar_coef', 'porcentaje_gasto_envio_despacho')
     def get_porcentaje_gasto_envio_despacho(self):
-
-        if not self.activar_coef:
-            if self.medio_envio == 'maritimo':
-                q = """select * from cotizador_configuracion order by id desc"""
-                request.cr.execute(q)
-                r = request.cr.dictfetchall()[0]['porcentaje_gasto_maritimo']
-            if self.medio_envio == 'aereo':
-                q = """select * from cotizador_configuracion order by id desc"""
-                request.cr.execute(q)
-                r = request.cr.dictfetchall()[0]['porcentaje_gasto_aereo']
-            if self.medio_envio == 'currier':
+        try:
+            if not self.activar_coef:
                 r = 0
-            self.porcentaje_gasto_envio_despacho = float(r)
+                if self.medio_envio == 'maritimo':
+                    q = """select * from cotizador_configuracion order by id desc"""
+                    request.cr.execute(q)
+                    r = request.cr.dictfetchall()[0]['porcentaje_gasto_maritimo']
+                if self.medio_envio == 'aereo':
+                    q = """select * from cotizador_configuracion order by id desc"""
+                    request.cr.execute(q)
+                    r = request.cr.dictfetchall()[0]['porcentaje_gasto_aereo']
+                if self.medio_envio == 'currier':
+                    r = 0
+                self.porcentaje_gasto_envio_despacho = float(r)
+        except:
+            self.porcentaje_gasto_envio_despacho = 0
 
     porcentaje_gasto_envio_despacho = fields.Float(compute="get_porcentaje_gasto_envio_despacho",
                                                    store=True,
@@ -244,11 +232,10 @@ class SaleOrder(models.Model):
 
                 for line in order.order_line:
                     precio_unitario = "ahora intentamos consultar el standard_price"
-                    #print (line.product_id.price)
+
                     try:
-                        #producto_precio_standard = line.product_id.standard_price
                         producto_precio_standard = line.product_id.variant_seller_ids.price
-                        print(producto_precio_standard)
+                        print("x238", producto_precio_standard)
                         if line.id not in actualizados2:
                             # actualizados2[line.id] = line.price_unit
                             actualizados2[line.id] = producto_precio_standard
@@ -351,7 +338,6 @@ class SaleOrder(models.Model):
                         line.price_unit = precio
                     except:
                         print("no hay precio en lista -except línea 351 sale_order_cotizador.py")
-                        pass
 
     def cotizar_ejemplo(self):
         if self.cotizar:
