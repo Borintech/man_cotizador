@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-#cambios para poder hacer commit
 
 def valor_dolar_euro():
 
@@ -8,7 +7,7 @@ def valor_dolar_euro():
     imdb_response = requests.get(imdb_url)
     imdb_soup = BeautifulSoup(imdb_response.text, 'html.parser')
 
-    print(imdb_response.text)
+    #print(imdb_response.text)
 
     lista = imdb_soup.find_all('td', {'class': 'dest'})
     i = 0

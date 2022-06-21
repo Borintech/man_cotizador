@@ -8,11 +8,12 @@
 
                 <xpath expr="//field[(@name='payment_term_id')]" position="after">
                     <field name="gasto_envio_local" string="Gtos. Envío Local"/>
-                    <field name="gasto_envio_despacho" string="Gtos. Despacho"/>
+                    <!--<field name="gasto_envio_despacho" string="Gtos. Despacho"/>-->
                     <field name="dias_almacenamiento" string="cp"  invisible="1"/>
-                    <field name="medio_envio" string="Metodo de Envío"/>
-                    <field name="porcentaje_gasto_envio_despacho" string="Gtos. Despacho %"/>
-                    <field name="gasto_envio_calculado" string="G. Env. Calculado"/>
+                    <field name="medio_envio" string="Tipo de Flete"/>
+                    <field name="porcentaje_gasto_envio_despacho" string="% Despacho"/>
+                    <field name="gasto_envio_calculado" string="Total Gastos de Desapacho"/>
+                    <field name="gasto_envio_agregado" string="Agregado/Descuento"/>
                     <field name="dias_almacenamiento2" string="Dias de Almacenamiento"/>
                     <field name="cotizar" string="Cotizar"/>
                 </xpath>
@@ -20,7 +21,7 @@
                 <xpath expr="//field[@name='partner_shipping_id']" position="after">
 
 
-                    <field name="coef_euro2dolar" string="Coef.Eu2Do" />
+                    <field name="coef_euro2dolar" string="Coef. EUR/USD" />
                     <!-- agrgué campos sub total 1 pesoreal variacionpeso-->
                     <field name="subtotal1_precio" decoration-bf="1" readonly="1"/>
                     <field name="peso_real" readonly="1"/>
@@ -31,16 +32,16 @@
 
                     <field name="subtotal2_flete" string="Sub Total 2" decoration-bf="1" readonly="1"/>
 
-                    <field name="coef_dexport" string="Porcentaje Derechos de Importación" />
+                    <field name="coef_dexport" string="% Derechos" />
                     <field name="subtotal3_dexport" string="Sub Total 3" decoration-bf="1" readonly="1"/>
 
-                    <field name="coef_utilidad" string="Porcentaje Utilidad"/>
+                    <field name="coef_utilidad" string="% Utilidad"/>
                     <field name="subtotal4_utilidad" string="Sub Total 4" decoration-bf="1" readonly="1"/>
 
 
                     <field name="valor_dolar" readonly="1"/>
                     <field name="valor_euro" readonly="1"/>
-                    <field name="coef_real_euro_dolar" readonly="1" />
+                    <field name="coef_real_euro_dolar" readonly="1" string="Coef. EUR/USD Real"/>
 
 
                     <field name="activar_coef" string="Modificar porcentajes manualmente"/>
