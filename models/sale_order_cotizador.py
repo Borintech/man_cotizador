@@ -234,16 +234,34 @@ class SaleOrder(models.Model):
                     precio_unitario = "ahora intentamos consultar el standard_price"
 
                     try:
-                        producto_precio_standard = line.product_id.variant_seller_ids.price
-                        print("x238", producto_precio_standard)
+                        suppler = line.product_id.variant_seller_ids #.product.supplierinfo
+                        suppler_ids = suppler.ids
+                        p = 0
+                        for precio in suppler_ids:
+                            dondeestaelprecio = """SELECT price FROM public.product_supplierinfo
+                            where id = %s """ % precio
+                            request.cr.execute(dondeestaelprecio)
+                            elprecioes = request.cr.dictfetchall()[0]['price']
+                            if p <= elprecioes:
+                                p = elprecioes
+
                         if line.id not in actualizados2:
                             # actualizados2[line.id] = line.price_unit
-                            actualizados2[line.id] = producto_precio_standard
+                            actualizados2[line.id] = p
 
                         precio_unitario = actualizados2[line.id]
+
                     except:
-                        print("No se halló standard_price. línea 259 sale_order_cotizador.py")
-                        pass
+                        try:
+                            producto_precio_standard = line.product_id.variant_seller_ids.price
+                            if line.id not in actualizados2:
+                                # actualizados2[line.id] = line.price_unit
+                                actualizados2[line.id] = producto_precio_standard
+
+                            precio_unitario = actualizados2[line.id]
+                        except:
+                            print("No se halló standard_price. línea 259 sale_order_cotizador.py")
+                            pass
 
                     total_euros += precio_unitario * line.product_uom_qty
 

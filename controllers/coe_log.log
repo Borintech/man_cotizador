@@ -14143,3 +14143,487 @@
 - Log: 2022-06-21 14:58:15.236305 --->  - subtotal5 : 714.07
 - Log: 2022-06-21 14:58:15.236305 --->  - coef_cotizador : 1.0201
 - Log: 2022-06-21 14:58:15.236305 ---> ------------------------------------------------
+- Log: 2022-06-22 04:18:18.512411 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 04:18:18.512411 ---> total_euros : 0.0
+- Log: 2022-06-22 04:18:18.512411 ---> total_peso : 0.0
+- Log: 2022-06-22 04:18:18.512411 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 04:18:18.513412 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 04:18:18.513412 ---> dias_almacenamiento2 0
+- Log: 2022-06-22 04:18:18.513412 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 04:18:18.513412 --->  - subtotal1 : 0.0
+- Log: 2022-06-22 04:18:18.513412 --->  - subtotal2_flete : 0.0
+- Log: 2022-06-22 04:18:18.513412 --->  - subtotal3_dexport : 0.0
+- Log: 2022-06-22 04:18:18.514409 --->  - subtotal4_utilidad : 0.0
+- Log: 2022-06-22 04:18:18.515406 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 04:18:18.515406 --->  - subtotal5 : 0.0
+- Log: 2022-06-22 04:18:25.335852 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 04:18:25.335852 ---> total_euros : 0
+- Log: 2022-06-22 04:18:25.335852 ---> total_peso : 0
+- Log: 2022-06-22 04:18:25.336852 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 04:18:25.336852 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 04:18:25.336852 ---> dias_almacenamiento2 -1
+- Log: 2022-06-22 04:18:25.336852 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 04:18:25.336852 --->  - subtotal1 : 0.0
+- Log: 2022-06-22 04:18:25.336852 --->  - subtotal2_flete : 0.0
+- Log: 2022-06-22 04:18:25.336852 --->  - subtotal3_dexport : 0.0
+- Log: 2022-06-22 04:18:25.336852 --->  - subtotal4_utilidad : 0.0
+- Log: 2022-06-22 04:18:25.337849 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 04:18:25.337849 --->  - subtotal5 : 0.0
+- Log: 2022-06-22 04:18:30.176906 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 04:18:30.177940 ---> total_euros : 0.0
+- Log: 2022-06-22 04:18:30.177940 ---> total_peso : 0.0
+- Log: 2022-06-22 04:18:30.177940 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 04:18:30.177940 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 04:18:30.178901 ---> dias_almacenamiento2 -1
+- Log: 2022-06-22 04:18:30.178901 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 04:18:30.178901 --->  - subtotal1 : 0.0
+- Log: 2022-06-22 04:18:30.178901 --->  - subtotal2_flete : 0.0
+- Log: 2022-06-22 04:18:30.179898 --->  - subtotal3_dexport : 0.0
+- Log: 2022-06-22 04:18:30.179898 --->  - subtotal4_utilidad : 0.0
+- Log: 2022-06-22 04:18:30.181068 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 04:18:30.181068 --->  - subtotal5 : 0.0
+- Log: 2022-06-22 04:19:20.593378 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 04:19:20.593378 ---> total_euros : 0
+- Log: 2022-06-22 04:19:20.593378 ---> total_peso : 0
+- Log: 2022-06-22 04:19:20.593378 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 04:19:20.594379 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 04:19:20.594379 ---> dias_almacenamiento2 -1
+- Log: 2022-06-22 04:19:20.594379 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 04:19:20.594379 --->  - subtotal1 : 0.0
+- Log: 2022-06-22 04:19:20.594379 --->  - subtotal2_flete : 0.0
+- Log: 2022-06-22 04:19:20.594379 --->  - subtotal3_dexport : 0.0
+- Log: 2022-06-22 04:19:20.595376 --->  - subtotal4_utilidad : 0.0
+- Log: 2022-06-22 04:19:20.595376 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 04:19:20.595376 --->  - subtotal5 : 0.0
+- Log: 2022-06-22 04:19:26.467186 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 04:19:26.467186 ---> total_euros : 0.0
+- Log: 2022-06-22 04:19:26.467186 ---> total_peso : 0.0
+- Log: 2022-06-22 04:19:26.468182 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 04:19:26.468182 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 04:19:26.468182 ---> dias_almacenamiento2 -1
+- Log: 2022-06-22 04:19:26.468182 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 04:19:26.468182 --->  - subtotal1 : 0.0
+- Log: 2022-06-22 04:19:26.468182 --->  - subtotal2_flete : 0.0
+- Log: 2022-06-22 04:19:26.469179 --->  - subtotal3_dexport : 0.0
+- Log: 2022-06-22 04:19:26.469179 --->  - subtotal4_utilidad : 0.0
+- Log: 2022-06-22 04:19:26.470183 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 04:19:26.470183 --->  - subtotal5 : 0.0
+- Log: 2022-06-22 04:20:10.117868 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 04:20:10.118864 ---> total_euros : 0
+- Log: 2022-06-22 04:20:10.118864 ---> total_peso : 0
+- Log: 2022-06-22 04:20:10.118864 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 04:20:10.118864 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 04:20:10.118864 ---> dias_almacenamiento2 -1
+- Log: 2022-06-22 04:20:10.118864 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 04:20:10.118864 --->  - subtotal1 : 0.0
+- Log: 2022-06-22 04:20:10.119862 --->  - subtotal2_flete : 0.0
+- Log: 2022-06-22 04:20:10.119862 --->  - subtotal3_dexport : 0.0
+- Log: 2022-06-22 04:20:10.119862 --->  - subtotal4_utilidad : 0.0
+- Log: 2022-06-22 04:20:10.120860 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 04:20:10.120860 --->  - subtotal5 : 0.0
+- Log: 2022-06-22 04:21:48.686296 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 04:21:48.686296 ---> total_euros : 700.0
+- Log: 2022-06-22 04:21:48.686296 ---> total_peso : 0.0
+- Log: 2022-06-22 04:21:48.686296 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 04:21:48.686296 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 04:21:48.686296 ---> dias_almacenamiento2 0
+- Log: 2022-06-22 04:21:48.686296 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 04:21:48.687295 --->  - subtotal1 : 700.0
+- Log: 2022-06-22 04:21:48.687295 --->  - subtotal2_flete : 700.0
+- Log: 2022-06-22 04:21:48.687295 --->  - subtotal3_dexport : 707.0
+- Log: 2022-06-22 04:21:48.687295 --->  - subtotal4_utilidad : 714.07
+- Log: 2022-06-22 04:21:48.688332 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 04:21:48.688332 --->  - subtotal5 : 714.07
+- Log: 2022-06-22 04:21:48.688332 --->  - coef_cotizador : 1.0201
+- Log: 2022-06-22 04:21:48.688332 ---> ------------------------------------------------
+- Log: 2022-06-22 04:29:55.925225 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 04:29:55.926175 ---> total_euros : 0
+- Log: 2022-06-22 04:29:55.926175 ---> total_peso : 0
+- Log: 2022-06-22 04:29:55.926175 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 04:29:55.927173 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 04:29:55.927173 ---> dias_almacenamiento2 0
+- Log: 2022-06-22 04:29:55.927173 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 04:29:55.928170 --->  - subtotal1 : 0.0
+- Log: 2022-06-22 04:29:55.928170 --->  - subtotal2_flete : 0.0
+- Log: 2022-06-22 04:29:55.928170 --->  - subtotal3_dexport : 0.0
+- Log: 2022-06-22 04:29:55.929167 --->  - subtotal4_utilidad : 0.0
+- Log: 2022-06-22 04:29:55.931160 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 04:29:55.931160 --->  - subtotal5 : 0.0
+- Log: 2022-06-22 04:35:47.720180 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 04:35:47.720180 ---> total_euros : 0
+- Log: 2022-06-22 04:35:47.721137 ---> total_peso : 0
+- Log: 2022-06-22 04:35:47.721137 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 04:35:47.721137 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 04:35:47.722139 ---> dias_almacenamiento2 -1
+- Log: 2022-06-22 04:35:47.722139 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 04:35:47.722139 --->  - subtotal1 : 0.0
+- Log: 2022-06-22 04:35:47.723130 --->  - subtotal2_flete : 0.0
+- Log: 2022-06-22 04:35:47.723130 --->  - subtotal3_dexport : 0.0
+- Log: 2022-06-22 04:35:47.723130 --->  - subtotal4_utilidad : 0.0
+- Log: 2022-06-22 04:35:47.725119 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 04:35:47.725119 --->  - subtotal5 : 0.0
+- Log: 2022-06-22 04:38:19.834756 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 04:38:19.834756 ---> total_euros : 0
+- Log: 2022-06-22 04:38:19.834756 ---> total_peso : 0
+- Log: 2022-06-22 04:38:19.834756 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 04:38:19.834756 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 04:38:19.834756 ---> dias_almacenamiento2 -1
+- Log: 2022-06-22 04:38:19.834756 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 04:38:19.834756 --->  - subtotal1 : 0.0
+- Log: 2022-06-22 04:38:19.835757 --->  - subtotal2_flete : 0.0
+- Log: 2022-06-22 04:38:19.835757 --->  - subtotal3_dexport : 0.0
+- Log: 2022-06-22 04:38:19.835757 --->  - subtotal4_utilidad : 0.0
+- Log: 2022-06-22 04:38:19.836783 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 04:38:19.836783 --->  - subtotal5 : 0.0
+- Log: 2022-06-22 04:53:33.408982 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 04:53:33.409977 ---> total_euros : 0
+- Log: 2022-06-22 04:53:33.409977 ---> total_peso : 0
+- Log: 2022-06-22 04:53:33.410975 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 04:53:33.410975 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 04:53:33.410975 ---> dias_almacenamiento2 -1
+- Log: 2022-06-22 04:53:33.410975 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 04:53:33.411972 --->  - subtotal1 : 0.0
+- Log: 2022-06-22 04:53:33.411972 --->  - subtotal2_flete : 0.0
+- Log: 2022-06-22 04:53:33.411972 --->  - subtotal3_dexport : 0.0
+- Log: 2022-06-22 04:53:33.411972 --->  - subtotal4_utilidad : 0.0
+- Log: 2022-06-22 04:53:33.412969 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 04:53:33.413965 --->  - subtotal5 : 0.0
+- Log: 2022-06-22 05:38:17.595389 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:38:17.595389 ---> total_euros : 0
+- Log: 2022-06-22 05:38:17.595389 ---> total_peso : 0
+- Log: 2022-06-22 05:38:17.595389 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 05:38:17.595389 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:38:17.595389 ---> dias_almacenamiento2 -1
+- Log: 2022-06-22 05:38:17.596387 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:38:17.596387 --->  - subtotal1 : 0.0
+- Log: 2022-06-22 05:38:17.596387 --->  - subtotal2_flete : 0.0
+- Log: 2022-06-22 05:38:17.596387 --->  - subtotal3_dexport : 0.0
+- Log: 2022-06-22 05:38:17.596387 --->  - subtotal4_utilidad : 0.0
+- Log: 2022-06-22 05:38:17.597384 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:38:17.597384 --->  - subtotal5 : 0.0
+- Log: 2022-06-22 05:53:02.848393 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:53:02.848393 ---> total_euros : 0
+- Log: 2022-06-22 05:53:02.849392 ---> total_peso : 0
+- Log: 2022-06-22 05:53:02.849392 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 05:53:02.849392 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:53:02.849392 ---> dias_almacenamiento2 -1
+- Log: 2022-06-22 05:53:02.849392 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:53:02.849392 --->  - subtotal1 : 0.0
+- Log: 2022-06-22 05:53:02.849392 --->  - subtotal2_flete : 0.0
+- Log: 2022-06-22 05:53:02.849392 --->  - subtotal3_dexport : 0.0
+- Log: 2022-06-22 05:53:02.850390 --->  - subtotal4_utilidad : 0.0
+- Log: 2022-06-22 05:53:02.851387 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:53:02.851387 --->  - subtotal5 : 0.0
+- Log: 2022-06-22 05:53:11.472515 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:53:11.472515 ---> total_euros : 800.0
+- Log: 2022-06-22 05:53:11.472515 ---> total_peso : 0.0
+- Log: 2022-06-22 05:53:11.472515 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 05:53:11.472515 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:53:11.472515 ---> dias_almacenamiento2 -1
+- Log: 2022-06-22 05:53:11.472515 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:53:11.472515 --->  - subtotal1 : 800.0
+- Log: 2022-06-22 05:53:11.473514 --->  - subtotal2_flete : 800.0
+- Log: 2022-06-22 05:53:11.473514 --->  - subtotal3_dexport : 808.0
+- Log: 2022-06-22 05:53:11.473514 --->  - subtotal4_utilidad : 816.08
+- Log: 2022-06-22 05:53:11.474512 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:53:11.474512 --->  - subtotal5 : 816.08
+- Log: 2022-06-22 05:53:11.474512 --->  - coef_cotizador : 1.0201
+- Log: 2022-06-22 05:53:11.474512 ---> ------------------------------------------------
+- Log: 2022-06-22 05:53:29.998656 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:53:29.999683 ---> total_euros : 800.0
+- Log: 2022-06-22 05:53:29.999683 ---> total_peso : 0.0
+- Log: 2022-06-22 05:53:29.999683 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 05:53:29.999683 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:53:29.999683 ---> dias_almacenamiento2 -1
+- Log: 2022-06-22 05:53:29.999683 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:53:29.999683 --->  - subtotal1 : 800.0
+- Log: 2022-06-22 05:53:29.999683 --->  - subtotal2_flete : 800.0
+- Log: 2022-06-22 05:53:30.000650 --->  - subtotal3_dexport : 808.0
+- Log: 2022-06-22 05:53:30.000650 --->  - subtotal4_utilidad : 816.08
+- Log: 2022-06-22 05:53:30.000650 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:53:30.000650 --->  - subtotal5 : 816.08
+- Log: 2022-06-22 05:53:30.000650 --->  - coef_cotizador : 1.0201
+- Log: 2022-06-22 05:53:30.001648 ---> ------------------------------------------------
+- Log: 2022-06-22 05:53:35.755002 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:53:35.755002 ---> total_euros : 800.0
+- Log: 2022-06-22 05:53:35.755002 ---> total_peso : 0.0
+- Log: 2022-06-22 05:53:35.756003 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 05:53:35.756003 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:53:35.756003 ---> dias_almacenamiento2 -1
+- Log: 2022-06-22 05:53:35.756003 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:53:35.757000 --->  - subtotal1 : 800.0
+- Log: 2022-06-22 05:53:35.757000 --->  - subtotal2_flete : 800.0
+- Log: 2022-06-22 05:53:35.757000 --->  - subtotal3_dexport : 808.0
+- Log: 2022-06-22 05:53:35.757000 --->  - subtotal4_utilidad : 816.08
+- Log: 2022-06-22 05:53:35.758001 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:53:35.758001 --->  - subtotal5 : 816.08
+- Log: 2022-06-22 05:53:35.758001 --->  - coef_cotizador : 1.0201
+- Log: 2022-06-22 05:53:35.758001 ---> ------------------------------------------------
+- Log: 2022-06-22 05:53:43.742955 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:53:43.742955 ---> total_euros : 800.0
+- Log: 2022-06-22 05:53:43.743914 ---> total_peso : 0.0
+- Log: 2022-06-22 05:53:43.743914 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 05:53:43.743914 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:53:43.743914 ---> dias_almacenamiento2 10
+- Log: 2022-06-22 05:53:43.744910 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:53:43.744910 --->  - subtotal1 : 800.0
+- Log: 2022-06-22 05:53:43.744910 --->  - subtotal2_flete : 800.0
+- Log: 2022-06-22 05:53:43.744910 --->  - subtotal3_dexport : 808.0
+- Log: 2022-06-22 05:53:43.744910 --->  - subtotal4_utilidad : 816.08
+- Log: 2022-06-22 05:53:43.745909 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:53:43.745909 --->  - subtotal5 : 816.08
+- Log: 2022-06-22 05:53:43.746906 --->  - coef_cotizador : 1.0201
+- Log: 2022-06-22 05:53:43.746906 ---> ------------------------------------------------
+- Log: 2022-06-22 05:53:45.071185 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:53:45.071185 ---> total_euros : 800.0
+- Log: 2022-06-22 05:53:45.071185 ---> total_peso : 0.0
+- Log: 2022-06-22 05:53:45.071185 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 05:53:45.071185 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:53:45.071185 ---> dias_almacenamiento2 10
+- Log: 2022-06-22 05:53:45.071185 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:53:45.072184 --->  - subtotal1 : 800.0
+- Log: 2022-06-22 05:53:45.072184 --->  - subtotal2_flete : 800.0
+- Log: 2022-06-22 05:53:45.072184 --->  - subtotal3_dexport : 808.0
+- Log: 2022-06-22 05:53:45.072184 --->  - subtotal4_utilidad : 816.08
+- Log: 2022-06-22 05:53:45.072713 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:53:45.072713 --->  - subtotal5 : 816.08
+- Log: 2022-06-22 05:53:45.072713 --->  - coef_cotizador : 1.0201
+- Log: 2022-06-22 05:53:45.072713 ---> ------------------------------------------------
+- Log: 2022-06-22 05:54:14.131008 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:54:14.132005 ---> total_euros : 800.0
+- Log: 2022-06-22 05:54:14.133039 ---> total_peso : 0.0
+- Log: 2022-06-22 05:54:14.134026 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 05:54:14.134026 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:54:14.134026 ---> dias_almacenamiento2 100
+- Log: 2022-06-22 05:54:14.134026 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:54:14.134026 --->  - subtotal1 : 800.0
+- Log: 2022-06-22 05:54:14.134026 --->  - subtotal2_flete : 800.0
+- Log: 2022-06-22 05:54:14.134026 --->  - subtotal3_dexport : 808.0
+- Log: 2022-06-22 05:54:14.134998 --->  - subtotal4_utilidad : 816.08
+- Log: 2022-06-22 05:54:14.134998 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:54:14.134998 --->  - subtotal5 : 816.08
+- Log: 2022-06-22 05:54:14.134998 --->  - coef_cotizador : 1.0201
+- Log: 2022-06-22 05:54:14.136063 ---> ------------------------------------------------
+- Log: 2022-06-22 05:54:32.650258 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:54:32.650258 ---> total_euros : 800.0
+- Log: 2022-06-22 05:54:32.650258 ---> total_peso : 0.0
+- Log: 2022-06-22 05:54:32.651254 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 05:54:32.651254 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:54:32.651254 ---> dias_almacenamiento2 0
+- Log: 2022-06-22 05:54:32.651254 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:54:32.651254 --->  - subtotal1 : 800.0
+- Log: 2022-06-22 05:54:32.651254 --->  - subtotal2_flete : 800.0
+- Log: 2022-06-22 05:54:32.652251 --->  - subtotal3_dexport : 808.0
+- Log: 2022-06-22 05:54:32.652251 --->  - subtotal4_utilidad : 816.08
+- Log: 2022-06-22 05:54:32.653107 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:54:32.653107 --->  - subtotal5 : 816.08
+- Log: 2022-06-22 05:54:32.653107 --->  - coef_cotizador : 1.0201
+- Log: 2022-06-22 05:54:32.653107 ---> ------------------------------------------------
+- Log: 2022-06-22 05:54:47.976909 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:54:47.977910 ---> total_euros : 800.0
+- Log: 2022-06-22 05:54:47.977910 ---> total_peso : 0.0
+- Log: 2022-06-22 05:54:47.977910 ---> gasto_envio_local: 100.0
+- Log: 2022-06-22 05:54:47.977910 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:54:47.978907 ---> dias_almacenamiento2 0
+- Log: 2022-06-22 05:54:47.978907 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:54:47.978907 --->  - subtotal1 : 800.0
+- Log: 2022-06-22 05:54:47.978907 --->  - subtotal2_flete : 800.0
+- Log: 2022-06-22 05:54:47.979904 --->  - subtotal3_dexport : 808.0
+- Log: 2022-06-22 05:54:47.979904 --->  - subtotal4_utilidad : 816.08
+- Log: 2022-06-22 05:54:47.980904 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:54:47.980904 --->  - subtotal5 : 916.08
+- Log: 2022-06-22 05:54:47.980904 --->  - coef_cotizador : 1.1451
+- Log: 2022-06-22 05:54:47.980904 ---> ------------------------------------------------
+- Log: 2022-06-22 05:54:49.721709 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:54:49.722710 ---> total_euros : 800.0
+- Log: 2022-06-22 05:54:49.722710 ---> total_peso : 0.0
+- Log: 2022-06-22 05:54:49.722710 ---> gasto_envio_local: 100.0
+- Log: 2022-06-22 05:54:49.722710 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:54:49.722710 ---> dias_almacenamiento2 0
+- Log: 2022-06-22 05:54:49.723704 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:54:49.723704 --->  - subtotal1 : 800.0
+- Log: 2022-06-22 05:54:49.723704 --->  - subtotal2_flete : 800.0
+- Log: 2022-06-22 05:54:49.723704 --->  - subtotal3_dexport : 808.0
+- Log: 2022-06-22 05:54:49.723704 --->  - subtotal4_utilidad : 816.08
+- Log: 2022-06-22 05:54:49.724975 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:54:49.724975 --->  - subtotal5 : 916.08
+- Log: 2022-06-22 05:54:49.724975 --->  - coef_cotizador : 1.1451
+- Log: 2022-06-22 05:54:49.724975 ---> ------------------------------------------------
+- Log: 2022-06-22 05:54:58.328947 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:54:58.329991 ---> total_euros : 800.0
+- Log: 2022-06-22 05:54:58.329991 ---> total_peso : 0.0
+- Log: 2022-06-22 05:54:58.329991 ---> gasto_envio_local: 100.0
+- Log: 2022-06-22 05:54:58.330941 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:54:58.330941 ---> dias_almacenamiento2 0
+- Log: 2022-06-22 05:54:58.330941 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:54:58.331938 --->  - subtotal1 : 800.0
+- Log: 2022-06-22 05:54:58.331938 --->  - subtotal2_flete : 800.0
+- Log: 2022-06-22 05:54:58.332937 --->  - subtotal3_dexport : 808.0
+- Log: 2022-06-22 05:54:58.332937 --->  - subtotal4_utilidad : 816.08
+- Log: 2022-06-22 05:54:58.333933 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:54:58.333933 --->  - subtotal5 : 916.08
+- Log: 2022-06-22 05:54:58.333933 --->  - coef_cotizador : 1.1451
+- Log: 2022-06-22 05:54:58.334945 ---> ------------------------------------------------
+- Log: 2022-06-22 05:55:22.731085 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:55:22.731085 ---> total_euros : 800.0
+- Log: 2022-06-22 05:55:22.732084 ---> total_peso : 0.0
+- Log: 2022-06-22 05:55:22.732084 ---> gasto_envio_local: 100.0
+- Log: 2022-06-22 05:55:22.732084 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:55:22.732084 ---> dias_almacenamiento2 0
+- Log: 2022-06-22 05:55:22.732084 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:55:22.732084 --->  - subtotal1 : 800.0
+- Log: 2022-06-22 05:55:22.732084 --->  - subtotal2_flete : 800.0
+- Log: 2022-06-22 05:55:22.732084 --->  - subtotal3_dexport : 808.0
+- Log: 2022-06-22 05:55:22.732084 --->  - subtotal4_utilidad : 816.08
+- Log: 2022-06-22 05:55:22.733081 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:55:22.733081 --->  - subtotal5 : 916.08
+- Log: 2022-06-22 05:55:22.733081 --->  - coef_cotizador : 1.1451
+- Log: 2022-06-22 05:55:22.733081 ---> ------------------------------------------------
+- Log: 2022-06-22 05:55:31.764907 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:55:31.765902 ---> total_euros : 800.0
+- Log: 2022-06-22 05:55:31.765902 ---> total_peso : 0.0
+- Log: 2022-06-22 05:55:31.765902 ---> gasto_envio_local: 100.0
+- Log: 2022-06-22 05:55:31.765902 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:55:31.765902 ---> dias_almacenamiento2 0
+- Log: 2022-06-22 05:55:31.766899 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:55:31.766899 --->  - subtotal1 : 800.0
+- Log: 2022-06-22 05:55:31.766899 --->  - subtotal2_flete : 800.0
+- Log: 2022-06-22 05:55:31.766899 --->  - subtotal3_dexport : 808.0
+- Log: 2022-06-22 05:55:31.766899 --->  - subtotal4_utilidad : 816.08
+- Log: 2022-06-22 05:55:31.768072 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:55:31.768072 --->  - subtotal5 : 1079.296
+- Log: 2022-06-22 05:55:31.768072 --->  - coef_cotizador : 1.34912
+- Log: 2022-06-22 05:55:31.768072 ---> ------------------------------------------------
+- Log: 2022-06-22 05:58:05.254825 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:58:05.254825 ---> total_euros : 800.0
+- Log: 2022-06-22 05:58:05.255818 ---> total_peso : 0.0
+- Log: 2022-06-22 05:58:05.255818 ---> gasto_envio_local: 100.0
+- Log: 2022-06-22 05:58:05.255818 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:58:05.255818 ---> dias_almacenamiento2 0
+- Log: 2022-06-22 05:58:05.255818 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:58:05.256817 --->  - subtotal1 : 800.0
+- Log: 2022-06-22 05:58:05.256817 --->  - subtotal2_flete : 800.0
+- Log: 2022-06-22 05:58:05.256817 --->  - subtotal3_dexport : 808.0
+- Log: 2022-06-22 05:58:05.256817 --->  - subtotal4_utilidad : 816.08
+- Log: 2022-06-22 05:58:05.257929 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:58:05.257929 --->  - subtotal5 : 1079.296
+- Log: 2022-06-22 05:58:05.257929 --->  - coef_cotizador : 1.34912
+- Log: 2022-06-22 05:58:05.257929 ---> ------------------------------------------------
+- Log: 2022-06-22 05:58:42.960724 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:58:42.961673 ---> total_euros : 1100.0
+- Log: 2022-06-22 05:58:42.961673 ---> total_peso : 0.0
+- Log: 2022-06-22 05:58:42.961673 ---> gasto_envio_local: 100.0
+- Log: 2022-06-22 05:58:42.962677 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:58:42.962677 ---> dias_almacenamiento2 0
+- Log: 2022-06-22 05:58:42.963673 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:58:42.963673 --->  - subtotal1 : 1100.0
+- Log: 2022-06-22 05:58:42.963673 --->  - subtotal2_flete : 1100.0
+- Log: 2022-06-22 05:58:42.964670 --->  - subtotal3_dexport : 1111.0
+- Log: 2022-06-22 05:58:42.964670 --->  - subtotal4_utilidad : 1122.11
+- Log: 2022-06-22 05:58:42.966709 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:58:42.967662 --->  - subtotal5 : 1446.532
+- Log: 2022-06-22 05:58:42.967662 --->  - coef_cotizador : 1.315029090909091
+- Log: 2022-06-22 05:58:42.967662 ---> ------------------------------------------------
+- Log: 2022-06-22 05:58:51.993970 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:58:51.993970 ---> total_euros : 1100.0
+- Log: 2022-06-22 05:58:51.993970 ---> total_peso : 0.0
+- Log: 2022-06-22 05:58:51.993970 ---> gasto_envio_local: 100.0
+- Log: 2022-06-22 05:58:51.993970 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:58:51.993970 ---> dias_almacenamiento2 0
+- Log: 2022-06-22 05:58:51.993970 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:58:51.994968 --->  - subtotal1 : 1100.0
+- Log: 2022-06-22 05:58:51.994968 --->  - subtotal2_flete : 1100.0
+- Log: 2022-06-22 05:58:51.994968 --->  - subtotal3_dexport : 1111.0
+- Log: 2022-06-22 05:58:51.994968 --->  - subtotal4_utilidad : 1122.11
+- Log: 2022-06-22 05:58:51.996163 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:58:51.996163 --->  - subtotal5 : 1222.11
+- Log: 2022-06-22 05:58:51.996163 --->  - coef_cotizador : 1.1110090909090908
+- Log: 2022-06-22 05:58:51.996163 ---> ------------------------------------------------
+- Log: 2022-06-22 05:59:04.345949 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:59:04.345949 ---> total_euros : 1100.0
+- Log: 2022-06-22 05:59:04.345949 ---> total_peso : 0.0
+- Log: 2022-06-22 05:59:04.345949 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 05:59:04.346946 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:59:04.346946 ---> dias_almacenamiento2 0
+- Log: 2022-06-22 05:59:04.346946 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:59:04.346946 --->  - subtotal1 : 1100.0
+- Log: 2022-06-22 05:59:04.346946 --->  - subtotal2_flete : 1100.0
+- Log: 2022-06-22 05:59:04.346946 --->  - subtotal3_dexport : 1111.0
+- Log: 2022-06-22 05:59:04.346946 --->  - subtotal4_utilidad : 1122.11
+- Log: 2022-06-22 05:59:04.347945 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:59:04.348940 --->  - subtotal5 : 1122.11
+- Log: 2022-06-22 05:59:04.348940 --->  - coef_cotizador : 1.0201
+- Log: 2022-06-22 05:59:04.348940 ---> ------------------------------------------------
+- Log: 2022-06-22 05:59:06.174011 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:59:06.174011 ---> total_euros : 1100.0
+- Log: 2022-06-22 05:59:06.174011 ---> total_peso : 0.0
+- Log: 2022-06-22 05:59:06.175009 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 05:59:06.175009 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:59:06.175009 ---> dias_almacenamiento2 0
+- Log: 2022-06-22 05:59:06.175009 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:59:06.175009 --->  - subtotal1 : 1100.0
+- Log: 2022-06-22 05:59:06.175009 --->  - subtotal2_flete : 1100.0
+- Log: 2022-06-22 05:59:06.176006 --->  - subtotal3_dexport : 1111.0
+- Log: 2022-06-22 05:59:06.176006 --->  - subtotal4_utilidad : 1122.11
+- Log: 2022-06-22 05:59:06.176006 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:59:06.176006 --->  - subtotal5 : 1122.11
+- Log: 2022-06-22 05:59:06.176006 --->  - coef_cotizador : 1.0201
+- Log: 2022-06-22 05:59:06.177003 ---> ------------------------------------------------
+- Log: 2022-06-22 05:59:10.107026 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:59:10.107026 ---> total_euros : 0
+- Log: 2022-06-22 05:59:10.107026 ---> total_peso : 0
+- Log: 2022-06-22 05:59:10.107026 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 05:59:10.107026 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:59:10.107026 ---> dias_almacenamiento2 0
+- Log: 2022-06-22 05:59:10.108025 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:59:10.108025 --->  - subtotal1 : 0.0
+- Log: 2022-06-22 05:59:10.108025 --->  - subtotal2_flete : 0.0
+- Log: 2022-06-22 05:59:10.108025 --->  - subtotal3_dexport : 0.0
+- Log: 2022-06-22 05:59:10.108025 --->  - subtotal4_utilidad : 0.0
+- Log: 2022-06-22 05:59:10.108025 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:59:10.108025 --->  - subtotal5 : 0.0
+- Log: 2022-06-22 05:59:19.121924 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:59:19.121924 ---> total_euros : 1100.0
+- Log: 2022-06-22 05:59:19.121924 ---> total_peso : 0.0
+- Log: 2022-06-22 05:59:19.121924 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 05:59:19.121924 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:59:19.122921 ---> dias_almacenamiento2 0
+- Log: 2022-06-22 05:59:19.122921 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:59:19.122921 --->  - subtotal1 : 1100.0
+- Log: 2022-06-22 05:59:19.122921 --->  - subtotal2_flete : 1100.0
+- Log: 2022-06-22 05:59:19.122921 --->  - subtotal3_dexport : 1111.0
+- Log: 2022-06-22 05:59:19.122921 --->  - subtotal4_utilidad : 1122.11
+- Log: 2022-06-22 05:59:19.123919 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:59:19.123919 --->  - subtotal5 : 1122.11
+- Log: 2022-06-22 05:59:19.123919 --->  - coef_cotizador : 1.0201
+- Log: 2022-06-22 05:59:19.123919 ---> ------------------------------------------------
+- Log: 2022-06-22 05:59:35.466708 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 05:59:35.466708 ---> total_euros : 1100.0
+- Log: 2022-06-22 05:59:35.466708 ---> total_peso : 0.0
+- Log: 2022-06-22 05:59:35.466708 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 05:59:35.466708 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 05:59:35.466708 ---> dias_almacenamiento2 0
+- Log: 2022-06-22 05:59:35.467708 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 05:59:35.467708 --->  - subtotal1 : 1100.0
+- Log: 2022-06-22 05:59:35.467708 --->  - subtotal2_flete : 1100.0
+- Log: 2022-06-22 05:59:35.467708 --->  - subtotal3_dexport : 1111.0
+- Log: 2022-06-22 05:59:35.467708 --->  - subtotal4_utilidad : 1122.11
+- Log: 2022-06-22 05:59:35.467708 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 05:59:35.468705 --->  - subtotal5 : 1122.11
+- Log: 2022-06-22 05:59:35.468705 --->  - coef_cotizador : 1.0201
+- Log: 2022-06-22 05:59:35.468705 ---> ------------------------------------------------
+- Log: 2022-06-22 06:00:51.594350 ---> Calculando coef para los valores de:
+- Log: 2022-06-22 06:00:51.594350 ---> total_euros : 1100.0
+- Log: 2022-06-22 06:00:51.594350 ---> total_peso : 0.0
+- Log: 2022-06-22 06:00:51.594350 ---> gasto_envio_local: 0.0
+- Log: 2022-06-22 06:00:51.594350 ---> gasto_envio_despacho 0.0
+- Log: 2022-06-22 06:00:51.594350 ---> dias_almacenamiento2 0
+- Log: 2022-06-22 06:00:51.595347 --->  - coef euro a dolar : 1.0
+- Log: 2022-06-22 06:00:51.595347 --->  - subtotal1 : 1100.0
+- Log: 2022-06-22 06:00:51.595347 --->  - subtotal2_flete : 1100.0
+- Log: 2022-06-22 06:00:51.595347 --->  - subtotal3_dexport : 1111.0
+- Log: 2022-06-22 06:00:51.595347 --->  - subtotal4_utilidad : 1122.11
+- Log: 2022-06-22 06:00:51.595347 --->  - total_almacenaje_dolares : 0
+- Log: 2022-06-22 06:00:51.595347 --->  - subtotal5 : 1122.11
+- Log: 2022-06-22 06:00:51.596345 --->  - coef_cotizador : 1.0201
+- Log: 2022-06-22 06:00:51.596345 ---> ------------------------------------------------
