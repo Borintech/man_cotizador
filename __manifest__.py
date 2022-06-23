@@ -10,7 +10,7 @@
     'maintainer': 'Alejandro Sartorio_2',
     'website': 'https://www.odoomates.tech',
     'license': 'AGPL-3',
-    'depends': ['base', 'sale', 'inventory', 'purchase',],
+    'depends': ['base', 'sale', 'stock', 'purchase',],
     'data': [
         'views/costos_almacenamiento.xml',
         'views/analitico.xml',
