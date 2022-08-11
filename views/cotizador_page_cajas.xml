@@ -17,6 +17,12 @@
                             <field name="bobina_tabla"/>
                     </group>
                 </page>
+
+                <page name="utilidad" string="utilidad">
+                    <group>
+                            <field name="utilidad_tabla"/>
+                    </group>
+                </page>
             </notebook>
         </field>
     </record>

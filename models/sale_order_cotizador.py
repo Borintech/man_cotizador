@@ -46,6 +46,21 @@ def _make_caja_tabla2():
 
     return m
 
+def _make_utilidad_tabla2():
+    # rr = request.env['cotizador.bobinas'].search([])
+
+    q = "select * from cotizador_utilidad"
+    request.cr.execute(q)
+    rr = request.cr.fetchall()
+
+    m = f'<table style="width:50%">'
+    m += f'<tr> <th> Tipo de cliente </th> <th style="text-align:right"> Porcentaje de utilidad  </th></tr>'
+    for r in rr:
+        m += f'<tr><td> {r[1]} </td> <td style="text-align:right" > {r[2]} </td></tr>'
+
+    m += "</table>"
+
+    return m
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
@@ -90,6 +105,7 @@ class SaleOrder(models.Model):
 
     bobina_tabla = fields.Html(string='Tabla Bobina', readonly=True)
     caja_tabla = fields.Html(string="Tabla Caja", readonly=True)
+    utilidad_tabla = fields.Html(string='Tabla Utilidad', readonly=True)
 
     bonina_datos = fields.Many2many('cotizador.bobinas')
 
@@ -102,6 +118,9 @@ class SaleOrder(models.Model):
 
             m = _make_caja_tabla2()
             self.caja_tabla = m
+
+            m = _make_utilidad_tabla2()
+            self.utilidad_tabla= m
 
     @api.model
     def _obtener_imagen_cajas(self):

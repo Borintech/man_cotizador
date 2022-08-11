@@ -9,3 +9,5 @@ access_Cotizador_User_bobinas,Cotizador analitico usuario,model_cotizador_bobina
 access_Cotizador_Admin_bobinas,Cotizador analitico administrador,model_cotizador_bobinas,cotizador_admin,1,1,1,1
 access_Cotizador_User_cajas,Cotizador analitico usuario,model_cotizador_cajas,cotizador_user,1,0,0,0
 access_Cotizador_Admin_cajas,Cotizador analitico administrador,model_cotizador_cajas,cotizador_admin,1,1,1,1
+access_Cotizador_User_utilidad,Cotizador analitico usuario,model_cotizador_utilidad,cotizador_user,1,0,0,0
+access_Cotizador_Admin_utilidad,Cotizador analitico administrador,model_cotizador_utilidad,cotizador_admin,1,1,1,1

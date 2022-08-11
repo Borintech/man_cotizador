@@ -4,4 +4,6 @@ from . import configuracion
 from . import sale_order_cotizador
 from . import bobinas
 from . import cajas
+from . import utilidad
+
 #cambios para poder hacer commit

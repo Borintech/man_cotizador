@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--cambios para subir a la rama nelson-->
+
+    <record id="utilidad_view" model="ir.actions.act_window">
+        <field name="name">Utilidad</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cotizador.utilidad</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+    </record>
+
+
+     <record id="cotizador_utilidad_tree" model="ir.ui.view">
+        <field name="name">cotizador.utilidad.tree</field>
+        <field name="model">cotizador.utilidad</field>
+        <field name="arch" type="xml">
+                    <tree multi_edit = "1">
+                                <field name="tipo_cliente"/>
+                                <field name="porcentaje"/>
+                    </tree>
+        </field>
+    </record>
+
+
+     <record id="cotizador_utilidad_form" model="ir.ui.view">
+        <field name="name">cotizador.utilidad.form</field>
+        <field name="model">cotizador.utilidad</field>
+        <field name="arch" type="xml">
+                    <form>
+                            <sheet>
+                                <group>
+                                    <field name="tipo_cliente"/>
+                                    <field name="porcentaje"/>
+                                </group>
+                            </sheet>
+                    </form>
+        </field>
+     </record>
+
+
+    <!--<menuitem id="menu_cotizador"
+              name="Cotizador"
+              /> -->
+
+    <menuitem id="menu_cotizador_utilidad"
+              name="Utilidad"
+              parent="menu_cotizador"
+              action="utilidad_view"
+              />
+
+    <!--<menuitem id="menu_cotizador_analitico"
+          name="Analitico"
+          parent="menu_cotizador"
+          action="costos_almacenamiento_view"
+          /> -->
+
+</odoo>
