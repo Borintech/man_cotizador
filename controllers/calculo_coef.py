@@ -186,6 +186,7 @@ class cotiza:
             # 8. cálculo del coeficiente de conversión
             coef_cotizador = subtotal5 / subtotal1
 
+
             _log(f' - coef_cotizador : {coef_cotizador}')
 
             # 9. ahora lo paso a pesos
@@ -194,7 +195,8 @@ class cotiza:
 
             _log("------------------------------------------------")
 
-
+            # 10. Claculo del blue
+            # coef_cotizador_blue = coef_cotizador_blue * self.dolar
 
             return coef_cotizador, subtotal2_flete, subtotal3_dexport, subtotal4_utilidad, coef_subtotal2, coef_dexport, coef_utilidad, coef_euro2dolar, coef_real, subtotal5, subtotal1, nuevo_peso, gasto_envio_calculado
 

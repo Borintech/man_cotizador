@@ -175,6 +175,10 @@ class SaleOrder(models.Model):
 
     coef_cotizacion = fields.Float("Coef.Cotización")
 
+    #modificación
+    valor_dolar_blue = fields.Float("Valor Dólar Blue")
+    coef_cotizacion_blue = fields.Float("Coef. Cotización Blue")
+
     def funcion_ale(self, precio_a_cambiar):
         # pide coheficiente de algún lado
         coheficiente = 1.6
