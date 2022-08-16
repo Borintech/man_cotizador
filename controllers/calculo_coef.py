@@ -32,10 +32,12 @@ class cotiza:
             v_coef_flete_maritimo = valores[0]['coef_flete_maritimo']
             v_coef_flete_aereo = valores[0]['coef_flete_aereo']
             v_coef_flete_currier = valores[0]['coef_flete_currier']
+            v_d_blue = valores[0]['precio_dolar_blue']
 
         except Exception as e:
             v_dolar = 1
             v_euro = 1
+            v_d_blue = 1
             v_coef_peso_ajuste = 1
             v_coef_flete = 1
             v_coef_dexport = 1
@@ -44,8 +46,10 @@ class cotiza:
             v_coef_flete_aereo = 0
             v_coef_flete_currier = 0
 
+
         self.dolar = v_dolar
         self.euro = v_euro
+        self.dolar_blue = v_d_blue
 
     def _valor_coef_ajuste(self):
         return v_coef_peso_ajuste
@@ -85,7 +89,7 @@ class cotiza:
     def calcular_coeficiente(self, medio_envio, total_euros, total_peso,
                              gasto_envio_local=0, gasto_envio_despacho=0,
                              dias_almacenamiento=15, coef_euro2dolar=0, coef_subtotal2=0, coef_dexport=0,
-                             coef_utilidad=0, porcentaje_gasto_envio=0, gasto_envio_agregado=0):
+                             coef_utilidad=0, porcentaje_gasto_envio=0, gasto_envio_agregado=0, valor_dolar_blue=0, v_dolar_of=0):
         """
         Esta función se encarga calcular el coerficiente de conversión.
 
@@ -195,10 +199,14 @@ class cotiza:
 
             _log("------------------------------------------------")
 
-            # 10. Claculo del blue
-            # coef_cotizador_blue = coef_cotizador_blue * self.dolar
+            # 10. Calculo del blue
+            if valor_dolar_blue == 0:
+                valor_dolar_blue = self.dolar_blue
 
-            return coef_cotizador, subtotal2_flete, subtotal3_dexport, subtotal4_utilidad, coef_subtotal2, coef_dexport, coef_utilidad, coef_euro2dolar, coef_real, subtotal5, subtotal1, nuevo_peso, gasto_envio_calculado
+            coef_coti_blue = valor_dolar_blue / v_dolar_of
+
+
+            return coef_cotizador, subtotal2_flete, subtotal3_dexport, subtotal4_utilidad, coef_subtotal2, coef_dexport, coef_utilidad, coef_euro2dolar, coef_real, subtotal5, subtotal1, nuevo_peso, gasto_envio_calculado, valor_dolar_blue, coef_coti_blue
 
         except:
-            return 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+            return 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0

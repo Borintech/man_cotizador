@@ -18,6 +18,7 @@
                     <tree multi_edit = "1">
                         <field name="precio_dolar"/>
                         <field name="precio_euro"/>
+                        <field name="precio_dolar_blue"/>
                         <field name="coef_peso_ajuste"/>
 
                         <!--<field name="coef_flete"/>-->
@@ -45,6 +46,7 @@
                     <group>
                         <field name="precio_dolar"/>
                         <field name="precio_euro"/>
+                        <field name="precio_dolar_blue"/>
                         <field name="coef_peso_ajuste"/>
 
                         <!--<field name="coef_flete"/>-->
