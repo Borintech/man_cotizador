@@ -43,7 +43,7 @@
 
     <menuitem id="menu_cotizador"
               name="Cotizador"
-              />
+              web_icon="man_cotizador,static/src/img/cogs.png" />
 
     <menuitem id="menu_cotizador_gastos_almacenamiento"
               name="Gastos Almacenamiento"
