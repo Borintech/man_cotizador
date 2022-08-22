@@ -12,7 +12,7 @@ class Transformada(models.Model):
     precio_dolar = fields.Float("P.Dolar")
     precio_euro = fields.Float("P.Euro")
     precio_dolar_blue = fields.Float("P.Dolar Blue")
-
+    coef_peso_adicional = fields.Float("Peso adicional (bobina/palet)")
     # coef_peso_ajuste = 1.20
     coef_peso_ajuste = fields.Float("Variación Peso")
 

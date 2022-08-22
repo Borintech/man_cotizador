@@ -8,6 +8,6 @@ class Utilidad(models.Model):
     _order = "id asc"
 
     tipo_cliente = fields.Char("Tipo de Cliente")
-    porcentaje = fields.Float("Porcentaje de utilidad")
+    porcentaje = fields.Char("Porcentaje de utilidad")
 
 

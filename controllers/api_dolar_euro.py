@@ -13,15 +13,16 @@ def valor_dolar_euro():
     i = 0
     dolar = ""
     euro = ""
-
+    print(lista)
     for ll in lista:
 
         l = ll.text
         i += 1
 
-        if i == 1:
+        if i == 2:
             dolar = l
-        if i == 5:
+        if i == 6:
             euro = l
-
+    print(euro)
+    print(dolar)
     return (dolar, euro)
