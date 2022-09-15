@@ -4,6 +4,7 @@ from ..controllers.api_dolar_euro import valor_dolar_euro
 from odoo import api, fields, models, _
 from odoo.http import request
 from odoo.exceptions import ValidationError
+import datetime
 
 bandera = 1
 actualizados = []
@@ -235,18 +236,20 @@ class SaleOrder(models.Model):
                  'medio_envio', 'activar_coef')
     def aplica_coef_ejemplo(self):
         # muestra en sale_order valor dolar y euro según api
-        valor_dolar, valor_euro = valor_dolar_euro()
-        self.valor_dolar = valor_dolar
-        self.valor_euro = valor_euro
-        try:
-            self.coef_real_euro_dolar = float(valor_euro) / float(valor_dolar)
-        except:
-            self.coef_real_euro_dolar = 0
+        for order in self:
+            if order.date_order >= datetime.strptime ('2022-09-01', '%Y-%m-%d'):
+            valor_dolar, valor_euro = valor_dolar_euro()
+            order.valor_dolar = valor_dolar
+            order.valor_euro = valor_euro
+            try:
+                order.coef_real_euro_dolar = float(valor_euro) / float(valor_dolar)
+            except:
+                order.coef_real_euro_dolar = 0
 
-        global bandera, total_peso, total_euros
-        bandera += 1
+            global bandera, total_peso, total_euros
+            bandera += 1
 
-        if bandera > 2 and self.cotizar:
+        if bandera > 2 and order.cotizar:
             # todo Ale... recordar que en la instalación si sacamos bandera > 2 no entiendo
             #  por qué línea 223 if self.cotizar viene en true o pasa y rompe la instalación
             #  ya que order error
