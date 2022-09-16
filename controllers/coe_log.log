@@ -16398,3 +16398,68 @@
 - Log: 2022-09-15 17:03:18.987795 --->  - subtotal5 : 255.9695555555556
 - Log: 2022-09-15 17:03:18.987866 --->  - coef_cotizador : 2.303726
 - Log: 2022-09-15 17:03:18.987930 ---> ------------------------------------------------
+- Log: 2022-09-15 22:50:05.300828 ---> Calculando coef para los valores de:
+- Log: 2022-09-15 22:50:05.301091 ---> total_euros : 0
+- Log: 2022-09-15 22:50:05.301251 ---> total_peso : 0
+- Log: 2022-09-15 22:50:05.301398 ---> gasto_envio_local: 0.0
+- Log: 2022-09-15 22:50:05.301535 ---> gasto_envio_despacho 0.0
+- Log: 2022-09-15 22:50:05.301698 ---> dias_almacenamiento2 0
+- Log: 2022-09-15 22:50:05.301844 --->  - coef euro a dolar : 1.0
+- Log: 2022-09-15 22:50:05.301982 --->  - subtotal1 : 0.0
+- Log: 2022-09-15 22:50:05.302122 --->  - subtotal2_flete : 0.0
+- Log: 2022-09-15 22:50:05.302260 --->  - subtotal3_dexport : 0.0
+- Log: 2022-09-15 22:50:05.302396 --->  - subtotal4_utilidad : 0.0
+- Log: 2022-09-15 22:50:05.304560 --->  - total_almacenaje_dolares : 0
+- Log: 2022-09-15 22:50:05.304850 --->  - subtotal5 : 0.0
+- Log: 2022-09-15 23:23:08.901487 ---> Calculando coef para los valores de:
+- Log: 2022-09-15 23:23:08.901745 ---> total_euros : 0
+- Log: 2022-09-15 23:23:08.901911 ---> total_peso : 0
+- Log: 2022-09-15 23:23:08.902059 ---> gasto_envio_local: 0.0
+- Log: 2022-09-15 23:23:08.902199 ---> gasto_envio_despacho 0.0
+- Log: 2022-09-15 23:23:08.902332 ---> dias_almacenamiento2 0
+- Log: 2022-09-15 23:23:08.902478 --->  - coef euro a dolar : 1.0
+- Log: 2022-09-15 23:23:08.902616 --->  - subtotal1 : 0.0
+- Log: 2022-09-15 23:23:08.902760 --->  - subtotal2_flete : 0.0
+- Log: 2022-09-15 23:23:08.902902 --->  - subtotal3_dexport : 0.0
+- Log: 2022-09-15 23:23:08.903041 --->  - subtotal4_utilidad : 0.0
+- Log: 2022-09-15 23:23:08.904982 --->  - total_almacenaje_dolares : 0
+- Log: 2022-09-15 23:23:08.905259 --->  - subtotal5 : 0.0
+- Log: 2022-09-15 23:24:20.987005 ---> Calculando coef para los valores de:
+- Log: 2022-09-15 23:24:20.987383 ---> total_euros : 0
+- Log: 2022-09-15 23:24:20.987607 ---> total_peso : 0
+- Log: 2022-09-15 23:24:20.987844 ---> gasto_envio_local: 0.0
+- Log: 2022-09-15 23:24:20.988065 ---> gasto_envio_despacho 0.0
+- Log: 2022-09-15 23:24:20.988212 ---> dias_almacenamiento2 0
+- Log: 2022-09-15 23:24:20.988362 --->  - coef euro a dolar : 1.0
+- Log: 2022-09-15 23:24:20.988601 --->  - subtotal1 : 0.0
+- Log: 2022-09-15 23:24:20.988850 --->  - subtotal2_flete : 0.0
+- Log: 2022-09-15 23:24:20.989022 --->  - subtotal3_dexport : 0.0
+- Log: 2022-09-15 23:24:20.989168 --->  - subtotal4_utilidad : 0.0
+- Log: 2022-09-15 23:24:20.991332 --->  - total_almacenaje_dolares : 0
+- Log: 2022-09-15 23:24:20.991627 --->  - subtotal5 : 0.0
+- Log: 2022-09-15 23:25:49.740672 ---> Calculando coef para los valores de:
+- Log: 2022-09-15 23:25:49.740967 ---> total_euros : 0
+- Log: 2022-09-15 23:25:49.741140 ---> total_peso : 0
+- Log: 2022-09-15 23:25:49.741287 ---> gasto_envio_local: 0.0
+- Log: 2022-09-15 23:25:49.741427 ---> gasto_envio_despacho 0.0
+- Log: 2022-09-15 23:25:49.741565 ---> dias_almacenamiento2 0
+- Log: 2022-09-15 23:25:49.741713 --->  - coef euro a dolar : 1.0
+- Log: 2022-09-15 23:25:49.741853 --->  - subtotal1 : 0.0
+- Log: 2022-09-15 23:25:49.741997 --->  - subtotal2_flete : 0.0
+- Log: 2022-09-15 23:25:49.742139 --->  - subtotal3_dexport : 0.0
+- Log: 2022-09-15 23:25:49.742279 --->  - subtotal4_utilidad : 0.0
+- Log: 2022-09-15 23:25:49.743138 --->  - total_almacenaje_dolares : 0
+- Log: 2022-09-15 23:25:49.743496 --->  - subtotal5 : 0.0
+- Log: 2022-09-15 23:27:33.941895 ---> Calculando coef para los valores de:
+- Log: 2022-09-15 23:27:33.942215 ---> total_euros : 0
+- Log: 2022-09-15 23:27:33.942392 ---> total_peso : 0
+- Log: 2022-09-15 23:27:33.942540 ---> gasto_envio_local: 0.0
+- Log: 2022-09-15 23:27:33.942676 ---> gasto_envio_despacho 0.0
+- Log: 2022-09-15 23:27:33.942808 ---> dias_almacenamiento2 0
+- Log: 2022-09-15 23:27:33.942952 --->  - coef euro a dolar : 1.0
+- Log: 2022-09-15 23:27:33.943088 --->  - subtotal1 : 0.0
+- Log: 2022-09-15 23:27:33.943227 --->  - subtotal2_flete : 0.0
+- Log: 2022-09-15 23:27:33.943409 --->  - subtotal3_dexport : 0.0
+- Log: 2022-09-15 23:27:33.943552 --->  - subtotal4_utilidad : 0.0
+- Log: 2022-09-15 23:27:33.944399 --->  - total_almacenaje_dolares : 0
+- Log: 2022-09-15 23:27:33.944682 --->  - subtotal5 : 0.0
