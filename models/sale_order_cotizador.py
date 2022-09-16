@@ -239,10 +239,10 @@ class SaleOrder(models.Model):
         fecha = datetime.strptime('2022-09-01 00:32:33', '%Y-%m-%d %H:%M:%S')
         for order in self:
             if order.date_order > fecha:
-            print(order.date_order)
-            valor_dolar, valor_euro = valor_dolar_euro()
-            order.valor_dolar = valor_dolar
-            order.valor_euro = valor_euro
+                print(order.date_order)
+                valor_dolar, valor_euro = valor_dolar_euro()
+                order.valor_dolar = valor_dolar
+                order.valor_euro = valor_euro
             try:
                 order.coef_real_euro_dolar = float(valor_euro) / float(valor_dolar)
             except:
