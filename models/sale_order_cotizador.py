@@ -68,6 +68,8 @@ class SaleOrder(models.Model):
 
     activar_coef = fields.Boolean("Act.Coef")
 
+    peso_adicional = fields.Float(readonly=False, help="Agregar peso para ajustar \nvalores del campo \nPeso Total en Kg")
+
     gasto_envio_local = fields.Float("Gasto Envios")
     gasto_envio_despacho = fields.Float("Gasto Despacho")
 
@@ -102,7 +104,7 @@ class SaleOrder(models.Model):
     porcentaje_gasto_envio_despacho = fields.Float(compute="get_porcentaje_gasto_envio_despacho",
                                                    store=True,
                                                    readonly=False)
-    gasto_envio_calculado = fields.Float(readonly=True)
+    gasto_envio_calculado = fields.Float(readonly=False)
     gasto_envio_agregado = fields.Float(readonly=False, help="sume o reste para ajustar \nvalores del campo \nTotal Gastos de Despacho")
 
     bobina_tabla = fields.Html(string='Tabla Bobina', readonly=True)
@@ -319,7 +321,7 @@ class SaleOrder(models.Model):
                             self._tomar_coeficiente(
                                 self.medio_envio,
                                 total_euros,
-                                total_peso,
+                                total_peso + self.peso_adicional,
                                 self.gasto_envio_local,
                                 self.gasto_envio_despacho,
                                 self.dias_almacenamiento2,
@@ -331,12 +333,13 @@ class SaleOrder(models.Model):
                                 self.gasto_envio_agregado,
                                 self.valor_dolar_blue,
                                 self.valor_dolar
+                                #self.gasto_envio_calculado
                             )
                     else:
                         coef, s2, s3, s4, c2, c3, c4, c0, coef_real, subtotal5, s1, peso_despues, g_e_calc, valor_dolar_blue, coef_coti_blue = self._tomar_coeficiente(
                             self.medio_envio,
                             total_euros,
-                            total_peso,
+                            total_peso + self.peso_adicional,
                             self.gasto_envio_local,
                             self.gasto_envio_despacho,
                             self.dias_almacenamiento2,
@@ -348,8 +351,8 @@ class SaleOrder(models.Model):
                             self.gasto_envio_agregado,
                             self.valor_dolar_blue,
                             self.valor_dolar
+                            #self.gasto_envio_calculado
                         )
-
                 for order in self:
                     if self.medio_envio == 'currier':
                         self.dias_almacenamiento2 = -1
