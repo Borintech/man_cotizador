@@ -28,6 +28,8 @@
 
                     <field name="coef_subtotal2" style="width:20" string="Variación Peso"/>
 
+                    <field name="peso_adicional" style="width:20" string="Peso embalaje"/>
+
                     <field name="peso_por_variacion" readonly="1"/>
 
                     <field name="subtotal2_flete" string="Sub Total 2" decoration-bf="1" readonly="1"/>
