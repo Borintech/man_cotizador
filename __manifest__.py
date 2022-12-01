@@ -10,7 +10,7 @@
     'maintainer': 'DEV-MAN',
     'website': 'https://www.devman.com.ar',
     'license': 'AGPL-3',
-    'depends': ['base', 'sale', 'stock', 'purchase',],
+    'depends': ['base', 'sale', 'sale_management', 'stock', 'purchase'],
     'data': [
         'views/costos_almacenamiento.xml',
         'views/analitico.xml',
