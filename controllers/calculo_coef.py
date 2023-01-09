@@ -2,12 +2,12 @@ from odoo.http import request
 import os
 import datetime
 
-def _log(dato):
-    nombre = os.path.dirname(__file__) + '/coe_log.log'
-    log = open(nombre, 'a')
-    dato = "- Log: " + str(datetime.datetime.now()) + " ---> " + dato
-    log.write(dato + '\n')
-    log.close()
+#def _log(dato):
+#    nombre = os.path.dirname(__file__) + '/coe_log.log'
+#    log = open(nombre, 'a')
+#    dato = "- Log: " + str(datetime.datetime.now()) + " ---> " + dato
+#    log.write(dato + '\n')
+#    log.close()
 
 
 class cotiza:
@@ -98,25 +98,25 @@ class cotiza:
         OUT: Por último, hace todos los cálculos necesarios y devuelve el valor
         """
 
-        _log("Calculando coef para los valores de:")
-        _log("total_euros : " + str(total_euros))
-        _log("total_peso : " + str(total_peso))
-        _log("gasto_envio_local: " + str(gasto_envio_local))
-        _log("gasto_envio_despacho " + str(gasto_envio_despacho))
-        _log("dias_almacenamiento2 " + str(dias_almacenamiento))
+        #_log("Calculando coef para los valores de:")
+        #_log("total_euros : " + str(total_euros))
+        #_log("total_peso : " + str(total_peso))
+        #_log("gasto_envio_local: " + str(gasto_envio_local))
+        #_log("gasto_envio_despacho " + str(gasto_envio_despacho))
+        #_log("dias_almacenamiento2 " + str(dias_almacenamiento))
 
         try:
             # 1. de euro a dolar ---------------------
             if coef_euro2dolar == 0:
                 coef_euro2dolar = self.euro / self.dolar
 
-            _log(f' - coef euro a dolar : {coef_euro2dolar}')
+            #_log(f' - coef euro a dolar : {coef_euro2dolar}')
 
             # 2. subtotal1 --------------------------
             total_dolar = total_euros * coef_euro2dolar
             subtotal1 = total_dolar
 
-            _log(f' - subtotal1 : {subtotal1}')
+            #_log(f' - subtotal1 : {subtotal1}')
 
             # 3. total peso ajustado -----------------
             if coef_subtotal2 == 0:
@@ -136,7 +136,7 @@ class cotiza:
 
             subtotal2_flete = subtotal2_flete + subtotal1
 
-            _log(f' - subtotal2_flete : {subtotal2_flete}')
+            #_log(f' - subtotal2_flete : {subtotal2_flete}')
 
             # 4. coef_dexport
             if coef_dexport == 0:
@@ -144,7 +144,7 @@ class cotiza:
 
             subtotal3_dexport = (coef_dexport * subtotal2_flete) + subtotal2_flete
 
-            _log(f' - subtotal3_dexport : {subtotal3_dexport}')
+            #_log(f' - subtotal3_dexport : {subtotal3_dexport}')
 
             # 5. coef_utilidad
 
@@ -153,12 +153,12 @@ class cotiza:
 
             subtotal4_utilidad = (subtotal3_dexport * coef_utilidad) + subtotal3_dexport
 
-            _log(f' - subtotal4_utilidad : {subtotal4_utilidad}')
+            #_log(f' - subtotal4_utilidad : {subtotal4_utilidad}')
 
             # 6. total_almacenaje_dolares =  ver tabla de peso y dias
             total_almacenaje_dolares = self._valor_total_almacenaje_dolar(dias_almacenamiento, total_peso)
 
-            _log(f' - total_almacenaje_dolares : {total_almacenaje_dolares}')
+            #_log(f' - total_almacenaje_dolares : {total_almacenaje_dolares}')
 
             # 6 bis. calcula gasto_envio_despacho
             if medio_envio == 'maritimo':
@@ -185,19 +185,19 @@ class cotiza:
             # 7. subtotal5
             subtotal5 = gasto_envio_local + gasto_envio_calculado + total_almacenaje_dolares + subtotal4_utilidad
 
-            _log(f' - subtotal5 : {subtotal5}')
+            #_log(f' - subtotal5 : {subtotal5}')
 
             # 8. cálculo del coeficiente de conversión
             coef_cotizador = subtotal5 / subtotal1
 
 
-            _log(f' - coef_cotizador : {coef_cotizador}')
+            #_log(f' - coef_cotizador : {coef_cotizador}')
 
             # 9. ahora lo paso a pesos
             coef_real = coef_cotizador
             coef_cotizador = coef_cotizador * self.dolar
 
-            _log("------------------------------------------------")
+            #_log("------------------------------------------------")
 
             # 10. Calculo del blue
             if valor_dolar_blue == 0:
