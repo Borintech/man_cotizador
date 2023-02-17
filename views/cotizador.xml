@@ -13,7 +13,7 @@
                     <field name="medio_envio" string="Tipo de Flete"/>
                     <field name="porcentaje_gasto_envio_despacho" string="% Despacho"/>
                     <field name="gasto_envio_calculado" string="Total Gastos de Desapacho"/>
-                    <field name="gasto_envio_agregado" string="Agregado/Descuento"/>
+                    <field name="gasto_envio_agregado" string="Agregado/Descuento" invisible="1"/>
                     <field name="dias_almacenamiento2" string="Dias de Almacenamiento"/>
                     <field name="cotizar" string="Cotizar"/>
                 </xpath>

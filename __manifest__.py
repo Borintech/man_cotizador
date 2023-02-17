@@ -2,7 +2,7 @@
 #cambios para poder hacer commit
 {
     'name': 'Cotizador2',
-    'version': '1',
+    'version': '5',
     'summary': 'Cotizador2',
     'sequence': -101,
     'description': """Modulo cotizador desarrollado para Borintech""",
