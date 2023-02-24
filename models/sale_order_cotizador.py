@@ -294,22 +294,31 @@ class SaleOrder(models.Model):
                         try:
                             suppler = line.product_id.variant_seller_ids #.product.supplierinfo
                             suppler_ids = suppler.ids
-                            p = 0
+                            precio_candidato = 0
+                            cantidad_sale_order = line.product_uom_qty
+                            dif_init = 9999.99
+                            cantidad = 0.0
+                            dif = 0.0
+
                             for precio in suppler_ids:
-                                dondeestaelprecio = """SELECT price FROM public.product_supplierinfo
+                                dondeestaelprecio = """SELECT min_qty, price FROM public.product_supplierinfo
                                 where id = %s """ % precio
                                 request.cr.execute(dondeestaelprecio)
-                                elprecioes = request.cr.dictfetchall()[0]['price']
-                                if p <= elprecioes:
-                                    p = elprecioes
+                                cantidad = request.cr.dictfetchall()[0]['min_qty']
+                                dif = abs(cantidad_sale_order - cantidad)
 
+                                if dif <= dif_init:
+                                    dif_init = dif
+                                    request.cr.execute(dondeestaelprecio)
+                                    precio_candidato = request.cr.dictfetchall()[0]['price']
                             if line.id not in actualizados2:
                                 # actualizados2[line.id] = line.price_unit
-                                actualizados2[line.id] = p
+                                actualizados2[line.id] = precio_candidato
 
                             precio_unitario = actualizados2[line.id]
 
-                        except:
+                        except Exception as e:
+                            print(e)
                             try:
                                 producto_precio_standard = line.product_id.variant_seller_ids.price
                                 if line.id not in actualizados2:

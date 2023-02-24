@@ -1,0 +1,23 @@
+canti_del_sale_order = algo
+
+dif_init = 999999
+precio_candidato = 0
+
+for id in suppler_ids:
+	dondeestaelprecio = """SELECT price FROM public.product_supplierinfo
+	where id = %s """ % id
+
+	request.cr.execute(dondeestaelprecio)
+	cantidad = request.cr.dictfetchall()[0]['cantidad']
+	#precio_candidato = request.cr.dictfetchall()[0]['cantidad']
+
+	dif = 	abs(canti_del_sale_order - cantidad)
+
+
+	if dif <= dif_init:
+	    dif_init = dif
+	    precio_candidato = request.cr.dictfetchall()[0]['cantidad']
+
+
+	    'SELECT price FROM public.product_supplierinfo
+                                where id = 1 '
