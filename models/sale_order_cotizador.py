@@ -384,8 +384,8 @@ class SaleOrder(models.Model):
                         except:
                             print("no hay precio en lista -except línea 351 sale_order_cotizador.py")
 
-    # @api.onchange('order_line.product_uom_qty')
-    # def cotizar_ejemplo(self):
-    #     if self.cotizar:
-    #         self.aplica_coef_ejemplo()
-    #         raise ValidationError("Invocando a la función de cotización")
+    @api.onchange('coef_utilidad')
+    def cotizar_ejemplo(self):
+        if self.cotizar:
+            self.aplica_coef_ejemplo()
+           # raise ValidationError("Invocando a la función de cotización")

@@ -13,7 +13,7 @@
     'depends': ['base', 'sale', 'sale_management', 'stock', 'purchase'],
     'data': [
         'views/costos_almacenamiento.xml',
-        'views/analitico.xml',
+        # 'views/analitico.xml',
         'views/cotizador.xml',
         'views/configuracion.xml',
         'views/bobinas.xml',

@@ -51,10 +51,10 @@
               action="costos_almacenamiento_view"
               />
 
-    <menuitem id="menu_cotizador_analitico"
-          name="Analitico"
-          parent="menu_cotizador"
-          action="costos_almacenamiento_view"
-          />
+<!--    <menuitem id="menu_cotizador_analitico"-->
+<!--          name="Analitico"-->
+<!--          parent="menu_cotizador"-->
+<!--          action="costos_almacenamiento_view"-->
+<!--          />-->
 
 </odoo>
