@@ -3,7 +3,7 @@ from ..controllers.calculo_coef import cotiza
 from ..controllers.api_dolar_euro import valor_dolar_euro
 from odoo import api, fields, models, _
 from odoo.http import request
-from odoo.exceptions import ValidationError
+# from odoo.exceptions import ValidationError
 from datetime import datetime
 
 bandera = 1
@@ -106,11 +106,9 @@ class SaleOrder(models.Model):
                                                    readonly=False)
     gasto_envio_calculado = fields.Float(readonly=False)
     gasto_envio_agregado = fields.Float(readonly=False, help="sume o reste para ajustar \nvalores del campo \nTotal Gastos de Despacho")
-
     bobina_tabla = fields.Html(string='Tabla Bobina', readonly=True)
     caja_tabla = fields.Html(string="Tabla Caja", readonly=True)
     utilidad_tabla = fields.Html(string='Tabla Utilidad', readonly=True)
-
     bonina_datos = fields.Many2many('cotizador.bobinas')
 
     @api.onchange('gasto_envio_local')
@@ -161,25 +159,16 @@ class SaleOrder(models.Model):
     # - ajuste peso
     coef_subtotal2 = fields.Float("Coef.Peso")
     subtotal2_flete = fields.Float("Coef.Flete")
-
     # - Derechos de importacion
     coef_dexport = fields.Float("Coef.Exp")
     subtotal3_dexport = fields.Float("Sub.Exp")
-
     # - utilidad
     coef_utilidad = fields.Float("Coef.Utilidad")
     subtotal4_utilidad = fields.Float("Subt.Utilidad")
-
-    # activar_coef = fields.Boolean("Act.Coef")
-    # -------------------
-
     valor_dolar = fields.Float("Valor Dólar BNA")
     valor_euro = fields.Float("Valor Euro BNA")
     coef_real_euro_dolar = fields.Float("Coef. Real Euro2Dólar")
-
     coef_cotizacion = fields.Float("Coef.Cotización")
-
-    #ToDo Mati-modificación terminar
     valor_dolar_blue = fields.Float("Valor Dólar Blue")
     coef_cotizacion_blue = fields.Float("Coef. Cotización Blue")
 
@@ -196,33 +185,6 @@ class SaleOrder(models.Model):
 
     def _cal_coef(self, total_orden, total_peso):
         pass
-
-    # @api.depends('order_line')
-    # def aplica_coef(self):
-    #     # calculo el total
-    #     total_orden = 0
-    #     peso_unitario = 0
-    #     global total_peso
-    #     total_peso = 1  # lo pongo en uno
-    #     banderita = 0
-    #     for order in self:
-    #         for line in order.order_line:
-    #             banderita += 1
-    #             total_orden += line.price_unit
-    #             # se obtiene el peso del producto
-    #             peso_unitario += self._peso(line.product_id)
-    #             # total del peso es la cantiadad por el peso unitario
-    #             total_peso += peso_unitario * line.product_uom_qty
-    #
-    #     coef = 1
-    #     if banderita > 0:
-    #         coef = self._tomar_coeficiente()
-    #
-    #     # actualización del precio unitario de todas las lineas de los items de la órden
-    #     for order in self:
-    #         for line in order.order_line:
-    #             line.price_unit = line.price_unit * coef
-
 
     @api.depends('gasto_envio_local', 'gasto_envio_despacho', 'dias_almacenamiento2')
     def _tomar_coeficiente(self,
@@ -283,7 +245,6 @@ class SaleOrder(models.Model):
                 # todo Ale... recordar que en la instalación si sacamos bandera > 2 no entiendo
                 #  por qué línea 223 if self.cotizar viene en true o pasa y rompe la instalación
                 #  ya que order error
-
                 for order in self:
                     total_peso = 0
                     total_euros = 0
@@ -307,10 +268,12 @@ class SaleOrder(models.Model):
                                 cantidad = request.cr.dictfetchall()[0]['min_qty']
                                 dif = abs(cantidad_sale_order - cantidad)
 
-                                if dif <= dif_init:
+                                if dif <= dif_init and (cantidad_sale_order >= cantidad):
                                     dif_init = dif
                                     request.cr.execute(dondeestaelprecio)
                                     precio_candidato = request.cr.dictfetchall()[0]['price']
+                                    print("precio candidato", precio_candidato)
+
                             if line.id not in actualizados2:
                                 # actualizados2[line.id] = line.price_unit
                                 actualizados2[line.id] = precio_candidato
@@ -390,16 +353,13 @@ class SaleOrder(models.Model):
                 for order in self:
                     if self.medio_envio == 'currier':
                         self.dias_almacenamiento2 = -1
-
                     order.coef_euro2dolar = c0
                     order.subtotal2_flete = s2
                     order.subtotal3_dexport = s3
                     order.subtotal4_utilidad = s4
-
                     order.peso_real = total_peso
                     order.peso_por_variacion = peso_despues
                     order.subtotal1_precio = s1
-
                     order.coef_subtotal2 = c2
                     order.coef_dexport = c3 * 100
                     order.coef_utilidad = c4 * 100
@@ -408,21 +368,13 @@ class SaleOrder(models.Model):
                     order.valor_dolar_blue = valor_dolar_blue
                     order.coef_cotizacion_blue = coef_coti_blue
 
-
                     for line in order.order_line:
                         if line.id not in actualizados2:
                             actualizados2[line.id] = line.price_unit
                             precio = actualizados2[line.id]
                         else:
                             precio = actualizados2[line.id]
-
                         line.price_unit = precio * coef_real * c0 * coef_coti_blue
-                        #print("line.price_unit   --->  ", line.price_unit, "   precio original: ", precio)
-                        # actualizados.append(line.id)
-
-                    # if order.amount_total > 0:
-                    #     order.amount_total = subtotal5
-                    # print(order.amount_total)
             else:
                 for order in self:
                     for line in order.order_line:
@@ -432,23 +384,8 @@ class SaleOrder(models.Model):
                         except:
                             print("no hay precio en lista -except línea 351 sale_order_cotizador.py")
 
-    def cotizar_ejemplo(self):
-        if self.cotizar:
-            self.aplica_coef_ejemplo()
-            raise ValidationError("Invocando a la función de cotización")
-
-    # @api.model
-    # def create(self, vals_list):
-    #
-    #     # averigua el último id de sale.order
-    #     q = " select id from  public.sale_order order by id desc  limit 1"
-    #     request.cr.execute(q)
-    #     r = request.cr.fetchall()[0][0]
-    #     # ultimo_id = self.env['sale.order'].search([])[-1].id
-    #     men = f'Último id de sale.order  =  {r}'
-    #     print(men)
-    #     # -----
-    #
-    #     result = super(SaleOrder, self).create(vals_list)
-    #
-    #     return result
+    # @api.onchange('order_line.product_uom_qty')
+    # def cotizar_ejemplo(self):
+    #     if self.cotizar:
+    #         self.aplica_coef_ejemplo()
+    #         raise ValidationError("Invocando a la función de cotización")
