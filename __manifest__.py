@@ -2,12 +2,13 @@
 #cambios para poder hacer commit
 {
     'name': 'Cotizador2',
-    'version': '5',
+    'version': '5.1.0',
+    'category': 'Sales',
     'summary': 'Cotizador2',
     'sequence': -101,
     'description': """Modulo cotizador desarrollado para Borintech""",
-    'author': 'DEV-MAN',
-    'maintainer': 'DEV-MAN',
+    'author': 'Devman - Matias Banega',
+    'maintainer': 'Devman - Matias Banega',
     'website': 'https://www.devman.com.ar',
     'license': 'AGPL-3',
     'depends': ['base', 'sale', 'sale_management', 'stock', 'purchase'],
