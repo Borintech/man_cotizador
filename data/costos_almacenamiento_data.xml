@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="costos_almacenamiento_350_500" model="cotizador.costos_almacenamiento">
+        <field name="kg_desde">350.01</field>
+        <field name="kg_hasta">500</field>
+        <field name="importe">32</field>
+    </record>
+    <record id="costos_almacenamiento_200_350" model="cotizador.costos_almacenamiento">
+        <field name="kg_desde">200.01</field>
+        <field name="kg_hasta">350</field>
+        <field name="importe">26</field>
+    </record>
+    <record id="costos_almacenamiento_100_200" model="cotizador.costos_almacenamiento">
+        <field name="kg_desde">100.01</field>
+        <field name="kg_hasta">200</field>
+        <field name="importe">20</field>
+    </record>
+    <record id="costos_almacenamiento_50_100" model="cotizador.costos_almacenamiento">
+        <field name="kg_desde">50.01</field>
+        <field name="kg_hasta">100</field>
+        <field name="importe">14</field>
+    </record>
+    <record id="costos_almacenamiento_20_50" model="cotizador.costos_almacenamiento">
+        <field name="kg_desde">20.01</field>
+        <field name="kg_hasta">50</field>
+        <field name="importe">10</field>
+    </record>
+    <record id="costos_almacenamiento_10_20" model="cotizador.costos_almacenamiento">
+        <field name="kg_desde">10.01</field>
+        <field name="kg_hasta">20</field>
+        <field name="importe">6</field>
+    </record>
+    <record id="costos_almacenamiento_5_10" model="cotizador.costos_almacenamiento">
+        <field name="kg_desde">5.01</field>
+        <field name="kg_hasta">10</field>
+        <field name="importe">4</field>
+    </record>
+    <record id="costos_almacenamiento_0_5" model="cotizador.costos_almacenamiento">
+        <field name="kg_desde">0</field>
+        <field name="kg_hasta">5</field>
+        <field name="importe">2</field>
+    </record>
+</odoo>

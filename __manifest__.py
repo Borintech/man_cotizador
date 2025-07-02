@@ -2,7 +2,7 @@
 #cambios para poder hacer commit
 {
     'name': 'Cotizador2',
-    'version': '5.1.0',
+    'version': '5.2.0',
     'category': 'Sales',
     'summary': 'Cotizador2',
     'sequence': -101,
@@ -13,8 +13,10 @@
     'license': 'AGPL-3',
     'depends': ['base', 'sale', 'sale_management', 'stock', 'purchase'],
     'data': [
+        'data/costos_almacenamiento_data.xml',
+        'data/cajas_data.xml',
+        'data/bobinas_data.xml',
         'views/costos_almacenamiento.xml',
-        # 'views/analitico.xml',
         'views/cotizador.xml',
         'views/configuracion.xml',
         'views/bobinas.xml',

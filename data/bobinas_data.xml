@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="bobina_35x35x20" model="cotizador.bobinas">
+        <field name="m_bobinas">35x35x20</field>
+        <field name="peso_bruto">1.4</field>
+        <field name="peso_vol">4.9</field>
+    </record>
+    <record id="bobina_40x40x20" model="cotizador.bobinas">
+        <field name="m_bobinas">40x40x20</field>
+        <field name="peso_bruto">1.8</field>
+        <field name="peso_vol">6.4</field>
+    </record>
+    <record id="bobina_40x40x30" model="cotizador.bobinas">
+        <field name="m_bobinas">40x40x30</field>
+        <field name="peso_bruto">2.2</field>
+        <field name="peso_vol">9.6</field>
+    </record>
+    <record id="bobina_40x40x40" model="cotizador.bobinas">
+        <field name="m_bobinas">40x40x40</field>
+        <field name="peso_bruto">2.2</field>
+        <field name="peso_vol">12.8</field>
+    </record>
+    <record id="bobina_50x50x20" model="cotizador.bobinas">
+        <field name="m_bobinas">50x50x20</field>
+        <field name="peso_bruto">2.8</field>
+        <field name="peso_vol">10</field>
+    </record>
+    <record id="bobina_50x50x30" model="cotizador.bobinas">
+        <field name="m_bobinas">50x50x30</field>
+        <field name="peso_bruto">3</field>
+        <field name="peso_vol">15</field>
+    </record>
+    <record id="bobina_50x50x40" model="cotizador.bobinas">
+        <field name="m_bobinas">50x50x40</field>
+        <field name="peso_bruto">3.4</field>
+        <field name="peso_vol">20</field>
+    </record>
+    <record id="bobina_60x60x40" model="cotizador.bobinas">
+        <field name="m_bobinas">60x60x40</field>
+        <field name="peso_bruto">8.2</field>
+        <field name="peso_vol">28.8</field>
+    </record>
+    <record id="bobina_70x70x50" model="cotizador.bobinas">
+        <field name="m_bobinas">70x70x50</field>
+        <field name="peso_bruto">9.5</field>
+        <field name="peso_vol">49</field>
+    </record>
+    <record id="bobina_80x80x40" model="cotizador.bobinas">
+        <field name="m_bobinas">80x80x40</field>
+        <field name="peso_bruto">11</field>
+        <field name="peso_vol">51.2</field>
+    </record>
+    <record id="bobina_80x80x50" model="cotizador.bobinas">
+        <field name="m_bobinas">80x80x50</field>
+        <field name="peso_bruto">12.2</field>
+        <field name="peso_vol">64</field>
+    </record>
+    <record id="bobina_80x80x60" model="cotizador.bobinas">
+        <field name="m_bobinas">80x80x60</field>
+        <field name="peso_bruto">14</field>
+        <field name="peso_vol">76.8</field>
+    </record>
+    <record id="bobina_100x100x70" model="cotizador.bobinas">
+        <field name="m_bobinas">100x100x70</field>
+        <field name="peso_bruto">23</field>
+        <field name="peso_vol">140</field>
+    </record>
+</odoo>

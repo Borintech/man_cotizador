@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="caja_18x18x12" model="cotizador.cajas">
+        <field name="m_cajas">18x18x12 cm</field>
+        <field name="peso_vol">0.78</field>
+        <field name="vol_interior">2560</field>
+    </record>
+    <record id="caja_38x29x14" model="cotizador.cajas">
+        <field name="m_cajas">38x29x14 cm</field>
+        <field name="peso_vol">3.09</field>
+        <field name="vol_interior">11664</field>
+    </record>
+    <record id="caja_50x38x20" model="cotizador.cajas">
+        <field name="m_cajas">50x38x20 cm</field>
+        <field name="peso_vol">7.6</field>
+        <field name="vol_interior">31104</field>
+    </record>
+    <record id="caja_50x38x38" model="cotizador.cajas">
+        <field name="m_cajas">50x38x38 cm</field>
+        <field name="peso_vol">14.44</field>
+        <field name="vol_interior">62208</field>
+    </record>
+    <record id="caja_56x56x20" model="cotizador.cajas">
+        <field name="m_cajas">56x56x20 cm</field>
+        <field name="peso_vol">12.54</field>
+        <field name="vol_interior">42488</field>
+    </record>
+    <record id="caja_105x20x20" model="cotizador.cajas">
+        <field name="m_cajas">105x20x20 cm</field>
+        <field name="peso_vol">8.4</field>
+        <field name="vol_interior">33372</field>
+    </record>
+    <record id="caja_105x40x20" model="cotizador.cajas">
+        <field name="m_cajas">105x40x20 cm</field>
+        <field name="peso_vol">16.8</field>
+        <field name="vol_interior">70452</field>
+    </record>
+    <record id="caja_105x80x20" model="cotizador.cajas">
+        <field name="m_cajas">105x80x20 cm</field>
+        <field name="peso_vol">33.6</field>
+        <field name="vol_interior">144612</field>
+    </record>
+    <record id="caja_105x80x40" model="cotizador.cajas">
+        <field name="m_cajas">105x80x40 cm</field>
+        <field name="peso_vol">67.2</field>
+        <field name="vol_interior">305292</field>
+    </record>
+    <record id="caja_105x80x60" model="cotizador.cajas">
+        <field name="m_cajas">105x80x60 cm</field>
+        <field name="peso_vol">100.8</field>
+        <field name="vol_interior">465972</field>
+    </record>
+</odoo>
