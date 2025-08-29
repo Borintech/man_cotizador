@@ -14,6 +14,20 @@ actualizados2 = {}
 leer = True
 
 
+def get_safe_price_from_dict(line_id, line_price_unit):
+    """
+    Función helper para obtener precio de manera segura del diccionario actualizados2
+    """
+    global actualizados2
+    if line_id in actualizados2:
+        return actualizados2[line_id]
+    else:
+        # Si no existe, usar el precio de la línea como fallback
+        safe_price = line_price_unit if line_price_unit > 0 else 0.0
+        actualizados2[line_id] = safe_price
+        return safe_price
+
+
 def _make_bobina_tabla2():
     # rr = request.env['cotizador.bobinas'].search([])
 
@@ -225,6 +239,10 @@ class SaleOrder(models.Model):
     @api.depends('order_line', 'cotizar', 'gasto_envio_local', 'gasto_envio_despacho', 'dias_almacenamiento2',
                  'medio_envio', 'activar_coef')
     def aplica_coef_ejemplo(self):
+        # Validación para evitar problemas durante la instalación del módulo
+        if not self or not self.env.context.get('no_install_mode', True):
+            return
+            
         # muestra en sale_order valor dolar y euro según api
         fecha = datetime.strptime('2022-09-01 00:32:33', '%Y-%m-%d %H:%M:%S')
         for order in self:
@@ -373,19 +391,26 @@ class SaleOrder(models.Model):
                             actualizados2[line.id] = line.price_unit
                             precio = actualizados2[line.id]
                         else:
-                            precio = actualizados2[line.id]
+                            precio = get_safe_price_from_dict(line.id, line.price_unit)
                         line.price_unit = precio * coef_real * c0 * coef_coti_blue
             else:
                 for order in self:
                     for line in order.order_line:
                         try:
-                            precio = actualizados2[line.id]
+                            precio = get_safe_price_from_dict(line.id, line.price_unit)
                             line.price_unit = precio
-                        except:
-                            print("no hay precio en lista -except línea 351 sale_order_cotizador.py")
+                        except Exception as e:
+                            # Si hay cualquier error, usar el precio actual de la línea
+                            precio_fallback = line.price_unit if line.price_unit > 0 else 0.0
+                            line.price_unit = precio_fallback
+                            print(f"Error al obtener precio para línea {line.id}: {e}, usando precio fallback: {precio_fallback}")
 
     @api.onchange('coef_utilidad')
     def cotizar_ejemplo(self):
+        # Evitar ejecución durante la instalación del módulo
+        if self.env.context.get('install_mode') or not self._origin:
+            return
+            
         if self.cotizar:
             self.aplica_coef_ejemplo()
            # raise ValidationError("Invocando a la función de cotización")
