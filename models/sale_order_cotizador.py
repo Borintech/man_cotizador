@@ -3,7 +3,7 @@ from ..controllers.calculo_coef import cotiza
 from ..controllers.api_dolar_euro import valor_dolar_euro
 from odoo import api, fields, models, _
 from odoo.http import request
-# from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 from datetime import datetime
 
 bandera = 1
@@ -236,12 +236,29 @@ class SaleOrder(models.Model):
                                       g_env_calculado)
         return r
 
-    @api.depends('order_line', 'cotizar', 'gasto_envio_local', 'gasto_envio_despacho', 'dias_almacenamiento2',
+        def _can_modify_order_prices(self, order):
+        """Verificar si se pueden modificar los precios de una orden"""
+        return hasattr(order, 'state') and order.state in ['draft', 'sent']
+
+    @api.depends('total_precio_euros', 'order_line', 'coef_subtotal2', 'coef_dexport', 'coef_utilidad', 'activar_coef',
                  'medio_envio', 'activar_coef')
     def aplica_coef_ejemplo(self):
         # Validación para evitar problemas durante la instalación del módulo
         if not self or not self.env.context.get('no_install_mode', True):
             return
+            
+        # Validar que las órdenes estén en estado que permita modificaciones
+        orders_bloqueadas = []
+        for order in self:
+            if not self._can_modify_order_prices(order):
+                orders_bloqueadas.append(f"{order.name} (Estado: {order.state})")
+                
+        # Si hay órdenes bloqueadas, mostrar advertencia al usuario
+        if orders_bloqueadas:
+            mensaje = f"ADVERTENCIA: No se pueden modificar precios en las siguientes órdenes porque están confirmadas o bloqueadas:\n\n{chr(10).join(orders_bloqueadas)}\n\nSolo se procesarán las órdenes en estado 'Borrador' o 'Enviada'."
+            print(f"Cotizador: {mensaje}")
+            # Opcional: mostrar mensaje al usuario (descomenta la siguiente línea si quieres mostrar popup)
+            # raise UserError(mensaje)
             
         # muestra en sale_order valor dolar y euro según api
         fecha = datetime.strptime('2022-09-01 00:32:33', '%Y-%m-%d %H:%M:%S')
@@ -387,6 +404,10 @@ class SaleOrder(models.Model):
                     order.coef_cotizacion_blue = coef_coti_blue
 
                     for line in order.order_line:
+                        # Solo modificar precios si la orden está en estado que permite modificaciones
+                        if not self._can_modify_order_prices(order):
+                            continue
+                            
                         if line.id not in actualizados2:
                             actualizados2[line.id] = line.price_unit
                             precio = actualizados2[line.id]
@@ -395,6 +416,10 @@ class SaleOrder(models.Model):
                         line.price_unit = precio * coef_real * c0 * coef_coti_blue
             else:
                 for order in self:
+                    # Solo modificar precios si la orden está en estado que permite modificaciones
+                    if not self._can_modify_order_prices(order):
+                        continue
+                        
                     for line in order.order_line:
                         try:
                             precio = get_safe_price_from_dict(line.id, line.price_unit)
