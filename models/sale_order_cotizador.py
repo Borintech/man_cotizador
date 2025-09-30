@@ -240,8 +240,8 @@ class SaleOrder(models.Model):
         """Verificar si se pueden modificar los precios de una orden"""
         return hasattr(order, 'state') and order.state in ['draft', 'sent']
 
-    @api.depends('total_precio_euros', 'order_line', 'coef_subtotal2', 'coef_dexport', 'coef_utilidad', 'activar_coef',
-                 'medio_envio', 'activar_coef')
+    @api.depends('order_line', 'coef_subtotal2', 'coef_dexport', 'coef_utilidad', 'activar_coef',
+                 'medio_envio')
     def aplica_coef_ejemplo(self):
         # Validación para evitar problemas durante la instalación del módulo
         if not self or not self.env.context.get('no_install_mode', True):
