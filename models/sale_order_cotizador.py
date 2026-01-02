@@ -196,6 +196,101 @@ class SaleOrder(models.Model):
     coef_cotizacion = fields.Float("Coef.Cotización")
     valor_dolar_blue = fields.Float("Valor Dólar Blue")
     coef_cotizacion_blue = fields.Float("Coef. Cotización Blue")
+    
+    # Nuevos campos para coeficiente manual y cálculo según fórmula
+    coef_cotizacion_manual = fields.Boolean(
+        string="Coeficiente Manual",
+        default=False,
+        help="Si está activo, permite modificar manualmente el coeficiente final y recalcula los precios de venta."
+    )
+    total_compra_euros = fields.Float(
+        string="Total Compra (EUR)",
+        compute="_compute_total_compra_euros",
+        store=True,
+        help="Suma total de los precios de compra del proveedor en euros."
+    )
+    coef_cotizacion_calculado = fields.Float(
+        string="Coef. Calculado",
+        compute="_compute_coef_cotizacion_calculado",
+        store=True,
+        digits=(16, 4),
+        help="Coeficiente resultante = Precio Total Venta / (Precio Total Compra × Coef EUR/USD Real)"
+    )
+
+    @api.depends('order_line.product_id', 'order_line.product_uom_qty')
+    def _compute_total_compra_euros(self):
+        """Calcula el total de compra en euros basado en precios de proveedor"""
+        for order in self:
+            total_compra = 0.0
+            for line in order.order_line:
+                if line.product_id:
+                    # Buscar precio del proveedor
+                    precio_proveedor = 0.0
+                    try:
+                        supplier_info = line.product_id.variant_seller_ids
+                        if supplier_info:
+                            cantidad_line = line.product_uom_qty
+                            mejor_precio = 0.0
+                            mejor_dif = 9999.99
+                            for supplier in supplier_info:
+                                if cantidad_line >= supplier.min_qty:
+                                    dif = abs(cantidad_line - supplier.min_qty)
+                                    if dif <= mejor_dif:
+                                        mejor_dif = dif
+                                        mejor_precio = supplier.price
+                            precio_proveedor = mejor_precio if mejor_precio > 0 else (supplier_info[0].price if supplier_info else 0.0)
+                    except:
+                        precio_proveedor = 0.0
+                    total_compra += precio_proveedor * line.product_uom_qty
+            order.total_compra_euros = total_compra
+
+    @api.depends('amount_total', 'total_compra_euros', 'coef_real_euro_dolar')
+    def _compute_coef_cotizacion_calculado(self):
+        """Calcula el coeficiente como: Precio Venta Total / (Precio Compra Total × Coef EUR/USD Real)"""
+        for order in self:
+            if order.total_compra_euros > 0 and order.coef_real_euro_dolar > 0:
+                denominador = order.total_compra_euros * order.coef_real_euro_dolar
+                if denominador > 0:
+                    order.coef_cotizacion_calculado = order.amount_total / denominador
+                else:
+                    order.coef_cotizacion_calculado = 0.0
+            else:
+                order.coef_cotizacion_calculado = 0.0
+
+    @api.onchange('coef_cotizacion', 'coef_cotizacion_manual')
+    def _onchange_coef_cotizacion_manual(self):
+        """Cuando se modifica manualmente el coeficiente, recalcula los precios de las líneas"""
+        if not self.coef_cotizacion_manual or not self.coef_cotizacion:
+            return
+        
+        if self.env.context.get('install_mode') or not self._origin:
+            return
+            
+        # Solo recalcular si estamos en modo manual y tenemos coeficiente
+        if self.coef_cotizacion > 0 and self.coef_real_euro_dolar > 0:
+            for line in self.order_line:
+                if line.product_id:
+                    # Obtener precio de proveedor
+                    precio_proveedor = 0.0
+                    try:
+                        supplier_info = line.product_id.variant_seller_ids
+                        if supplier_info:
+                            cantidad_line = line.product_uom_qty
+                            mejor_precio = 0.0
+                            mejor_dif = 9999.99
+                            for supplier in supplier_info:
+                                if cantidad_line >= supplier.min_qty:
+                                    dif = abs(cantidad_line - supplier.min_qty)
+                                    if dif <= mejor_dif:
+                                        mejor_dif = dif
+                                        mejor_precio = supplier.price
+                            precio_proveedor = mejor_precio if mejor_precio > 0 else (supplier_info[0].price if supplier_info else 0.0)
+                    except:
+                        precio_proveedor = 0.0
+                    
+                    if precio_proveedor > 0:
+                        # Aplicar: precio_proveedor × coef_real_euro_dolar × coef_cotizacion
+                        line.price_unit = precio_proveedor * self.coef_real_euro_dolar * self.coef_cotizacion
 
     def funcion_ale(self, precio_a_cambiar):
         # pide coheficiente de algún lado

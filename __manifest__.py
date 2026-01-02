@@ -2,7 +2,7 @@
 #cambios para poder hacer commit
 {
     'name': 'Cotizador2',
-    'version': '5.4.1',
+    'version': '5.5.0',
     'category': 'Sales',
     'summary': 'Cotizador2',
     'sequence': -101,
