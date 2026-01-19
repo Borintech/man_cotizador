@@ -123,7 +123,19 @@ class SaleOrder(models.Model):
         readonly=True
     )
     
-    # Campo para coeficiente final manual (usa el existente coef_cotizacion_manual)
+    # Modo de coeficiente: Cliente, Calculado o Manual
+    modo_coeficiente = fields.Selection([
+        ('automatico', 'Automático (Cliente si existe, sino Calculado)'),
+        ('cliente', 'Usar Coef. Cliente'),
+        ('calculado', 'Usar Coef. Calculado'),
+        ('manual', 'Coef. Manual'),
+    ], string='Modo Coeficiente', default='automatico',
+       help='Automático: Usa coef. cliente si existe, sino el calculado\n'
+            'Cliente: Fuerza usar el coef. del tipo de cliente\n'
+            'Calculado: Fuerza usar el coef. calculado del sistema\n'
+            'Manual: Permite ingresar un coeficiente manualmente')
+    
+    # Campo para coeficiente final manual
     coef_final_manual = fields.Float(
         string='Coef. Final Manual',
         digits=(16, 4),
@@ -182,12 +194,12 @@ class SaleOrder(models.Model):
             order.cotizar = False
         return True
 
-    @api.onchange('coef_cotizacion_manual', 'coef_final_manual')
-    def _onchange_coef_final_manual(self):
-        """Recalcula precios cuando se modifica el coeficiente manual"""
-        if not self.coef_cotizacion_manual or self.env.context.get('install_mode'):
+    @api.onchange('modo_coeficiente', 'coef_final_manual')
+    def _onchange_modo_coeficiente(self):
+        """Recalcula precios cuando se cambia el modo o el coeficiente manual"""
+        if self.env.context.get('install_mode'):
             return
-        if self.coef_final_manual > 0 and self.cotizar:
+        if self.cotizar:
             self.aplica_coef_ejemplo()
 
     @api.onchange('medio_envio', 'activar_coef', 'porcentaje_gasto_envio_despacho')
@@ -581,15 +593,27 @@ class SaleOrder(models.Model):
                 order.valor_dolar_blue = valor_dolar_blue
                 order.coef_cotizacion_blue = coef_coti_blue
 
-                # Aplicar coeficientes adicionales de tipo cliente y flete
-                coef_cliente = order.cotizador_coef_cliente if order.cotizador_coef_cliente > 0 else 1.0
-                coef_flete_tipo = order.cotizador_coef_flete if order.cotizador_coef_flete > 0 else 1.0
+                # Coeficiente calculado del sistema (para referencia)
+                coef_calculado_sistema = coef_real * c0 * coef_coti_blue
                 
-                # Si está en modo manual, usar el coeficiente manual
-                if order.coef_cotizacion_manual and order.coef_final_manual > 0:
+                # Determinar coeficiente final según el modo seleccionado
+                coef_cliente = order.cotizador_coef_cliente if order.cotizador_coef_cliente > 0 else 0
+                
+                if order.modo_coeficiente == 'manual' and order.coef_final_manual > 0:
+                    # Modo manual: usar el valor ingresado
                     coef_final = order.coef_final_manual
+                elif order.modo_coeficiente == 'cliente' and coef_cliente > 0:
+                    # Modo cliente forzado: usar coef del cliente
+                    coef_final = coef_cliente
+                elif order.modo_coeficiente == 'calculado':
+                    # Modo calculado forzado: usar coef calculado del sistema
+                    coef_final = coef_calculado_sistema
                 else:
-                    coef_final = coef_real * c0 * coef_coti_blue * coef_cliente * coef_flete_tipo
+                    # Modo automático: si el cliente tiene coeficiente, usarlo; sino usar calculado
+                    if coef_cliente > 0:
+                        coef_final = coef_cliente
+                    else:
+                        coef_final = coef_calculado_sistema
 
                 for line in order.order_line:
                     if not self._can_modify_order_prices(order):

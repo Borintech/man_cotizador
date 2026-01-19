@@ -44,8 +44,10 @@
                             class="btn-link"
                             icon="fa-eraser"
                             invisible="not cotizar"/>
-                    <field name="coef_final_manual" string="Coef. Final Manual" 
-                           invisible="not coef_cotizacion_manual"/>
+                    <separator string="Modo Coeficiente"/>
+                    <field name="modo_coeficiente" widget="radio" options="{'horizontal': true}"/>
+                    <field name="coef_final_manual" string="Coef. Manual" 
+                           invisible="modo_coeficiente != 'manual'"/>
                 </xpath>
 
                 <xpath expr="//field[@name='partner_shipping_id']" position="after">
