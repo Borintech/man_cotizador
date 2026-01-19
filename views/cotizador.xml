@@ -11,11 +11,20 @@
                     <!--<field name="gasto_envio_despacho" string="Gtos. Despacho"/>-->
                     <field name="dias_almacenamiento" string="cp"  invisible="1"/>
                     <field name="medio_envio" string="Tipo de Flete"/>
+                    <field name="cotizador_tipo_flete_id" string="Config. Flete"/>
+                    <field name="cotizador_coef_flete" string="Coef. Flete" readonly="1"/>
                     <field name="porcentaje_gasto_envio_despacho" string="% Despacho"/>
                     <field name="gasto_envio_calculado" string="Total Gastos de Desapacho"/>
                     <field name="gasto_envio_agregado" string="Agregado/Descuento" invisible="1"/>
                     <field name="dias_almacenamiento2" string="Dias de Almacenamiento"/>
+                    <separator string="Tipo de Cliente"/>
+                    <field name="cotizador_tipo_cliente_id" string="Tipo Cliente"/>
+                    <field name="cotizador_coef_cliente" string="Coef. Cliente" readonly="1"/>
+                    <separator string="Cotización"/>
                     <field name="cotizar" string="Cotizar"/>
+                    <field name="usar_coef_manual" string="Usar Coef. Manual"/>
+                    <field name="coef_final_manual" string="Coef. Final Manual" 
+                           invisible="not usar_coef_manual"/>
                 </xpath>
 
                 <xpath expr="//field[@name='partner_shipping_id']" position="after">

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Heredar vista form de res.partner para agregar campos del cotizador -->
+    <record id="view_partner_form_cotizador" model="ir.ui.view">
+        <field name="name">res.partner.form.cotizador</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales_purchases']" position="after">
+                <page string="Cotizador" name="cotizador">
+                    <group>
+                        <group string="Configuración Cotizador">
+                            <field name="cotizador_tipo_cliente_id"/>
+                            <field name="cotizador_coeficiente"/>
+                            <field name="cotizador_tipo_flete_preferido_id"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

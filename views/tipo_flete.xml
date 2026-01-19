@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista Tree para Tipo de Flete -->
+    <record id="view_cotizador_tipo_flete_tree" model="ir.ui.view">
+        <field name="name">cotizador.tipo.flete.tree</field>
+        <field name="model">cotizador.tipo.flete</field>
+        <field name="arch" type="xml">
+            <tree string="Tipos de Flete">
+                <field name="sequence" widget="handle"/>
+                <field name="codigo"/>
+                <field name="name"/>
+                <field name="coeficiente"/>
+                <field name="coef_flete"/>
+                <field name="porcentaje_gasto_despacho"/>
+                <field name="active" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista Form para Tipo de Flete -->
+    <record id="view_cotizador_tipo_flete_form" model="ir.ui.view">
+        <field name="name">cotizador.tipo.flete.form</field>
+        <field name="model">cotizador.tipo.flete</field>
+        <field name="arch" type="xml">
+            <form string="Tipo de Flete">
+                <sheet>
+                    <widget name="web_ribbon" title="Archivado" bg_color="bg-danger"
+                            invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Nombre del tipo de flete"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="codigo"/>
+                            <field name="coeficiente"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="coef_flete"/>
+                            <field name="porcentaje_gasto_despacho"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Descripción">
+                            <field name="descripcion" placeholder="Descripción detallada..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción para Tipo de Flete -->
+    <record id="action_cotizador_tipo_flete" model="ir.actions.act_window">
+        <field name="name">Tipos de Flete</field>
+        <field name="res_model">cotizador.tipo.flete</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear un tipo de flete
+            </p>
+            <p>
+                Los tipos de flete permiten configurar coeficientes por cada medio de envío (Marítimo, Aéreo, Currier).
+            </p>
+        </field>
+    </record>
+
+    <!-- Menú para Tipo de Flete -->
+    <menuitem id="menu_cotizador_tipo_flete"
+              name="Tipos de Flete"
+              parent="cotizador_menu"
+              action="action_cotizador_tipo_flete"
+              sequence="31"/>
+</odoo>

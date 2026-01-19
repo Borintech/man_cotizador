@@ -6,19 +6,11 @@ from odoo.http import request
 from odoo.exceptions import ValidationError, UserError
 from datetime import datetime
 
-bandera = 1
-actualizados = []
-total_euros = 0
-total_peso = 0
-actualizados2 = {}
-leer = True
 
-
-def get_safe_price_from_dict(line_id, line_price_unit):
+def get_safe_price_from_dict(actualizados2, line_id, line_price_unit):
     """
     Función helper para obtener precio de manera segura del diccionario actualizados2
     """
-    global actualizados2
     if line_id in actualizados2:
         return actualizados2[line_id]
     else:
@@ -100,11 +92,83 @@ class SaleOrder(models.Model):
     enume = [('maritimo', "Marítimo"), ('aereo', "Aéreo"), ('currier', "Currier")]
     medio_envio = fields.Selection(string="Envío", selection=enume, store=True, default='currier')
 
+    # Campos para tipo de cliente y tipo de flete
+    cotizador_tipo_cliente_id = fields.Many2one(
+        'cotizador.tipo.cliente',
+        string='Tipo de Cliente',
+        help='Tipo de cliente para aplicar coeficiente automático'
+    )
+    cotizador_coef_cliente = fields.Float(
+        string='Coef. Cliente',
+        related='cotizador_tipo_cliente_id.coeficiente',
+        store=True,
+        readonly=True
+    )
+    cotizador_tipo_flete_id = fields.Many2one(
+        'cotizador.tipo.flete',
+        string='Tipo de Flete',
+        help='Tipo de flete para aplicar coeficiente automático'
+    )
+    cotizador_coef_flete = fields.Float(
+        string='Coef. Flete',
+        related='cotizador_tipo_flete_id.coeficiente',
+        store=True,
+        readonly=True
+    )
+    
+    # Campo para coeficiente manual
+    usar_coef_manual = fields.Boolean(
+        string='Usar Coef. Manual',
+        default=False,
+        help='Activar para modificar manualmente el coeficiente final'
+    )
+    coef_final_manual = fields.Float(
+        string='Coef. Final Manual',
+        digits=(16, 4),
+        default=1.0,
+        help='Coeficiente final que se aplicará a los precios cuando está activado el modo manual'
+    )
+
     @api.depends('dias_almacenamiento2')
     def _compute_dias_almacenamiento(self):
         """Evita recomputaciones costosas al instalar el módulo"""
         for order in self:
             order.dias_almacenamiento = float(order.dias_almacenamiento2 or 0.0)
+
+    @api.onchange('partner_id')
+    def _onchange_partner_id_cotizador(self):
+        """Carga automáticamente el tipo de cliente y flete preferido del partner"""
+        if self.partner_id:
+            if self.partner_id.cotizador_tipo_cliente_id:
+                self.cotizador_tipo_cliente_id = self.partner_id.cotizador_tipo_cliente_id
+            if self.partner_id.cotizador_tipo_flete_preferido_id:
+                self.cotizador_tipo_flete_id = self.partner_id.cotizador_tipo_flete_preferido_id
+
+    @api.onchange('medio_envio')
+    def _onchange_medio_envio_tipo_flete(self):
+        """Carga automáticamente el tipo de flete según el medio de envío seleccionado"""
+        if self.medio_envio:
+            tipo_flete = self.env['cotizador.tipo.flete'].search([
+                ('codigo', '=', self.medio_envio),
+                ('active', '=', True)
+            ], limit=1)
+            if tipo_flete:
+                self.cotizador_tipo_flete_id = tipo_flete
+
+    @api.onchange('cotizar')
+    def _onchange_cotizar(self):
+        """Ejecuta el cálculo cuando se activa o desactiva cotizar"""
+        if self.env.context.get('install_mode'):
+            return
+        self.aplica_coef_ejemplo()
+
+    @api.onchange('usar_coef_manual', 'coef_final_manual')
+    def _onchange_coef_final_manual(self):
+        """Recalcula precios cuando se modifica el coeficiente manual"""
+        if not self.usar_coef_manual or self.env.context.get('install_mode'):
+            return
+        if self.coef_final_manual > 0 and self.cotizar:
+            self.aplica_coef_ejemplo()
 
     @api.onchange('medio_envio', 'activar_coef', 'porcentaje_gasto_envio_despacho')
     def get_porcentaje_gasto_envio_despacho(self):
@@ -350,6 +414,9 @@ class SaleOrder(models.Model):
         # Evitar ejecuciones masivas durante instalación o actualizaciones
         if not self or self.env.context.get('install_mode'):
             return
+        
+        # Diccionario local para almacenar precios (reemplaza variable global)
+        precios_lineas = {}
             
         # Validar que las órdenes estén en estado que permita modificaciones
         orders_bloqueadas = []
@@ -361,8 +428,6 @@ class SaleOrder(models.Model):
         if orders_bloqueadas:
             mensaje = f"ADVERTENCIA: No se pueden modificar precios en las siguientes órdenes porque están confirmadas o bloqueadas:\n\n{chr(10).join(orders_bloqueadas)}\n\nSolo se procesarán las órdenes en estado 'Borrador' o 'Enviada'."
             print(f"Cotizador: {mensaje}")
-            # Opcional: mostrar mensaje al usuario (descomenta la siguiente línea si quieres mostrar popup)
-            # raise UserError(mensaje)
             
         # muestra en sale_order valor dolar y euro según api
         fecha = datetime.strptime('2022-09-01 00:32:33', '%Y-%m-%d %H:%M:%S')
@@ -377,15 +442,13 @@ class SaleOrder(models.Model):
             except:
                 order.coef_real_euro_dolar = 0
 
-            global bandera
-            bandera += 1
-
-            if bandera > 2 and order.cotizar:
+            # Procesar solo si cotizar está activo
+            if order.cotizar:
                 total_peso = 0
                 total_euros = 0
 
                 for line in order.order_line:
-                    precio_unitario = "ahora intentamos consultar el standard_price"
+                    precio_unitario = 0.0
 
                     try:
                         suppler = line.product_id.variant_seller_ids
@@ -409,19 +472,19 @@ class SaleOrder(models.Model):
                                 precio_candidato = request.cr.dictfetchall()[0]['price']
                                 print("precio candidato", precio_candidato)
 
-                        if line.id not in actualizados2:
-                            actualizados2[line.id] = precio_candidato
+                        if line.id not in precios_lineas:
+                            precios_lineas[line.id] = precio_candidato
 
-                        precio_unitario = actualizados2[line.id]
+                        precio_unitario = precios_lineas[line.id]
 
                     except Exception as e:
                         print(e)
                         try:
                             producto_precio_standard = line.product_id.variant_seller_ids.price
-                            if line.id not in actualizados2:
-                                actualizados2[line.id] = producto_precio_standard
+                            if line.id not in precios_lineas:
+                                precios_lineas[line.id] = producto_precio_standard
 
-                            precio_unitario = actualizados2[line.id]
+                            precio_unitario = precios_lineas[line.id]
                         except:
                             print("No se halló standard_price. línea 259 sale_order_cotizador.py")
                             precio_unitario = 0.0
@@ -498,23 +561,35 @@ class SaleOrder(models.Model):
                 order.valor_dolar_blue = valor_dolar_blue
                 order.coef_cotizacion_blue = coef_coti_blue
 
+                # Aplicar coeficientes adicionales de tipo cliente y flete
+                coef_cliente = order.cotizador_coef_cliente if order.cotizador_coef_cliente > 0 else 1.0
+                coef_flete_tipo = order.cotizador_coef_flete if order.cotizador_coef_flete > 0 else 1.0
+                
+                # Si está en modo manual, usar el coeficiente manual
+                if order.usar_coef_manual and order.coef_final_manual > 0:
+                    coef_final = order.coef_final_manual
+                else:
+                    coef_final = coef_real * c0 * coef_coti_blue * coef_cliente * coef_flete_tipo
+
                 for line in order.order_line:
                     if not self._can_modify_order_prices(order):
                         continue
 
-                    if line.id not in actualizados2:
-                        actualizados2[line.id] = line.price_unit
-                        precio = actualizados2[line.id]
+                    if line.id not in precios_lineas:
+                        precios_lineas[line.id] = line.price_unit
+                        precio = precios_lineas[line.id]
                     else:
-                        precio = get_safe_price_from_dict(line.id, line.price_unit)
-                    line.price_unit = precio * coef_real * c0 * coef_coti_blue
+                        precio = get_safe_price_from_dict(precios_lineas, line.id, line.price_unit)
+                    
+                    line.price_unit = precio * coef_final
             else:
+                # Si cotizar está desactivado, restaurar precios originales
                 if not self._can_modify_order_prices(order):
                     continue
 
                 for line in order.order_line:
                     try:
-                        precio = get_safe_price_from_dict(line.id, line.price_unit)
+                        precio = get_safe_price_from_dict(precios_lineas, line.id, line.price_unit)
                         line.price_unit = precio
                     except Exception as e:
                         precio_fallback = line.price_unit if line.price_unit > 0 else 0.0

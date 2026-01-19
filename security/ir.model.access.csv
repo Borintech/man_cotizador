@@ -11,3 +11,7 @@ access_Cotizador_User_cajas,Cotizador analitico usuario,model_cotizador_cajas,co
 access_Cotizador_Admin_cajas,Cotizador analitico administrador,model_cotizador_cajas,cotizador_admin,1,1,1,1
 access_Cotizador_User_utilidad,Cotizador analitico usuario,model_cotizador_utilidad,cotizador_user,1,0,0,0
 access_Cotizador_Admin_utilidad,Cotizador analitico administrador,model_cotizador_utilidad,cotizador_admin,1,1,1,1
+access_Cotizador_User_tipo_cliente,Cotizador tipo cliente usuario,model_cotizador_tipo_cliente,cotizador_user,1,0,0,0
+access_Cotizador_Admin_tipo_cliente,Cotizador tipo cliente administrador,model_cotizador_tipo_cliente,cotizador_admin,1,1,1,1
+access_Cotizador_User_tipo_flete,Cotizador tipo flete usuario,model_cotizador_tipo_flete,cotizador_user,1,0,0,0
+access_Cotizador_Admin_tipo_flete,Cotizador tipo flete administrador,model_cotizador_tipo_flete,cotizador_admin,1,1,1,1

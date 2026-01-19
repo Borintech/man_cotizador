@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tipo_flete_maritimo" model="cotizador.tipo.flete">
+            <field name="name">Flete Marítimo</field>
+            <field name="codigo">maritimo</field>
+            <field name="coeficiente">1.0</field>
+            <field name="coef_flete">0.0</field>
+            <field name="porcentaje_gasto_despacho">0.0</field>
+            <field name="descripcion">Envío por vía marítima</field>
+            <field name="sequence">10</field>
+        </record>
+        
+        <record id="tipo_flete_aereo" model="cotizador.tipo.flete">
+            <field name="name">Flete Aéreo</field>
+            <field name="codigo">aereo</field>
+            <field name="coeficiente">1.15</field>
+            <field name="coef_flete">0.0</field>
+            <field name="porcentaje_gasto_despacho">0.0</field>
+            <field name="descripcion">Envío por vía aérea</field>
+            <field name="sequence">20</field>
+        </record>
+        
+        <record id="tipo_flete_currier" model="cotizador.tipo.flete">
+            <field name="name">Flete Currier</field>
+            <field name="codigo">currier</field>
+            <field name="coeficiente">1.25</field>
+            <field name="coef_flete">0.0</field>
+            <field name="porcentaje_gasto_despacho">0.0</field>
+            <field name="descripcion">Envío por servicio currier/courier</field>
+            <field name="sequence">30</field>
+        </record>
+    </data>
+</odoo>

@@ -2,7 +2,7 @@
 #cambios para poder hacer commit
 {
     'name': 'Cotizador2',
-    'version': '5.5.0',
+    'version': '5.6.0',
     'category': 'Sales',
     'summary': 'Cotizador2',
     'sequence': -101,
@@ -16,6 +16,8 @@
         'data/costos_almacenamiento_data.xml',
         'data/cajas_data.xml',
         'data/bobinas_data.xml',
+        'data/tipo_cliente_data.xml',
+        'data/tipo_flete_data.xml',
         'views/costos_almacenamiento.xml',
         'views/cotizador.xml',
         'views/configuracion.xml',
@@ -23,6 +25,9 @@
         'views/cajas.xml',
         'views/utilidad.xml',
         'views/cotizador_page_cajas.xml',
+        'views/tipo_cliente.xml',
+        'views/tipo_flete.xml',
+        'views/res_partner.xml',
         'security/cotizador_security.xml',
         'security/ir.model.access.csv',
             ],

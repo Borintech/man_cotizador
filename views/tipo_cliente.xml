@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista Tree para Tipo de Cliente -->
+    <record id="view_cotizador_tipo_cliente_tree" model="ir.ui.view">
+        <field name="name">cotizador.tipo.cliente.tree</field>
+        <field name="model">cotizador.tipo.cliente</field>
+        <field name="arch" type="xml">
+            <tree string="Tipos de Cliente">
+                <field name="sequence" widget="handle"/>
+                <field name="codigo"/>
+                <field name="name"/>
+                <field name="coeficiente"/>
+                <field name="partner_count"/>
+                <field name="active" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista Form para Tipo de Cliente -->
+    <record id="view_cotizador_tipo_cliente_form" model="ir.ui.view">
+        <field name="name">cotizador.tipo.cliente.form</field>
+        <field name="model">cotizador.tipo.cliente</field>
+        <field name="arch" type="xml">
+            <form string="Tipo de Cliente">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_partners" type="object"
+                                class="oe_stat_button" icon="fa-users">
+                            <field name="partner_count" widget="statinfo" string="Clientes"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archivado" bg_color="bg-danger"
+                            invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Nombre del tipo de cliente"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="codigo"/>
+                            <field name="coeficiente"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Descripción">
+                            <field name="descripcion" placeholder="Descripción detallada..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción para Tipo de Cliente -->
+    <record id="action_cotizador_tipo_cliente" model="ir.actions.act_window">
+        <field name="name">Tipos de Cliente</field>
+        <field name="res_model">cotizador.tipo.cliente</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear un tipo de cliente
+            </p>
+            <p>
+                Los tipos de cliente permiten aplicar coeficientes automáticos según la categoría del cliente.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menú para Tipo de Cliente -->
+    <menuitem id="menu_cotizador_tipo_cliente"
+              name="Tipos de Cliente"
+              parent="cotizador_menu"
+              action="action_cotizador_tipo_cliente"
+              sequence="30"/>
+</odoo>
