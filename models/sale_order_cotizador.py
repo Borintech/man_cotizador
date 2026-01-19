@@ -123,16 +123,14 @@ class SaleOrder(models.Model):
         readonly=True
     )
     
-    # Modo de coeficiente: Cliente, Calculado o Manual
+    # Modo de coeficiente: Automático (aplica coef cliente), Calculado (sin coef cliente) o Manual
     modo_coeficiente = fields.Selection([
-        ('automatico', 'Automático (Cliente si existe, sino Calculado)'),
-        ('cliente', 'Usar Coef. Cliente'),
-        ('calculado', 'Usar Coef. Calculado'),
+        ('automatico', 'Automático (Base × Coef. Cliente)'),
+        ('calculado', 'Solo Calculado (sin Coef. Cliente)'),
         ('manual', 'Coef. Manual'),
     ], string='Modo Coeficiente', default='automatico',
-       help='Automático: Usa coef. cliente si existe, sino el calculado\n'
-            'Cliente: Fuerza usar el coef. del tipo de cliente\n'
-            'Calculado: Fuerza usar el coef. calculado del sistema\n'
+       help='Automático: Aplica coef base × coef cliente (descuento/recargo)\n'
+            'Calculado: Usa solo el coef base del sistema (ignora coef cliente)\n'
             'Manual: Permite ingresar un coeficiente manualmente')
     
     # Campo para coeficiente final manual
@@ -593,27 +591,23 @@ class SaleOrder(models.Model):
                 order.valor_dolar_blue = valor_dolar_blue
                 order.coef_cotizacion_blue = coef_coti_blue
 
-                # Coeficiente calculado del sistema (para referencia)
-                coef_calculado_sistema = coef_real * c0 * coef_coti_blue
+                # Coeficiente base del sistema (igual que v13): coef_real * c0 * coef_coti_blue
+                coef_base_sistema = coef_real * c0 * coef_coti_blue
+                
+                # El coeficiente del cliente es un MULTIPLICADOR adicional (0.85 = -15%, 1.0 = sin cambio)
+                coef_cliente = order.cotizador_coef_cliente if order.cotizador_coef_cliente > 0 else 1.0
                 
                 # Determinar coeficiente final según el modo seleccionado
-                coef_cliente = order.cotizador_coef_cliente if order.cotizador_coef_cliente > 0 else 0
-                
                 if order.modo_coeficiente == 'manual' and order.coef_final_manual > 0:
-                    # Modo manual: usar el valor ingresado
+                    # Modo manual: usar el valor ingresado directamente
                     coef_final = order.coef_final_manual
-                elif order.modo_coeficiente == 'cliente' and coef_cliente > 0:
-                    # Modo cliente forzado: usar coef del cliente
-                    coef_final = coef_cliente
                 elif order.modo_coeficiente == 'calculado':
-                    # Modo calculado forzado: usar coef calculado del sistema
-                    coef_final = coef_calculado_sistema
+                    # Modo calculado: usar solo el coef base del sistema (sin aplicar coef cliente)
+                    coef_final = coef_base_sistema
                 else:
-                    # Modo automático: si el cliente tiene coeficiente, usarlo; sino usar calculado
-                    if coef_cliente > 0:
-                        coef_final = coef_cliente
-                    else:
-                        coef_final = coef_calculado_sistema
+                    # Modo automático o cliente: coef base * coef cliente
+                    # Esto aplica el descuento/recargo del tipo de cliente sobre el cálculo base
+                    coef_final = coef_base_sistema * coef_cliente
 
                 for line in order.order_line:
                     if not self._can_modify_order_prices(order):
