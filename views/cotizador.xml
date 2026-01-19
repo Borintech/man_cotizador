@@ -21,10 +21,31 @@
                     <field name="cotizador_tipo_cliente_id" string="Tipo Cliente"/>
                     <field name="cotizador_coef_cliente" string="Coef. Cliente" readonly="1"/>
                     <separator string="Cotización"/>
-                    <field name="cotizar" string="Cotizar"/>
-                    <field name="usar_coef_manual" string="Usar Coef. Manual"/>
+                    <field name="cotizar" invisible="1"/>
+                    <field name="cotizacion_estado" widget="badge" 
+                           decoration-success="cotizacion_estado == 'cotizado'"
+                           decoration-warning="cotizacion_estado == 'pendiente'"
+                           readonly="1"/>
+                    <button name="action_calcular_cotizacion" 
+                            type="object" 
+                            string="Calcular Cotización" 
+                            class="btn-primary"
+                            icon="fa-calculator"
+                            invisible="cotizar"/>
+                    <button name="action_calcular_cotizacion" 
+                            type="object" 
+                            string="Recalcular" 
+                            class="btn-secondary"
+                            icon="fa-refresh"
+                            invisible="not cotizar"/>
+                    <button name="action_limpiar_cotizacion" 
+                            type="object" 
+                            string="Limpiar" 
+                            class="btn-link"
+                            icon="fa-eraser"
+                            invisible="not cotizar"/>
                     <field name="coef_final_manual" string="Coef. Final Manual" 
-                           invisible="not usar_coef_manual"/>
+                           invisible="not coef_cotizacion_manual"/>
                 </xpath>
 
                 <xpath expr="//field[@name='partner_shipping_id']" position="after">

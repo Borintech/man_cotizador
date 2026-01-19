@@ -87,6 +87,13 @@ class SaleOrder(models.Model):
     )
 
     cotizar = fields.Boolean("Cotizar", default=False)
+    
+    # Estado de cotización para mostrar visualmente
+    cotizacion_estado = fields.Selection([
+        ('pendiente', 'Pendiente'),
+        ('cotizado', 'Cotizado'),
+    ], string='Estado Cotización', default='pendiente', compute='_compute_cotizacion_estado', store=True)
+    
     dias_almacenamiento2 = fields.Integer()
 
     enume = [('maritimo', "Marítimo"), ('aereo', "Aéreo"), ('currier', "Currier")]
@@ -116,18 +123,18 @@ class SaleOrder(models.Model):
         readonly=True
     )
     
-    # Campo para coeficiente manual
-    usar_coef_manual = fields.Boolean(
-        string='Usar Coef. Manual',
-        default=False,
-        help='Activar para modificar manualmente el coeficiente final'
-    )
+    # Campo para coeficiente final manual (usa el existente coef_cotizacion_manual)
     coef_final_manual = fields.Float(
         string='Coef. Final Manual',
         digits=(16, 4),
         default=1.0,
         help='Coeficiente final que se aplicará a los precios cuando está activado el modo manual'
     )
+    
+    @api.depends('cotizar')
+    def _compute_cotizacion_estado(self):
+        for order in self:
+            order.cotizacion_estado = 'cotizado' if order.cotizar else 'pendiente'
 
     @api.depends('dias_almacenamiento2')
     def _compute_dias_almacenamiento(self):
@@ -162,10 +169,23 @@ class SaleOrder(models.Model):
             return
         self.aplica_coef_ejemplo()
 
-    @api.onchange('usar_coef_manual', 'coef_final_manual')
+    def action_calcular_cotizacion(self):
+        """Botón para calcular/recalcular la cotización"""
+        for order in self:
+            order.cotizar = True
+            order.aplica_coef_ejemplo()
+        return True
+    
+    def action_limpiar_cotizacion(self):
+        """Botón para limpiar/resetear la cotización"""
+        for order in self:
+            order.cotizar = False
+        return True
+
+    @api.onchange('coef_cotizacion_manual', 'coef_final_manual')
     def _onchange_coef_final_manual(self):
         """Recalcula precios cuando se modifica el coeficiente manual"""
-        if not self.usar_coef_manual or self.env.context.get('install_mode'):
+        if not self.coef_cotizacion_manual or self.env.context.get('install_mode'):
             return
         if self.coef_final_manual > 0 and self.cotizar:
             self.aplica_coef_ejemplo()
@@ -566,7 +586,7 @@ class SaleOrder(models.Model):
                 coef_flete_tipo = order.cotizador_coef_flete if order.cotizador_coef_flete > 0 else 1.0
                 
                 # Si está en modo manual, usar el coeficiente manual
-                if order.usar_coef_manual and order.coef_final_manual > 0:
+                if order.coef_cotizacion_manual and order.coef_final_manual > 0:
                     coef_final = order.coef_final_manual
                 else:
                     coef_final = coef_real * c0 * coef_coti_blue * coef_cliente * coef_flete_tipo
