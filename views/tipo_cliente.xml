@@ -75,7 +75,7 @@
     <!-- Menú para Tipo de Cliente -->
     <menuitem id="menu_cotizador_tipo_cliente"
               name="Tipos de Cliente"
-              parent="cotizador_menu"
+              parent="menu_cotizador"
               action="action_cotizador_tipo_cliente"
               sequence="30"/>
 </odoo>

@@ -72,7 +72,7 @@
     <!-- Menú para Tipo de Flete -->
     <menuitem id="menu_cotizador_tipo_flete"
               name="Tipos de Flete"
-              parent="cotizador_menu"
+              parent="menu_cotizador"
               action="action_cotizador_tipo_flete"
               sequence="31"/>
 </odoo>
