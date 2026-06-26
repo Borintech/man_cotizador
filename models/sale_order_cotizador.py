@@ -463,13 +463,19 @@ class SaleOrder(models.Model):
         fecha = datetime.strptime('2022-09-01 00:32:33', '%Y-%m-%d %H:%M:%S')
         for order in self:
             if order.date_order and order.date_order > fecha:
-                print(order.date_order)
-                valor_dolar, valor_euro = valor_dolar_euro()
-                order.valor_dolar = valor_dolar
-                order.valor_euro = valor_euro
-            try:
-                order.coef_real_euro_dolar = float(valor_euro) / float(valor_dolar)
-            except:
+                # Cuando activar_coef está activo y ya hay valores cargados manualmente, no pisar con la API
+                if order.activar_coef and order.valor_dolar > 0 and order.valor_euro > 0:
+                    pass
+                else:
+                    api_dolar, api_euro = valor_dolar_euro()
+                    if api_dolar > 0:
+                        order.valor_dolar = api_dolar
+                    if api_euro > 0:
+                        order.valor_euro = api_euro
+
+            if order.valor_dolar > 0 and order.valor_euro > 0:
+                order.coef_real_euro_dolar = order.valor_euro / order.valor_dolar
+            else:
                 order.coef_real_euro_dolar = 0
 
             # Procesar solo si cotizar está activo
@@ -528,16 +534,9 @@ class SaleOrder(models.Model):
                         pass
 
                 if order.activar_coef:
-                    if order.coef_dexport > 0:
-                        try:
-                            order.coef_dexport /= 100
-                        except:
-                            pass
-                    if order.coef_utilidad > 0:
-                        try:
-                            order.coef_utilidad /= 100
-                        except:
-                            pass
+                    # Convertir porcentajes a fracción en variables locales, sin pisar los campos del order
+                    coef_dexport_calc = (order.coef_dexport / 100) if order.coef_dexport > 0 else 0
+                    coef_utilidad_calc = (order.coef_utilidad / 100) if order.coef_utilidad > 0 else 0
                     coef, s2, s3, s4, c2, c3, c4, c0, coef_real, subtotal5, s1, peso_despues, g_e_calc, valor_dolar_blue, coef_coti_blue = \
                         order._tomar_coeficiente(
                             order.medio_envio,
@@ -548,8 +547,8 @@ class SaleOrder(models.Model):
                             order.dias_almacenamiento2,
                             order.coef_euro2dolar,
                             order.coef_subtotal2,
-                            order.coef_dexport,
-                            order.coef_utilidad,
+                            coef_dexport_calc,
+                            coef_utilidad_calc,
                             order.porcentaje_gasto_envio_despacho,
                             order.gasto_envio_agregado,
                             order.valor_dolar_blue,

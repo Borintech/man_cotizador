@@ -73,8 +73,10 @@
                     <field name="subtotal4_utilidad" string="Sub Total 4" decoration-bf="1" readonly="1"/>
 
 
-                    <field name="valor_dolar" readonly="1"/>
-                    <field name="valor_euro" readonly="1"/>
+                    <field name="valor_dolar" readonly="not activar_coef"
+                           help="Valor desde API BNA. Editable cuando 'Modificar porcentajes manualmente' está activo."/>
+                    <field name="valor_euro" readonly="not activar_coef"
+                           help="Valor desde API BNA. Editable cuando 'Modificar porcentajes manualmente' está activo."/>
                     <field name="coef_real_euro_dolar" readonly="1" string="Coef. EUR/USD Real"/>
 
                     <field name="valor_dolar_blue" style="width:20" string="Valor Dólar Blue"/>
